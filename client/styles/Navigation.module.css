@@ -1,0 +1,210 @@
+.hamburger {
+  padding: 0px 0px 0px 20px;
+  cursor: pointer;
+}
+
+.navbarBrand {
+  justify-self: left;
+  padding: 0px 20px 0px 0px;
+}
+
+.navLink {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.searchSpacer {
+  width: 50%;
+  min-width: 40vw;
+}
+
+.mapMarker {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  color: rgb(52, 56, 53)!important;
+  font-size: 0.9rem;
+  margin-left: 8px;
+  padding-right: 80px;
+}
+
+.cartSpacer {
+  min-height: 40px; 
+  min-width: 190px;
+  flex-shrink: 0;
+}
+
+.modalBackground {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: rgb(0,0,0,0.6);
+  z-index: 9990;
+}
+
+
+/*****************************
+/* Menu Drawer
+/*****************************/
+
+.menuDrawer {
+  position: fixed;
+  width: 250px;
+  top: 0;
+  left: -255px;
+  background-color: white;
+  display: block;
+  transition: left 0.7s;
+  height: 100vh;
+  box-shadow: 2px 0px 5px rgba(0,0,0,0.15);
+  z-index: 9997;
+  overflow-y: scroll;
+}
+
+.menuDrawer > div {
+  position: relative;
+  left: 20px;
+}
+
+.menuDrawer hr {
+  background-color: #999;
+  width: 220px;
+  margin: 20px 0px;
+  height: 1px;
+  position: relative;
+  left: 15px;
+}
+
+.menuDrawer h5 {
+  color: black!important;
+  font-weight: 700!important;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.menuDrawer h6 {
+  font-size: 0.75rem;
+  color: #aaa;
+}
+
+.menuHeader {
+  position: relative;
+  padding: 25px 0px 10px 0px;
+  top: 0px;
+  left: 0px;
+  display: block;
+  border: none;
+  width: 200px;
+}
+
+.menuHeaderOptions {
+  color: rgb(10, 173, 10)!important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0px 15px;
+  font-weight: bold;
+}
+
+.menuHeaderOption {
+  display: inline-block;
+  cursor: pointer;
+  color: rgb(10, 173, 10);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: left;
+  padding: 0px;
+}
+
+.menuItem {
+  width: 100%;
+  padding-bottom: 15px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: left;
+}
+
+.menuItem > div {
+  line-height: 26px;
+  margin-left: 10px;
+}
+
+.menuFooter {
+  width: 210px; 
+  text-align: center;
+}
+
+.modalMenuExpanded {
+  left: 0px!important;
+}
+
+.accountSettings {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.accountSettings:hover {
+  color: rgb(10,173,10)!important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*****************************
+/* Login and Register Drawers
+/*****************************/
+.loginDrawerContainer {
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  left: -570px;
+  top: 0px;
+  transition: left 1s ease;
+  z-index: 9998;
+}
+
+.showLoginDrawerContainer {
+  left: 0px!important;
+  transition: left 1s ease!important;
+  z-index: 9999!important;
+}
+
+
+
+@media only screen and (max-width: 576px) {
+  .searchSpacer {
+    display: none;
+    min-width: 0px;
+    width: 0px;
+  }
+
+  .mapMarker {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 796px) {
+  .searchSpacer {
+    width: 30%;
+    min-width: 20vw;
+  }
+
+  .mapMarker {
+    padding-right: 90px;
+  }
+
+}

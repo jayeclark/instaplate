@@ -1,0 +1,10 @@
+node_modules
+.next
+services
+.env.development
+.env.production
+.env*
+yarn.lock
+package-lock.json
+.DS_Store
+backend

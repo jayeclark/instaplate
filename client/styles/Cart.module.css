@@ -1,0 +1,281 @@
+.cartWidget {
+  position: fixed;
+  right: 20px;
+  top: 12px;
+  z-index: 999;
+}
+
+.cartDrawerContainer {
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  left: 100vw;
+  top: 0px;
+  transition: left 2s ease;
+  margin-left: calc(100vw - 520px);
+}
+
+.cartDrawerContainerBackground {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0,0,0,0.6);
+  z-index: 998;
+}
+
+.itemCount {
+  padding: 0px 6px;
+}
+
+.show {
+  left: 0vw!important;
+  width: 100vw!important;
+  transition: left 1s ease!important;
+}
+
+.show .cartDrawerContainerBackground {
+  display: block!important;
+}
+
+.cartDrawer {
+  position: relative;
+  right: 0px;
+  min-height: 100vh;
+  width: 520px;
+  z-index: 999;
+}
+
+.cartContainer {
+  background-color: white;
+  padding: 10px;
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.closeCart {
+  position: absolute;
+  margin: 14px 15px;
+  right: 0px;
+  top: 0px;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: 1px solid rgb(10, 173, 10);
+  color: rgb(10,173,10);
+  font-size: 0.9rem;
+  line-height: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+.closeCartIcon {
+  height: 22px;
+}
+.closeCartText {
+  margin: 0px 0px 0px 8px;
+}
+
+.cartEmpty {
+  padding: 30% 15%;
+  text-align: center;
+}
+
+.cartHeader {
+  max-height: 64px;
+  padding: 12px;
+  position: fixed;
+  width: 520px;
+}
+
+.cartHeader h6 {
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.cartHeader p {
+  text-align: center;
+  font-size: 0.7rem;
+  color: #999;
+}
+
+.spacer {
+  margin: 64px -10px 10px -10px;
+  height: 10px;
+  width: calc(100% + 30px);
+  background-color: rgb(248, 248, 248);
+  border-top: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
+}
+
+.cartDetails {
+  display: flex;
+  justify-content: space-between;
+}
+
+.restaurantLockup {
+  display: flex;
+  justify-content: left;
+  flex-wrap: nowrap;
+}
+
+.restaurantLogo {
+  min-width: 60px;
+  min-height: 60px;
+  max-height: 60px;
+  max-width: 60px;
+  margin: 10px;
+  line-height: 60px;
+  text-align: center;
+  border-radius: 40px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+}
+
+.restaurantName {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.restaurantDeliveryBy {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.restaurantGuarantee {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: rgb(43, 120, 198);
+}
+
+.cartTotal {
+  font-weight: 600;
+}
+
+.noRush {
+  color: rgb(212, 54, 132);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 8px;
+  background-color: rgba(212, 54, 132, 0.05);
+  margin-bottom: 10px;
+}
+
+.checkout {
+  width: 100%;
+  cursor: pointer; 
+  display: block;
+  background-color: transparent;
+}
+
+.checkoutButton {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  border: none;
+  color: white;
+  padding: 12px 0px;
+  border-radius: 5px;
+  font-size: 1.1rem; 
+  font-weight: 600;
+  background-color: rgb(67, 176, 42);
+}
+
+.checkoutButton:hover,
+.checkoutButton:active {
+  background-color: rgb(51, 150, 21);
+}
+
+.checkoutTotal {
+  position: absolute;
+  top: 8px;
+  padding: 4px 8px;
+  right: 8px;
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 5px;
+}
+
+.cartItemRow {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0px;
+  border-top: 1px solid #efefef;
+}
+
+.itemDetails {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.itemImg {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  overflow:hidden;
+  margin-right: 15px;
+}
+
+.itemCount {
+  font-size: 0.75rem;
+}
+
+.itemOptions {
+  color: rgb(67, 176, 42);
+  font-size: 0.8rem;
+}
+
+.itemQuantityLockup {
+  padding: 3px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.itemQuantityGroup {
+  padding: 10px;
+  border: 1px solid #afafaf;
+  border-radius: 3px;
+  margin: 20px;
+  text-align: center;
+  min-width: 50px;
+  min-height: 50px;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.itemQuantity {
+  width: 100%;
+  padding: 0px 10px;
+}
+
+.itemQuantityHidden {
+  display: none;
+  cursor: pointer;
+}
+
+.itemTotalCost {
+  text-align: right;
+}
+
+.itemquantityLockup:hover .itemQuantity {
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.25);
+  margin-right: 30px;
+}
+
+.itemQuantityLockup:hover .itemQuantityHidden {
+  display: block;
+}
+
+.itemQuantityLockup:hover .itemTotalCost {
+  display: none;
+}
