@@ -76,7 +76,7 @@ function Register(props: any) {
                       signIn();
                     }}
                   >
-                    Log in with <img height="20px" src="http://localhost:3000/images/google.png"/>
+                    Log in with <img height="20px" src="/images/google.png"/>
                   </button>
               </Link>
               Welcome to Instaplate! Enter your details to sign up.
