@@ -1,15 +1,14 @@
 FROM node:14
 
 # Set working directory
-RUN mkdir -p /usr/src/app
-WORKDIR /client
+WORKDIR /app
 
 # Installing dependencies
-COPY package.json /usr/src/app
+COPY package.json /app
 RUN npm install
 
 # Copying source files
-COPY . /usr/src/app
+COPY . /app
 
 # Building app 
 RUN npm run build
