@@ -1,10 +1,7 @@
 FROM node:14
 
-ENV PORT 3000
-
-# Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+# Set working directory
+WORKDIR /client
 
 # Installing dependencies
 COPY package.json /usr/src/app
