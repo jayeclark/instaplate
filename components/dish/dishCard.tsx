@@ -38,7 +38,7 @@ export default function DishCard({dish, index, isAvailable, menuStart}) {
           top={true}
           height={'200px'}
           position="center"
-          src={`${API_URL}${dish.image.url}`}
+          src={dish.image ? `${API_URL}${dish.image.url}` : ''}
         />
         </div>
           </div>

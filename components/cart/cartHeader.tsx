@@ -26,7 +26,7 @@ export default function CartHeader({ restaurant, cartTotal, zipCode='00901' }) {
       <div className={styles.cartDetails}>
         <div className={styles.restaurantLockup}>
           <div className={styles.restaurantLogo}>
-            <img height="65px" src={API_URL+restaurant.image.url} />
+            <img height="65px" src={restaurant.image ? API_URL+restaurant.image.url : ''} />
           </div>
           <div>
             <div className={styles.restaurantName}>{restaurant.name}</div>

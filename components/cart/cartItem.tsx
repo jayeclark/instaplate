@@ -18,7 +18,7 @@ export default function CartItem({ item }) {
     >
       <div className={styles.itemDetails}>
         <div className={styles.itemImg}>
-          <img width="100%" src={API_URL + item.image.url}/>
+          <img width="100%" src={item.image ? API_URL + item.image.url : ''}/>
         </div>
         <div>
           <div>{item.name}</div>

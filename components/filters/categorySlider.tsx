@@ -50,7 +50,7 @@ function CategorySlider({ handleSetCuisine }) {
             return (
               <div key={i} id={`cat${i}`} ref={ref ? ref : null} style={{ margin: "8px", cursor: "pointer" }} onClick={() => handleSetCuisine(type.id)} >
                 <div style={{ backgroundColor: "#efefef", borderRadius: "40px", overflow: "hidden", height: "80px", minWidth: "80px", textAlign: "right" }}>
-                  <img height="100%" src={API_URL + type.image.url}/>
+                  <img height="100%" src={type.image ? `${API_URL}${type.image.url}` : ''}/>
                   </div>
                 <div style={{ textAlign: 'center', marginTop: "8px", fontWeight: "bold", fontSize: "0.8rem" }}>
                   {type.title}

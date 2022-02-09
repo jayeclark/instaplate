@@ -150,7 +150,7 @@ function CheckoutForm() {
           <div style={{paddingTop: "5px", paddingLeft:"5px"}}>{cart.items.reduce((a,b) => a + b.quantity, 0)} items</div>
         </h6>
         <div className={styles.hidden}>
-          {cart.items.map((item,i) => (<img key={i} height="50px" style={{marginBottom: "10px", marginRight:"5px", width:"50px", borderRadius:"30px", overflow:"hidden"}} src={API_URL + item.image.url}/>))}
+          {cart.items.map((item,i) => (<img key={i} height="50px" style={{marginBottom: "10px", marginRight:"5px", width:"50px", borderRadius:"30px", overflow:"hidden"}} src={item.image ? API_URL + item.image.url : ''}/>))}
         </div>
       </div>
       <div style={{marginBottom: "20px", borderBottom: "1px solid #efefef", overflowX: "scroll"}}>

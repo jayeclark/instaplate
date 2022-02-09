@@ -24,7 +24,7 @@ function DishDetail({ dish, handleCloseDish }) {
     <div className="background-container">
       <div className="dish-detail">
         <div className="dish-image">
-          <img src={`${API_URL}${dish.image.url}`} width="100%" />
+          <img src={dish.image ? `${API_URL}${dish.image.url}` : ''} width="100%" />
         </div>
         <div style={{margin: "0px 20px", fontSize: "2.5rem"}}>{dish.name}</div>
         <div style={{margin: "0px 20px"}}>{dish.description}</div>

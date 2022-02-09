@@ -22,7 +22,7 @@ export default function RestaurantHeader({ restID }) {
       style={{objectPosition: "50% 50%", transform: "translateY(-50%)"}}
       object-position="center center"
       src={
-        API_URL + image.url
+        image ? API_URL + image.url : ''
       }
     />
     </div>
