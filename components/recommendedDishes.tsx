@@ -4,6 +4,7 @@ import {Container, Row } from "reactstrap";
 
 import DishDetail from "./dish/dishDetail";
 import { getAPIUrl } from "../scripts/urls";
+import { parseSRC } from "../scripts/utilities"
 
 function RecommendedDishes({ dishes, filters, sort }){
 
@@ -32,7 +33,7 @@ function RecommendedDishes({ dishes, filters, sort }){
           {dishes.map((dish: any, i: number) => (
             <div key={i}>
               <div className="dish-lockup" onClick={()=>handleSetDish(dish.id)}>
-                <div className="image-container"><img object-fit="cover" src={dish.image ? API_URL+dish.image.url : ''}></img></div>
+                <div className="image-container"><img object-fit="cover" src={parseSRC(dish)}></img></div>
                 <div><b>{dish.name}</b></div>
                 <div>{dish.restaurant.name}</div>
                 <div className="price-button"><div>${dish.price.toFixed(2)}</div></div>

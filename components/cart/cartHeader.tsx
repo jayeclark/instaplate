@@ -2,6 +2,7 @@ import Icons from '../UI/icons/index';
 import styles from '../../styles/Cart.module.css';
 import { parseDeliveryByTime } from '../../scripts/time';
 import { getAPIUrl } from '../../scripts/urls';
+import { parseSRC } from '../../scripts/utilities';
 
 export default function CartHeader({ restaurant, cartTotal, zipCode='00901' }) {
 
@@ -26,7 +27,7 @@ export default function CartHeader({ restaurant, cartTotal, zipCode='00901' }) {
       <div className={styles.cartDetails}>
         <div className={styles.restaurantLockup}>
           <div className={styles.restaurantLogo}>
-            <img height="65px" src={restaurant.image ? API_URL+restaurant.image.url : ''} />
+            <img height="65px" src={parseSRC(restaurant)} />
           </div>
           <div>
             <div className={styles.restaurantName}>{restaurant.name}</div>

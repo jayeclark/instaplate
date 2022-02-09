@@ -2,6 +2,7 @@ import Icons from '../UI/icons/index';
 import { useState, useContext } from 'react';
 import HandlerContext from '../context/handlerContext';
 import { getAPIUrl } from '../../scripts/urls';
+import { parseSRC } from "../../scripts/utilities";
 
 function DishDetail({ dish, handleCloseDish }) {
 
@@ -24,7 +25,7 @@ function DishDetail({ dish, handleCloseDish }) {
     <div className="background-container">
       <div className="dish-detail">
         <div className="dish-image">
-          <img src={dish.image ? `${API_URL}${dish.image.url}` : ''} width="100%" />
+          <img src={parseSRC(dish)} width="100%" />
         </div>
         <div style={{margin: "0px 20px", fontSize: "2.5rem"}}>{dish.name}</div>
         <div style={{margin: "0px 20px"}}>{dish.description}</div>

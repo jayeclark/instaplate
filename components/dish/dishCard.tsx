@@ -11,11 +11,10 @@ import styles from '../../styles/Dishes.module.css';
 import { current } from '../../scripts/utilities';
 import NotAvailable from '../restaurant/notAvailable';
 import DishDetail from "./dishDetail";
-import { getAPIUrl } from '../../scripts/urls';
+import { parseSRC } from '../../scripts/utilities';
 
 export default function DishCard({dish, index, isAvailable, menuStart}) {
   
-  const API_URL = getAPIUrl();
   const [displayDetails, setDisplayDetails] = useState(false);
   const handleSetDisplay = (bool: boolean) => setDisplayDetails(bool);
   
@@ -38,7 +37,7 @@ export default function DishCard({dish, index, isAvailable, menuStart}) {
           top={true}
           height={'200px'}
           position="center"
-          src={dish.image ? `${API_URL}${dish.image.url}` : ''}
+          src={parseSRC(dish)}
         />
         </div>
           </div>

@@ -2,11 +2,10 @@ import styles from '../../styles/Cart.module.css';
 import { useContext } from 'react';
 import HandlerContext from '../context/handlerContext';
 import Icons from '../UI/icons/index';
-import { getAPIUrl } from '../../scripts/urls';
+import { parseSRC } from '../../scripts/utilities';
 
 export default function CartItem({ item }) {
 
-  const API_URL = getAPIUrl();
   const { dispatchCart, getCart } = useContext(HandlerContext);
   const { editOutlineIcon, trashOutlineIcon, plusIcon, minusIcon, trashIcon } = Icons;
 
@@ -18,7 +17,7 @@ export default function CartItem({ item }) {
     >
       <div className={styles.itemDetails}>
         <div className={styles.itemImg}>
-          <img width="100%" src={item.image ? API_URL + item.image.url : ''}/>
+          <img width="100%" src={parseSRC(item)}/>
         </div>
         <div>
           <div>{item.name}</div>

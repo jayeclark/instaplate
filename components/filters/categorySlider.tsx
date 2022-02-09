@@ -1,11 +1,10 @@
 import { useQuery } from '@apollo/client';
 import { useRef } from "react";
 import { GET_RESTAURANT_CATEGORIES } from '../../scripts/queries';
-import { getAPIUrl } from '../../scripts/urls';
+import { parseSRC } from "../../scripts/utilities";
 
 function CategorySlider({ handleSetCuisine }) {
 
-  const API_URL = getAPIUrl();
   const firstCat = useRef();
   const lastCat = useRef();
   const leftArrow = useRef();
@@ -50,7 +49,7 @@ function CategorySlider({ handleSetCuisine }) {
             return (
               <div key={i} id={`cat${i}`} ref={ref ? ref : null} style={{ margin: "8px", cursor: "pointer" }} onClick={() => handleSetCuisine(type.id)} >
                 <div style={{ backgroundColor: "#efefef", borderRadius: "40px", overflow: "hidden", height: "80px", minWidth: "80px", textAlign: "right" }}>
-                  <img height="100%" src={type.image ? `${API_URL}${type.image.url}` : ''}/>
+                  <img height="100%" src={parseSRC(type)}/>
                   </div>
                 <div style={{ textAlign: 'center', marginTop: "8px", fontWeight: "bold", fontSize: "0.8rem" }}>
                   {type.title}
