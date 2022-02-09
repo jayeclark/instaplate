@@ -2,7 +2,7 @@ import { useContext, useRef, useEffect } from "react";
 
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-
+import Cookie from "js-cookie";
 import { current } from "../../scripts/utilities";
 
 import UserContext from "../context/userContext";
@@ -22,9 +22,11 @@ const Navigation = (props) => {
 
   useEffect(() => {
     if (sessionData?.user && !user) {
+      const token: any = sessionData.token;
       const tempUser = {...sessionData.user, username: null, provider: null};
       tempUser.username = tempUser.email.replace(/@.+/,'');
       tempUser.provider = "google";
+      Cookie.set("token", token.jwt);
       handleSetUser(tempUser);
     } else if (user?.provider === "google" && !sessionData?.user) {
       handleSetUser(null);

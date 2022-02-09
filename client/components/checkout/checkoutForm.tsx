@@ -16,6 +16,7 @@ function CheckoutForm() {
   const [formSection, setFormSection] = useState("address");
   const [data, setData] = useState({
     address: "",
+    address2: "",
     city: "",
     state: "",
     zip: "",
@@ -68,7 +69,8 @@ function CheckoutForm() {
     // get token back from stripe to process credit card
     const token = await stripe.createToken(cardElement);
     const userToken = Cookies.get("token");
-
+    console.log(userToken);
+    
     const response = await fetch(`${API_URL}/orders`, {
       method: "POST",
       headers: userToken && { Authorization: `Bearer ${userToken}` },
@@ -76,7 +78,9 @@ function CheckoutForm() {
         amount: Number((cart.total * 1.1).toFixed(2)),
         dishes: cart.items,
         address: data.address,
+        address_line_2: data.address2,
         city: data.city,
+        zip: data.zip,
         state: data.state,
         token: token.token.id,
         restaurant_id: cart.items[0].restaurant.id, 

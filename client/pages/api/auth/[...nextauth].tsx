@@ -18,6 +18,11 @@ export default NextAuth({
     strategy: "jwt",
   },
   callbacks: {
+    session: async ({ session, token, user })=> {
+      console.log(session);
+      session.token = token;
+      return session;
+    },
     jwt: async (initialData) => {
       const { token, user, account } = initialData;
       const isSignIn = user ? true : false;

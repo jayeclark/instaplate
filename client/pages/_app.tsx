@@ -64,7 +64,7 @@ function MyApp(props: any){
 
   const handleSetZip = (str: string) => {
     const tempState = {...state, zipCode: str};
-    window.localStorage.set("zipCode", '00901');
+    window.localStorage.set("zipCode", str);
     setState(tempState);
   }
 

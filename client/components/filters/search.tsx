@@ -16,13 +16,12 @@ export default function Search({ global, handleSetQuery }) {
         top: 0px;
         background-color: #fff;
         left: 0px;
-        width: 53vw;
-        min-width: 38vw;
+        width: calc(100vw - 510px);
         height: fit-content;
         margin-top: 10px;
         margin-bottom: 10px;
-        margin-right: 260px;
-        margin-left: calc(max(25vw, 270px));
+        margin-right: 240px;
+        margin-left: 270px;
         z-index: 99;
       }
 
