@@ -4,6 +4,7 @@ import {
   Container,
   Row,
   Col} from "reactstrap";
+import { API_URL } from '../scripts/urls';
 
 function RestaurantCards({ list, filters, cuisine, sort }) {
 
@@ -52,7 +53,7 @@ function RestaurantCards({ list, filters, cuisine, sort }) {
                 object-position="50% 50%"
                 style={{ left: "50%", top: "50%", transform: "translateY(-25%)" }}
                 src={
-                `http://localhost:1337`+ url
+                API_URL + url
                 }
               />
             </div>

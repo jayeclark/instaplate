@@ -10,6 +10,7 @@ import styles from '../../styles/Checkout.module.css';
 import { toast } from "react-toastify";
 import { address, address2, city, state, zip } from "../../scripts/validation";
 import Icons from "../UI/icons/index";
+import { API_URL } from "../../scripts/urls";
 
 function CheckoutForm() {
   const [formSection, setFormSection] = useState("address");
@@ -65,8 +66,6 @@ function CheckoutForm() {
     // // Pass the Element directly to other Stripe.js methods:
     // // e.g. createToken - https://stripe.com/docs/js/tokens_sources/create_token?type=cardElement
     // get token back from stripe to process credit card
-    const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
-
     const token = await stripe.createToken(cardElement);
     const userToken = Cookies.get("token");
 
@@ -146,7 +145,7 @@ function CheckoutForm() {
           <div style={{paddingTop: "5px", paddingLeft:"5px"}}>{cart.items.reduce((a,b) => a + b.quantity, 0)} items</div>
         </h6>
         <div className={styles.hidden}>
-          {cart.items.map((item,i) => (<img key={i} height="50px" style={{marginBottom: "10px", marginRight:"5px", width:"50px", borderRadius:"30px", overflow:"hidden"}} src={'http://localhost:1337' + item.image.url}/>))}
+          {cart.items.map((item,i) => (<img key={i} height="50px" style={{marginBottom: "10px", marginRight:"5px", width:"50px", borderRadius:"30px", overflow:"hidden"}} src={API_URL + item.image.url}/>))}
         </div>
       </div>
       <div style={{marginBottom: "20px", borderBottom: "1px solid #efefef", overflowX: "scroll"}}>

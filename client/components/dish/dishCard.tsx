@@ -11,6 +11,7 @@ import styles from '../../styles/Dishes.module.css';
 import { current } from '../../scripts/utilities';
 import NotAvailable from '../restaurant/notAvailable';
 import DishDetail from "./dishDetail";
+import { API_URL } from '../../scripts/urls';
 
 export default function DishCard({dish, index, isAvailable, menuStart}) {
   
@@ -36,7 +37,7 @@ export default function DishCard({dish, index, isAvailable, menuStart}) {
           top={true}
           height={'200px'}
           position="center"
-          src={`http://localhost:1337${dish.image.url}`}
+          src={`${API_URL}${dish.image.url}`}
         />
         </div>
           </div>

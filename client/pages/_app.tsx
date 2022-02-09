@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 
 import { cartReducer } from "../scripts/reducer";
+import { API_URL } from "../scripts/urls";
 import UserContext from "../components/context/userContext";
 import HandlerContext from "../components/context/handlerContext";
 import Layout from "../components/layout";
@@ -13,7 +14,6 @@ import '../styles/globals.css';
 
 function MyApp(props: any){
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
   const link = new HttpLink({ uri: `${API_URL}/graphql` })
   const cache = new InMemoryCache()
   const client = new ApolloClient({link,cache});

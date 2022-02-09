@@ -1,6 +1,7 @@
 import Icons from '../UI/icons/index';
 import { useState, useContext } from 'react';
 import HandlerContext from '../context/handlerContext';
+import { API_URL } from '../../scripts/urls';
 
 function DishDetail({ dish, handleCloseDish }) {
 
@@ -22,7 +23,7 @@ function DishDetail({ dish, handleCloseDish }) {
     <div className="background-container">
       <div className="dish-detail">
         <div className="dish-image">
-          <img src={`http://localhost:1337${dish.image.url}`} width="100%" />
+          <img src={`${API_URL}${dish.image.url}`} width="100%" />
         </div>
         <div style={{margin: "0px 20px", fontSize: "2.5rem"}}>{dish.name}</div>
         <div style={{margin: "0px 20px"}}>{dish.description}</div>

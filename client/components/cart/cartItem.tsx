@@ -2,6 +2,7 @@ import styles from '../../styles/Cart.module.css';
 import { useContext } from 'react';
 import HandlerContext from '../context/handlerContext';
 import Icons from '../UI/icons/index';
+import { API_URL } from '../../scripts/urls';
 
 export default function CartItem({ item }) {
 
@@ -16,7 +17,7 @@ export default function CartItem({ item }) {
     >
       <div className={styles.itemDetails}>
         <div className={styles.itemImg}>
-          <img width="100%" src={'http://localhost:1337' + item.image.url}/>
+          <img width="100%" src={API_URL + item.image.url}/>
         </div>
         <div>
           <div>{item.name}</div>

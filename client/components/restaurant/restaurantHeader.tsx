@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
 
 import { GET_RESTAURANT } from '../../scripts/queries';
+import { API_URL } from '../../scripts/urls';
 
 export default function RestaurantHeader({ restID }) {
 
@@ -20,7 +21,7 @@ export default function RestaurantHeader({ restID }) {
       style={{objectPosition: "50% 50%", transform: "translateY(-50%)"}}
       object-position="center center"
       src={
-        `http://localhost:1337`+ image.url
+        API_URL + image.url
       }
     />
     </div>
