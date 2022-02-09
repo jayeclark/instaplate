@@ -23,7 +23,7 @@ function Menus({restaurantID, initialMenu}) {
   useEffect(() => {
     if (initialMenu) {
       setCurrentMenu(initialMenu)
-    } else if (menus.length > 0) {
+    } else if (menus.length > 0 && currentMenu === null) {
       setCurrentMenu(menus[0].id)
     }
   })

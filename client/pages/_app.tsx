@@ -56,13 +56,13 @@ function MyApp(props: any){
     }
   }, [])
 
-  const handleSetUser = (user) => {
+  const handleSetUser = (user: any) => {
     const tempState = { ...state, user};
     tempState.isAuthenticated = true;
     setState(tempState);
   };
 
-  const handleSetZip = (str) => {
+  const handleSetZip = (str: string) => {
     const tempState = {...state, zipCode: str};
     window.localStorage.set("zipCode", '00901');
     setState(tempState);
