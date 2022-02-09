@@ -4,10 +4,12 @@ import {
   Container,
   Row,
   Col} from "reactstrap";
-import { API_URL } from '../scripts/urls';
+import { getAPIUrl } from '../scripts/urls';
 
 function RestaurantCards({ list, filters, cuisine, sort }) {
 
+  const API_URL = getAPIUrl();
+  
   function relevance(a, b) {return b.name?.length - a.name?.length}
   function popularity(a, b) {return Number(b.recentOrders) - Number(a.recentOrders)}
   function rating(a, b) {return Number(b.rating) - Number(a.rating)}

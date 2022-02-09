@@ -3,10 +3,11 @@ import {useState} from "react";
 import {Container, Row } from "reactstrap";
 
 import DishDetail from "./dish/dishDetail";
-import { API_URL } from "../scripts/urls";
+import { getAPIUrl } from "../scripts/urls";
 
 function RecommendedDishes({ dishes, filters, sort }){
 
+  const API_URL = getAPIUrl();
   const [currentDish, setCurrentDish] = useState(null);
 
   const handleCloseDish = () => {

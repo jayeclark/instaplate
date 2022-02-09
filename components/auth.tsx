@@ -5,10 +5,11 @@ import Router from "next/router";
 import Cookie from "js-cookie";
 import axios from "axios";
 
-import { API_URL } from "../scripts/urls";
+import { getAPIUrl } from "../scripts/urls";
 
 //register a new user
 export const registerUser = (username:string, email:string, password:string) => {
+  const API_URL = getAPIUrl();
   //prevent function from being ran on the server
   if (typeof window === "undefined") {
     return;
@@ -36,6 +37,7 @@ export const registerUser = (username:string, email:string, password:string) => 
 
 export const login = (username, password) => {
 
+  const API_URL = getAPIUrl();
   //prevent function from being ran on the server
   if (typeof window === "undefined") {
     return;

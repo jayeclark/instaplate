@@ -1,10 +1,11 @@
 import { useQuery } from '@apollo/client';
 
 import { GET_RESTAURANT } from '../../scripts/queries';
-import { API_URL } from '../../scripts/urls';
+import { getAPIUrl } from '../../scripts/urls';
 
 export default function RestaurantHeader({ restID }) {
 
+  const API_URL = getAPIUrl();
   const { loading, error, data } = useQuery(GET_RESTAURANT, { variables: { id: restID }})
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {JSON.stringify(error)}</p>;

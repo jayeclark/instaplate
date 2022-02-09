@@ -1,10 +1,11 @@
 import Icons from '../UI/icons/index';
 import { useState, useContext } from 'react';
 import HandlerContext from '../context/handlerContext';
-import { API_URL } from '../../scripts/urls';
+import { getAPIUrl } from '../../scripts/urls';
 
 function DishDetail({ dish, handleCloseDish }) {
 
+  const API_URL = getAPIUrl();
   const [numItems, setNumItems] = useState(1);
 
   const updateItemCount = (increment) => {

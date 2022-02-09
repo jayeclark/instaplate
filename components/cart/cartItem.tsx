@@ -2,10 +2,11 @@ import styles from '../../styles/Cart.module.css';
 import { useContext } from 'react';
 import HandlerContext from '../context/handlerContext';
 import Icons from '../UI/icons/index';
-import { API_URL } from '../../scripts/urls';
+import { getAPIUrl } from '../../scripts/urls';
 
 export default function CartItem({ item }) {
 
+  const API_URL = getAPIUrl();
   const { dispatchCart, getCart } = useContext(HandlerContext);
   const { editOutlineIcon, trashOutlineIcon, plusIcon, minusIcon, trashIcon } = Icons;
 

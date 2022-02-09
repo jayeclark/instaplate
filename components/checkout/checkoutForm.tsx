@@ -10,9 +10,10 @@ import styles from '../../styles/Checkout.module.css';
 import { toast } from "react-toastify";
 import { address, address2, city, state, zip } from "../../scripts/validation";
 import Icons from "../UI/icons/index";
-import { API_URL } from "../../scripts/urls";
+import { getAPIUrl } from "../../scripts/urls";
 
 function CheckoutForm() {
+  const API_URL = getAPIUrl();
   const [formSection, setFormSection] = useState("address");
   const [data, setData] = useState({
     address: "",

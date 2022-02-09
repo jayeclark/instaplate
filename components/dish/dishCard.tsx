@@ -11,10 +11,11 @@ import styles from '../../styles/Dishes.module.css';
 import { current } from '../../scripts/utilities';
 import NotAvailable from '../restaurant/notAvailable';
 import DishDetail from "./dishDetail";
-import { API_URL } from '../../scripts/urls';
+import { getAPIUrl } from '../../scripts/urls';
 
 export default function DishCard({dish, index, isAvailable, menuStart}) {
   
+  const API_URL = getAPIUrl();
   const [displayDetails, setDisplayDetails] = useState(false);
   const handleSetDisplay = (bool: boolean) => setDisplayDetails(bool);
   

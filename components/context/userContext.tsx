@@ -30,6 +30,7 @@ const UserContext = React.createContext(
         handleSetUser: (user: any) => {},
         zipCode: recallZip(),
         handleSetZip: (str: string) => {},
+        API_URL: null
     });
 
 export default UserContext;

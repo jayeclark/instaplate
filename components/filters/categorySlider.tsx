@@ -1,10 +1,11 @@
 import { useQuery } from '@apollo/client';
 import { useRef } from "react";
 import { GET_RESTAURANT_CATEGORIES } from '../../scripts/queries';
-import { API_URL } from '../../scripts/urls';
+import { getAPIUrl } from '../../scripts/urls';
 
 function CategorySlider({ handleSetCuisine }) {
 
+  const API_URL = getAPIUrl();
   const firstCat = useRef();
   const lastCat = useRef();
   const leftArrow = useRef();
