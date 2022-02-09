@@ -1,3 +1,4 @@
+console.log('current env', process.env)
 module.exports = {
   webpack: (config, { isServer }) => {
     // Fixes npm packages that depend on `fs` module
@@ -8,8 +9,5 @@ module.exports = {
     }
 
     return config
-  },
-  env: {
-    API_URL: process.env.NEXT_PUBLIC_API_URL
   }
 }
