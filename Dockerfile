@@ -1,6 +1,7 @@
 FROM node:14
 
 # Set working directory
+RUN mkdir -p /usr/src/app
 WORKDIR /client
 
 # Installing dependencies
