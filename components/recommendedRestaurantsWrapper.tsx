@@ -11,11 +11,7 @@ function RestaurantsWrapper({ids, title, subTitle}) {
   if (error) return <p>Error: {JSON.stringify(error)}</p>;
   if (!data) return <p>Not found</p>;
 
-  const memoizedData = useMemo(() => {
-    return data;
-  }, [data]);
-
-  return <RecommendedRestaurants title={title} subTitle={subTitle} restaurants={memoizedData.restaurants.filter(x => ids.includes(x.id))} />
+  return <RecommendedRestaurants title={title} subTitle={subTitle} restaurants={data.restaurants.filter(x => ids.includes(x.id))} />
 
 }
 

@@ -44,7 +44,7 @@ export default function SearchAndFilter({cuisine, highlights}) {
         </div>
         <div style={{width: "70%"}}>
           {query && query !== '' ? null : highlights.map((highlight, i) => (
-            <RestaurantsWrapper ids={highlight.ids} title={highlight.title} subTitle={highlight.subTitle} />
+            <RestaurantsWrapper key={i} ids={highlight.ids} title={highlight.title} subTitle={highlight.subTitle} />
           ))}
           <div className="restaurants">
           <RestaurantCardsWrapper sort={sort} cuisine={cuisine} filters={filters} query={query}/>

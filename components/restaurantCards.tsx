@@ -52,8 +52,7 @@ function RestaurantCards({ list, filters, cuisine, sort }) {
             <div style={{height: "120px", overflow: "hidden"}}>
               <img
                 width="100%"
-                object-position="50% 50%"
-                style={{ left: "50%", top: "50%", transform: "translateY(-25%)" }}
+                style={{ position: "relative", left: "50%", top: "50%", transform: "translate(-50%, -50%)" }}
                 src={
                 API_URL + url
                 }

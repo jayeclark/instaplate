@@ -51,7 +51,7 @@ function RecommendedDishes({ dishes, filters, sort }){
               {dishes.map((dish: any, i: number) => (
                 <div key={i}>
                   <div className="dish-lockup" onClick={()=>handleSetDish(dish.id)}>
-                    <div className="image-container"><img object-fit="cover" src={parseSRC(dish)}></img></div>
+                    <div className="image-container" style={{backgroundImage: `url(${parseSRC(dish)})`, position: "relative"}}><img object-fit="cover" height="100%" src={parseSRC(dish)}></img></div>
                     <div><b>{dish.name}</b></div>
                     <div>{dish.restaurant.name}</div>
                     <div className="price-button"><div>${dish.price.toFixed(2)}</div></div>
