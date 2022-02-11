@@ -5,7 +5,7 @@ import CartIcon from "../cart/cartWidget";
 
 function Menu({ restId, menu, style }){
 
-  const isThisMenuAvailable = isAvailable(menu.menuStart, menu.menuEnd, [menu.mon, menu.tue, menu.wed, menu.thu, menu.fri, menu.sat, menu.sun]);
+  const isThisMenuAvailable = menu ? isAvailable(menu.menuStart, menu.menuEnd, [menu.mon, menu.tue, menu.wed, menu.thu, menu.fri, menu.sat, menu.sun]) : false;
 
   const Dishes = ({ name, dishes, isAvailable }) => {
   if (dishes.length === 0) { return null;}
@@ -50,7 +50,7 @@ function Menu({ restId, menu, style }){
     )
   }
 
-  if (restId){
+  if (restId && menu){
     return (
     <div className="menu-details" style={style}>
       <MenuCategories categories={menu.menu_categories} isAvailable={isThisMenuAvailable}/>
@@ -58,6 +58,8 @@ function Menu({ restId, menu, style }){
     )
   } else if (!restId) {
     return <h1> No Dishes</h1>
+  } else {
+    return null;
   }
 }
 

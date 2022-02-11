@@ -1,4 +1,3 @@
-console.log('current env', process.env)
 module.exports = {
   webpack: (config, { isServer }) => {
     // Fixes npm packages that depend on `fs` module

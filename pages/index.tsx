@@ -8,7 +8,11 @@ function Home() {
     const [cuisine, setCuisine] = useState(null);
 
     const handleSetCuisine = (id) => {
-      setCuisine(id);
+      if (cuisine === id) {
+        setCuisine(null)
+      } else {
+        setCuisine(id);    
+      }
     }
 
     // TODO: Add components for offer carousel, three subsets of restaurants
@@ -19,7 +23,7 @@ function Home() {
         <div>
           <CartIcon />
             <div style={{ minHeight:"160px" }}>
-                <CategorySlider handleSetCuisine={handleSetCuisine}/>
+                <CategorySlider cuisine={cuisine} handleSetCuisine={handleSetCuisine}/>
             </div>
             
             <div className="flex">

@@ -22,7 +22,7 @@ export default function FilterSidebar({filters, handleAddQuery, handleRemoveQuer
   const gluten = (<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" className="cq ec ca cb"><path fillRule="evenodd" clipRule="evenodd" d="M12 5.182C13.09 4 14.546 2.909 16.546 2.909 19.727 2.91 22 5.546 22 8.82c0 1.636-.727 3-1.818 4.09L12 20.637l-8.182-7.728C2.636 11.91 2 10.455 2 8.82c0-3.273 2.273-5.91 5.455-5.91 2 0 3.454 1.182 4.545 2.273zm0 6.09l3.364-3.182 1.818 1.818-5.182 5-5.182-5L8.636 8.09 12 11.272z"></path></svg>);
 
   return (
-    <div className="side-bar" style={{ width: "390px", height: "100%", marginLeft:"30px" }}>
+    <div className="side-bar" style={{ width: "fit-content", maxWidth: "390px", height: "100%", marginLeft:"30px" }}>
       <h3 style={{fontWeight: "600"}}>All Restaurants</h3><br></br>
       <h5>Sort</h5>
       <div style={{ padding: "5px 0px"}}>
@@ -75,6 +75,12 @@ export default function FilterSidebar({filters, handleAddQuery, handleRemoveQuer
 
         .active {
           background-color: #cfcfcf;
+        }
+
+        @media only screen and (max-width: 796px) {
+          .side-bar {
+            display: none;
+          }
         }
       `}</style>
     </div>

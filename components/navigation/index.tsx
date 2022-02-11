@@ -60,6 +60,20 @@ const Navigation = (props) => {
 
   };
 
+  const closeNavContent = () => {
+    const modalContent: HTMLElement = navContentRef.current;
+    const background: HTMLElement = modalBackgroundRef.current;
+
+    const loginVisible = () => current(loginRef).classList.contains(styles.showLoginDrawerContainer);
+    const registerVisible = () => current(registerRef).classList.contains(styles.showLoginDrawerContainer);
+    
+    modalContent.classList.remove(styles.modalMenuExpanded);
+    if (!loginVisible() && !registerVisible()) {
+      setTimeout(() => background.style.display = "none", 500);
+    }
+    return false;
+  }
+
   return (
     <div>
     <Nav>
@@ -96,10 +110,11 @@ const Navigation = (props) => {
       handleSetUser={handleSetUser}
       user={user}
       toggleNavContent={toggleNavContent}
+      closeNavContent={closeNavContent}
       loginRef={loginRef}
       registerRef={registerRef}
     />
-    <div ref={loginRef} className={styles.loginDrawerContainer}>
+    <div id="loginScreen" ref={loginRef} className={styles.loginDrawerContainer}>
       <Login 
         handleToggle={() => {
           current(loginRef).classList.remove(styles.showLoginDrawerContainer);

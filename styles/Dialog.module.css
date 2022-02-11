@@ -119,3 +119,9 @@
   margin-top: 12px;
   margin-bottom: 20px;
 }
+
+@media only screen and (max-width: 576px) {
+  .login-drawer {
+    width: calc(100vw - 50px);
+  }
+}

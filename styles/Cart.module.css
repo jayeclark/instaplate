@@ -225,13 +225,16 @@
   margin-right: 15px;
 }
 
-.itemCount {
+.itemCount,
+.itemCountWidget {
   font-size: 0.75rem;
 }
 
 .itemOptions {
   color: rgb(67, 176, 42);
   font-size: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .itemQuantityLockup {
@@ -278,4 +281,26 @@
 
 .itemQuantityLockup:hover .itemTotalCost {
   display: none;
+}
+
+@media only screen and (max-width: 576px) {
+  .cartDrawerContainer {
+    margin-left: 0px;
+  }
+  .cartDrawer {
+    width: 100vw;
+  }
+  .cartHeader {
+    width: 100vw;
+  }
+  .cartHeader p,
+  .cartHeader h6 {
+    text-align: left;
+  }
+  .itemCount {
+    display: none;
+  }
+  .itemOptions > div {
+    margin-top: 5px;
+  }
 }

@@ -1,12 +1,10 @@
 import Icons from '../UI/icons/index';
 import { useState, useContext } from 'react';
 import HandlerContext from '../context/handlerContext';
-import { getAPIUrl } from '../../scripts/urls';
 import { parseSRC } from "../../scripts/utilities";
 
 function DishDetail({ dish, handleCloseDish }) {
 
-  const API_URL = getAPIUrl();
   const [numItems, setNumItems] = useState(1);
 
   const updateItemCount = (increment) => {
@@ -154,6 +152,15 @@ function DishDetail({ dish, handleCloseDish }) {
           bottom: 0px;
           padding: 15px;
           font-weight: 300;
+        }
+
+        @media only screen and (max-width: 600px) {
+          .price-total {
+            color: #666;
+            bottom: 45px;
+            right: -10px;
+            top: unset;
+          }
         }
       `}</style>
     </div>

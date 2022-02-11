@@ -22,7 +22,7 @@ export default function CartItem({ item }) {
         <div>
           <div>{item.name}</div>
           <div className={styles.itemCount}>{item.quantity} ct</div>
-          <div className={styles.itemOptions}>{editOutlineIcon}Preferences&nbsp;&nbsp;&nbsp;<span style={{ cursor: "pointer" }} onClick={() => dispatchCart({type: 'removeItemEntirely', remove: {item}})}>{trashOutlineIcon}Remove</span></div>
+          <div className={styles.itemOptions}><div>{editOutlineIcon}Preferences&nbsp;&nbsp;&nbsp;</div><div><span style={{ cursor: "pointer" }} onClick={() => dispatchCart({type: 'removeItemEntirely', remove: {item}})}>{trashOutlineIcon}Remove</span></div></div>
         </div>
       </div>
       <div className={styles.itemQuantityLockup}>

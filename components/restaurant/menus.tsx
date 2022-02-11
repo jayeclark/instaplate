@@ -35,7 +35,7 @@ function Menus({restaurantID, initialMenu}) {
 
   menus = data.restaurant.menus;
 
-  const filteredMenus = menus.filter(({ menuEnd, mon, tue, wed, thu, fri, sat, sun }) => {
+  let filteredMenus = menus.filter(({ menuEnd, mon, tue, wed, thu, fri, sat, sun }) => {
     const days = [mon, tue, wed, thu, fri, sat, sun];
     const day = new Date().getDay();
     const hr = new Date().getHours();
@@ -45,6 +45,10 @@ function Menus({restaurantID, initialMenu}) {
   }).sort((a, b) => {
     return timeInMinutes(a.menuStart) - timeInMinutes(b.menuStart);
   });
+
+  if (filteredMenus.length === 0) {
+    filteredMenus = menus;
+  }
 
   const filteredDishes = !dishString ? [] : filteredMenus.reduce((a, b) => {
     const { menu_categories, menuStart, menuEnd, mon, tue, wed, thu, fri, sat, sun } = b;
@@ -73,7 +77,7 @@ function Menus({restaurantID, initialMenu}) {
       <div className="menu-toggler">
       <h3 style={{textAlign: "left", margin:"0px"}}>Menu</h3>
       <div className="menu-ribbon" style={{display: "flex"}}>
-        {menus.length === 0 ? <div style={{ padding: "0px 10px" }}>Sorry, no menus available today!</div> : menus.map((menu,i) => {
+        {filteredMenus.length === 0 ? <div style={{ padding: "0px 15px" }}>Sorry, no menus available today!</div> : menus.map((menu,i) => {
           return (
           <MenuButton key={i} menu={menu} index={i} handleSetMenu={() => setCurrentMenu(menu.id)} style={{ borderBottom: menu.id === currentMenu ? "4px solid black" : null }}/>
           )

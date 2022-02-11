@@ -1,7 +1,7 @@
 /* pages/checkout.js */
 
 import { useContext } from "react";
-import { Row, Col } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../components/checkout/checkoutForm";
@@ -23,14 +23,15 @@ function Checkout() {
   );
 
   return (
+    <Container className="checkout" style={{minHeight: "calc(100vh - 70px)", backgroundColor: "rgb(246, 249, 252)"}}>
     <Row>
-      <Col style={{ paddingLeft: 5 }} sm={{ size: 6, order: 1, offset: 1 }}>
+      <Col style={{ paddingLeft: 5,  paddingRight: 5 }} xs={{ size: 10, order: 1, offset: 1 }} sm={{ size: 6, order: 1, offset: 1 }}>
         <Elements stripe={stripePromise}>
-          {cart.items.length > 0 && <CheckoutForm />}
+          {cart.items.length > 0 && isAuthenticated && <CheckoutForm />}
           {cart.items.length > 0 && !isAuthenticated && (
             <div className={styles.paper}>
               <div style={{height: "fit-content"}}>
-                Please sign in order to continue.
+                Please <a style={{cursor: "pointer"}} onClick={() => document.getElementById('loginScreen').classList.add(styles.showLoginDrawerContainer)}>sign in</a> order to continue.
               </div>
             </div>
           )}          
@@ -43,7 +44,7 @@ function Checkout() {
           )}
         </Elements>
       </Col>
-      <Col style={{ paddingRight: 0 }} sm={{ size: 4, order: 2, offset: 0 }}>
+      <Col style={{ paddingRight: 5, paddingLeft: 5 }} xs={{ size: 10, order: 1, offset: 1 }} sm={{ size: 4, order: 2, offset: 0 }}>
         <div className={styles.paper}>
           <div style={{display: "flex", alignItems: "center", paddingBottom: "15px"}}>
             <div style={{paddingRight: "10px"}}><img height="50px" src="/images/guarantee.png" /></div>
@@ -78,13 +79,7 @@ function Checkout() {
           * {
             box-sizing: border-box;
           }
-          body,
-          html {
-            background-color: #f6f9fc;
-            font-size: 18px;
-            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-          }
-          h1 {
+          .checkout h1 {
             color: #32325d;
             font-weight: 400;
             line-height: 50px;
@@ -92,12 +87,12 @@ function Checkout() {
             margin: 20px 0;
             padding: 0;
           }
-          label {
+          .checkout label {
             color: #6b7c93;
             font-weight: 300;
             letter-spacing: 0.025em;
           }
-          button {
+          .checkout button {
             white-space: nowrap;
             border: 0;
             outline: 0;
@@ -119,20 +114,13 @@ function Checkout() {
             transition: all 150ms ease;
             margin-top: 10px;
           }
-          form {
+          .checkout form {
             margin-bottom: 40px;
             padding-bottom: 40px;
             border-bottom: 3px solid #e6ebf1;
           }
-          button:hover {
-            color: #fff;
-            cursor: pointer;
-            background-color: #7795f8;
-            transform: translateY(-1px);
-            box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1),
-              0 3px 6px rgba(0, 0, 0, 0.08);
-          }
-          input,
+
+          .checkout input,
           .StripeElement {
             display: block;
             background-color: #f8f9fa !important;
@@ -148,10 +136,10 @@ function Checkout() {
             border-radius: 4px;
             background: white;
           }
-          input::placeholder {
+          .checkout input::placeholder {
             color: #aab7c4;
           }
-          input:focus,
+          .checkout input:focus,
           .StripeElement--focus {
             box-shadow: rgba(50, 50, 93, 0.109804) 0px 4px 6px,
               rgba(0, 0, 0, 0.0784314) 0px 1px 3px;
@@ -165,6 +153,7 @@ function Checkout() {
         `}
       </style>
     </Row>
+    </Container>
   );
   // }
 }

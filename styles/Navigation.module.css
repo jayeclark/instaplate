@@ -183,9 +183,34 @@
   z-index: 9999!important;
 }
 
+.closeIcon {
+  display: none;
+  margin: 0px 16px;
+}
 
 
 @media only screen and (max-width: 576px) {
+
+  .loginDrawerContainer {
+    width: 100vw;
+  }
+
+  .menuDrawer hr {
+    width: calc(100% - 40px);
+    margin: 20px 5px 20px 5px;
+  }
+
+  .menuDrawer {
+    width: 100vw;
+    left: calc(-100vw - 5px);
+  }
+
+  .menuItem {
+    padding-bottom: 35px;
+    font-size: 1.2rem;
+    width: calc(100% - 60px);
+  }
+
   .searchSpacer {
     display: none;
     min-width: 0px;
@@ -194,6 +219,30 @@
 
   .mapMarker {
     display: none;
+  }
+  .menuHeader {
+    width: calc(100vw - 60px);
+    left: 0px;
+  }
+
+  .menuHeader, 
+  .menuHeaderOption {
+    font-size: 1.5rem;
+  }
+
+  .menuItem h6 {
+    font-size: 1rem;
+  }
+  .menuFooter {
+    width: 100%; 
+    text-align: center;
+  }
+  .closeIcon {
+    display: flex;
+    width: 100vw;
+    padding: 0px 50px;
+    position: absolute;
+    justify-content: right;
   }
 }
 
@@ -207,4 +256,6 @@
     padding-right: 90px;
   }
 
+
+  
 }

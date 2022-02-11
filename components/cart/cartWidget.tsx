@@ -25,7 +25,7 @@ const CartIcon = () => {
     <div className={styles.cartWidget}>
     <button type="button" disabled={items.length === 0} onClick={showCartDrawer}>
       {items.length === 0 ? shoppingCartDisabled : shoppingCartEnabled}
-      <span className={styles.itemCount}>{items.reduce((a,b) => a + b.quantity, 0)}</span>
+      <span className={styles.itemCountWidget}>{items.reduce((a,b) => a + b.quantity, 0)}</span>
     </button>
     <div ref={drawerRef} className={styles.cartDrawerContainer}>
       {items.length > 0 ? <div className={styles.cartDrawerContainerBackground}></div> : null}

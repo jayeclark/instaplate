@@ -31,7 +31,7 @@ const Layout = (props) => {
         </style>
         <Navigation />
       </header>
-      <div style={{ paddingTop: "80px" }}>{props.children}</div>
+      <div style={{ paddingTop: "70px" }}>{props.children}</div>
     </>
   );
 };

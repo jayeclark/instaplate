@@ -71,7 +71,6 @@ function CheckoutForm() {
     // get token back from stripe to process credit card
     const token = await stripe.createToken(cardElement);
     const userToken = Cookies.get("token");
-    console.log(userToken);
     
     const response = await fetch(`${API_URL}/orders`, {
       method: "POST",

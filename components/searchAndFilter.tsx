@@ -32,15 +32,37 @@ export default function SearchAndFilter({cuisine}) {
   return (
     <>
       <Search global={true} handleSetQuery={handleSetQuery}/>
-      <FilterSidebar handleAddQuery={handleAddQuery} handleRemoveQuery={handleRemoveQuery} filters={filters} handleSetSort={handleSetSort} />
-      <div>
-        <div>
-        <RestaurantCardsWrapper sort={sort} cuisine={cuisine} filters={filters} query={query}/>
+      <div style={{display: "flex", width: "100vw", flexWrap: "nowrap"}}>
+        <div className="side-bar-container">
+          <FilterSidebar handleAddQuery={handleAddQuery} handleRemoveQuery={handleRemoveQuery} filters={filters} handleSetSort={handleSetSort} />
         </div>
-        <div>
-        <RecommendedDishesWrapper sort={sort} filters={filters} query={query}/>
-        </div>  
+        <div style={{width: "70%"}}>
+          <div className="restaurants">
+          <RestaurantCardsWrapper sort={sort} cuisine={cuisine} filters={filters} query={query}/>
+          </div>
+          <div className="dishes">
+          <RecommendedDishesWrapper sort={sort} filters={filters} query={query}/>
+          </div>  
+        </div>
       </div>
+      <style jsx>{`
+      .side-bar-container {
+        width: 30%
+      }
+      .restaurants, .dishes {
+        width: 70%
+      }
+      @media only screen and (max-width: 796px) {
+        .side-bar-container {
+          display: none;
+        }
+        .restaurants,
+        .dishes {
+          width: 100vw;
+          overflow: hidden;
+        }
+      }
+      `}</style>
     </>
   )
 }

@@ -15,7 +15,6 @@ import '../styles/globals.css';
 function MyApp(props: any){
 
   const API_URL = getAPIUrl();
-  console.log(API_URL);
   const link = new HttpLink({ uri: `${API_URL}/graphql` })
   const cache = new InMemoryCache()
   const client = new ApolloClient({link,cache});

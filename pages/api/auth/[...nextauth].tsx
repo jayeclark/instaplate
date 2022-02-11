@@ -19,7 +19,6 @@ export default NextAuth({
   },
   callbacks: {
     session: async ({ session, token, user })=> {
-      console.log(session);
       session.token = token;
       return session;
     },

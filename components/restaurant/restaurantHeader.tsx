@@ -67,7 +67,7 @@ export default function RestaurantHeader({ restID }) {
           }
 
           @media only screen and (max-width: 576px) {
-            .restaurant-image {
+            .restaurant-hero {
               display: none;
             }
 

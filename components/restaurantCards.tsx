@@ -29,10 +29,13 @@ function RestaurantCards({ list, filters, cuisine, sort }) {
   if (filteredRestaurants.length === 0) {
     return(
 
-      <Container>
-      <Row cols={3} style={{margin: "50px 30px 50px 0px", padding: "20px", border: "1px solid #dfdfdf"}}>
-        <h3> No restaurants match those filters!</h3>
-      </Row> 
+      <Container style={{width: "100%", padding: "0px 20px"}}>
+        <Row>
+          <Col><div><h2>Restaurants</h2></div></Col>
+        </Row>
+        <Row cols={1} style={{margin: "15px 0px 15px 0px", padding: "20px", border: "1px solid #dfdfdf"}}>
+          <Col><h3> No restaurants match those filters!</h3></Col>
+        </Row> 
       </Container>
   
     )
@@ -45,10 +48,10 @@ function RestaurantCards({ list, filters, cuisine, sort }) {
   })
 
   let restList = restaurantList.sort(sortFunction).map(({ id, name, url, deliveryFee, deliveryTime, rating }) => (
-    <Col xs="12" md="6" lg="4" key={id}>
+    <Col xs="12" sm="6" lg="4" key={id}>
       <Link as={"/restaurants/"+id} href="/restaurants/[id]">
         <a>
-          <Card style={{ margin: "0 0.5rem 20px 0.5rem", border: "none" }}>
+          <Card style={{ margin: "0 8px 20px 8px", border: "none" }}>
             <div style={{height: "120px", overflow: "hidden"}}>
               <img
                 width="100%"
@@ -74,7 +77,10 @@ function RestaurantCards({ list, filters, cuisine, sort }) {
 
   return(
 
-      <Container>
+      <Container style={{width: "100%", padding: "0px 12px"}}>
+      <Row style={{padding: "0px 8px"}}>
+        <div><h2>Restaurants</h2></div>
+      </Row>
       <Row xs='3'>
         {restList}
       </Row> 

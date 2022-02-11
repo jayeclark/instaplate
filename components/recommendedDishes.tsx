@@ -5,6 +5,7 @@ import {Container, Row } from "reactstrap";
 import DishDetail from "./dish/dishDetail";
 import { getAPIUrl } from "../scripts/urls";
 import { parseSRC } from "../scripts/utilities"
+import LeftRightArrows from "./UI/sliderArrows";
 
 function RecommendedDishes({ dishes, filters, sort }){
 
@@ -25,25 +26,27 @@ function RecommendedDishes({ dishes, filters, sort }){
 
   return (
     <>
-      <Container style={{overflowX: "hidden"}}>
-        <div style={{overflowX: "hidden", marginRight: "10px"}}>
-          <Row style={{overflowX:"scroll"}}>
-          <div><h2>Recommended Dishes</h2></div>
-          <div style={{display:"flex"}}>
-          {dishes.map((dish: any, i: number) => (
-            <div key={i}>
-              <div className="dish-lockup" onClick={()=>handleSetDish(dish.id)}>
-                <div className="image-container"><img object-fit="cover" src={parseSRC(dish)}></img></div>
-                <div><b>{dish.name}</b></div>
-                <div>{dish.restaurant.name}</div>
-                <div className="price-button"><div>${dish.price.toFixed(2)}</div></div>
-              </div>
-            </div>
-            )
-          )}
-          </div>
+      <Container style={{width: "100%", padding: "0px 12px", overflowX: "hidden"}}>
+          <Row>
+            <div><h2>Recommended Dishes</h2></div>
           </Row>
-        </div>
+          <Row style={{width: "100%", overflowX:"scroll"}}>
+            <LeftRightArrows numElements={dishes.length}>
+              <div style={{display:"flex"}}>
+              {dishes.map((dish: any, i: number) => (
+                <div key={i}>
+                  <div className="dish-lockup" onClick={()=>handleSetDish(dish.id)}>
+                    <div className="image-container"><img object-fit="cover" src={parseSRC(dish)}></img></div>
+                    <div><b>{dish.name}</b></div>
+                    <div>{dish.restaurant.name}</div>
+                    <div className="price-button"><div>${dish.price.toFixed(2)}</div></div>
+                  </div>
+                </div>
+                )
+              )}
+              </div>
+            </LeftRightArrows>
+          </Row>
       </Container>
       {currentDish ? <DishDetail dish={getDish(currentDish)} handleCloseDish={handleCloseDish} /> : null}
       <style jsx>{`
