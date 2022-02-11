@@ -104,7 +104,7 @@ const Navigation = (props) => {
       </div>
 
     </Nav>
-    <div ref={modalBackgroundRef} className={styles.modalBackground}></div>
+    <div ref={modalBackgroundRef} className={styles.modalBackground} onClick={closeNavContent}></div>
     <MenuDrawer 
       navContentRef={navContentRef}
       handleSetUser={handleSetUser}
