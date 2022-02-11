@@ -6,6 +6,7 @@ export default function FilterSidebar({filters, handleAddQuery, handleRemoveQuer
   const [staticPosition, setStatic] = useState(false);
 
   const sideBarRef = useRef();
+  const parentRef = useRef();
 
   const toggleDietary = (i) => {
     if (filters.dietary.includes(i)) {
@@ -32,11 +33,11 @@ export default function FilterSidebar({filters, handleAddQuery, handleRemoveQuer
 
     function handleSetSidebar() {
 
-      const sideBarEl: HTMLElement = sideBarRef.current;
-      const sideBarTop = sideBarEl.getBoundingClientRect().top;
-      if (sideBarTop < 92) {
+      const parentEl: HTMLElement = parentRef?.current;
+      const parentTop = parentEl?.getBoundingClientRect().top || 0;
+      if (parentTop <= 92) {
         setStatic(true);
-      } else if (sideBarTop > 92) {
+      } else if (parentTop > 92) {
         setStatic(false);
       }
     }
@@ -51,7 +52,7 @@ export default function FilterSidebar({filters, handleAddQuery, handleRemoveQuer
   const gluten = (<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" className="cq ec ca cb"><path fillRule="evenodd" clipRule="evenodd" d="M12 5.182C13.09 4 14.546 2.909 16.546 2.909 19.727 2.91 22 5.546 22 8.82c0 1.636-.727 3-1.818 4.09L12 20.637l-8.182-7.728C2.636 11.91 2 10.455 2 8.82c0-3.273 2.273-5.91 5.455-5.91 2 0 3.454 1.182 4.545 2.273zm0 6.09l3.364-3.182 1.818 1.818-5.182 5-5.182-5L8.636 8.09 12 11.272z"></path></svg>);
 
   return (
-    <div className="side-bar">
+    <div ref={parentRef} className="side-bar">
       <div ref={sideBarRef} style={{ position: staticPosition ? "fixed" : "relative", top: staticPosition ? "92px" : null, width: "fit-content", maxWidth: "390px", height: "100%", marginLeft:"30px" }}>
       <h3 style={{fontWeight: "600", marginBottom: "0px"}}>{(filters.query === null || filters.query === '') ? "All Stores" : `"${filters.query}"`}</h3>
       {(filters.query === null || filters.query === '') ? null : (<span style={{display: "block", fontSize: "0.9rem"}}>Showing results for "{filters.query}"</span>)}
