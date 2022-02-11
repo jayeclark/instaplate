@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import Link from "next/link";
-import HandlerContext from "../context/handlerContext";
 import UserContext from "../context/userContext";
 import styles from "../../styles/Cart.module.css";
 import Icons from "../UI/icons/index";
@@ -9,8 +8,7 @@ import CartItem from "./cartItem";
 
 function CartDrawer({ handleCloseDrawer }) {
 
-  const { getCart } = useContext(HandlerContext);
-  const cart: any = getCart();
+  const { cart } = useContext(UserContext);
   const { items, total } = cart;
 
   let { zipCode } = useContext(UserContext);

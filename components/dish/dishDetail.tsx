@@ -1,6 +1,7 @@
 import Icons from '../UI/icons/index';
 import { useState, useContext } from 'react';
 import HandlerContext from '../context/handlerContext';
+import UserContext from '../context/userContext';
 import { parseSRC } from "../../scripts/utilities";
 
 function DishDetail({ dish, handleCloseDish }) {
@@ -13,7 +14,7 @@ function DishDetail({ dish, handleCloseDish }) {
     }
   }
 
-  const { dispatchCart } = useContext(HandlerContext);
+  const { cart, add } = useContext(UserContext);
 
   if (dish === null) {
     return null;
@@ -38,7 +39,7 @@ function DishDetail({ dish, handleCloseDish }) {
           <div style={{textAlign: "center", minWidth: "35px", fontSize: "1.2rem"}}>{numItems}</div>
           <div onClick={() => updateItemCount(1)} className="round-button lightgray">{Icons.plusIcon}</div>
         </div>
-        <div onClick={(e) => dispatchCart({type: 'addItem', add: { item: dish, count: numItems }})} className="add-to-cart">
+        <div onClick={(e) => add({ cart, item: dish, count: numItems })} className="add-to-cart">
           Add {numItems} to order
           <div className="price-total">
             ${(dish.price * numItems).toFixed(2)}

@@ -1,12 +1,11 @@
-import HandlerContext from "../context/handlerContext";
+import UserContext from "../context/userContext";
 import { useContext, useRef } from "react";
 import CartDrawer from "./cartDrawer";
 import styles from '../../styles/Cart.module.css';
 import Icons from '../UI/icons/index';
 
 const CartIcon = () => {
-  const { getCart} = useContext(HandlerContext);
-  const cart:any = getCart();
+  const { statefulCart: cart } = useContext(UserContext);
   const { items } = cart;
 
   const { shoppingCartDisabled, shoppingCartEnabled } = Icons;
@@ -23,13 +22,13 @@ const CartIcon = () => {
 
   return (
     <div className={styles.cartWidget}>
-    <button type="button" disabled={items.length === 0} onClick={showCartDrawer}>
-      {items.length === 0 ? shoppingCartDisabled : shoppingCartEnabled}
-      <span className={styles.itemCountWidget}>{items.reduce((a,b) => a + b.quantity, 0)}</span>
+    <button type="button" disabled={!items || items.length === 0} onClick={showCartDrawer}>
+      {!items || items.length === 0 ? shoppingCartDisabled : shoppingCartEnabled}
+      <span className={styles.itemCountWidget}>{!items ? 0 : items.reduce((a,b) => a + b.quantity, 0)}</span>
     </button>
     <div ref={drawerRef} className={styles.cartDrawerContainer}>
-      {items.length > 0 ? <div className={styles.cartDrawerContainerBackground}></div> : null}
-      {items.length > 0 ? <CartDrawer handleCloseDrawer={hideCartDrawer}/> : null}
+      {items?.length > 0 ? <div className={styles.cartDrawerContainerBackground}></div> : null}
+      {items?.length > 0 ? <CartDrawer handleCloseDrawer={hideCartDrawer}/> : null}
     </div>
     <style jsx>
       {`

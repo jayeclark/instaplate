@@ -27,10 +27,40 @@ function MyApp(props: any){
 
   const [state, setState] = useState(initialState);
 
-  const initialCart = {items: [], total: 0};
+  const initialCart = {
+    items: [], 
+    total: 0,
+  };
 
-  const [cart, dispatchCart] = useReducer(cartReducer, initialCart);
-  const getCart = () => cart;
+  const [statefulCart, setStatefulCart] = useState(initialCart);
+
+  const add = ({cart, item, count}) => {
+    if (cart.items.filter(x => x.id === item.id).length > 0) {
+      cart.items.filter(x => x.id === item.id)[0].quantity += count;
+    } else {
+      cart.items.push({...item, quantity: count})
+    }
+    setStatefulCart(cart);
+    return true;
+  };
+  const remove = ({cart, item}) => {
+    if (cart.items.filter(x => x.id === item.id)[0].quantity === 1) {
+      const newItems = this.items.filter(x => x.id !== item.id)
+      cart.items = newItems;
+    } else {
+      cart.items.filter(x => x.id)[0].quantity -= 1;
+    }
+    setStatefulCart(cart);
+    return true;
+  };
+  const removeAll = ({cart, item}) => {
+    const newItems = cart.items.filter(x => x.id !== item.id);
+    cart.items = newItems;
+    setStatefulCart(cart);
+    return true;
+  }
+  //const [cart, dispatchCart] = useReducer(cartReducer, initialCart);
+  //const getCart = () => cart;
 
   const { Component, pageProps: {session, ...pageProps} } = props;
 
@@ -71,17 +101,18 @@ function MyApp(props: any){
 
   return (
     <SessionProvider session={session}>
-        <HandlerContext.Provider value={{
-          dispatchCart,
-          getCart, 
-        }}>
           <UserContext.Provider value={{ 
             user: state.user, 
             isAuthenticated: state.isAuthenticated, 
             handleSetUser,
             zipCode: state.zipCode,
             handleSetZip,
-            API_URL
+            API_URL,
+            cart: initialCart,
+            statefulCart,
+            add,
+            remove,
+            removeAll
           }}>
             <ApolloProvider client={client}>
               <Layout>
@@ -90,7 +121,6 @@ function MyApp(props: any){
               <ToastContainer />
             </ApolloProvider>
           </UserContext.Provider>
-        </HandlerContext.Provider>
     </SessionProvider>
   );
   

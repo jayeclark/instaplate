@@ -6,16 +6,12 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../components/checkout/checkoutForm";
 import UserContext from "../components/context/userContext";
-import HandlerContext from "../components/context/handlerContext";
 import styles from "../styles/Checkout.module.css";
 import Link from "next/link";
 
 function Checkout() {
   // get app context
-  const {isAuthenticated} = useContext(UserContext);
-  const {getCart} = useContext(HandlerContext);
-
-  const cart: any = getCart();
+  const {isAuthenticated, cart} = useContext(UserContext);
 
   // load stripe to inject into elements components
   const stripePromise = loadStripe(
