@@ -30,11 +30,8 @@ function RestaurantCards({ list, filters, cuisine, sort }) {
     return(
 
       <Container style={{width: "100%", padding: "0px 20px"}}>
-        <Row>
-          <Col><div><h2>Restaurants</h2></div></Col>
-        </Row>
-        <Row cols={1} style={{margin: "15px 0px 15px 0px", padding: "20px", border: "1px solid #dfdfdf"}}>
-          <Col><h3> No restaurants match those filters!</h3></Col>
+        <Row cols={1} style={{margin: "15px 0px 65px 0px", padding: "20px", border: "1px solid #dfdfdf"}}>
+          <Col><h4> No restaurants match those filters!</h4></Col>
         </Row> 
       </Container>
   
@@ -78,9 +75,6 @@ function RestaurantCards({ list, filters, cuisine, sort }) {
   return(
 
       <Container style={{width: "100%", padding: "0px 12px"}}>
-      <Row style={{padding: "0px 8px"}}>
-        <div><h2>Restaurants</h2></div>
-      </Row>
       <Row xs='3'>
         {restList}
       </Row> 

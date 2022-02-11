@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-import {Container, Row } from "reactstrap";
+import {Container, Row, Col} from "reactstrap";
 
 import DishDetail from "./dish/dishDetail";
 import { getAPIUrl } from "../scripts/urls";
@@ -22,6 +22,21 @@ function RecommendedDishes({ dishes, filters, sort }){
   
   const getDish = (dishID: string) => {
     return dishes.filter((x: any) => x.id === dishID)[0];
+  }
+
+  if (dishes.length === 0) {
+    return(
+
+      <Container style={{width: "100%", padding: "0px 20px"}}>
+        <Row>
+          <div><h2>Recommended Dishes</h2></div>
+        </Row>
+        <Row cols={1} style={{margin: "15px 0px 15px 0px", padding: "20px", border: "1px solid #dfdfdf"}}>
+          <Col><h4> No dishes match those filters!</h4></Col>
+        </Row> 
+      </Container>
+  
+    )
   }
 
   return (
