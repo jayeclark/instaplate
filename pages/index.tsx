@@ -7,7 +7,7 @@ import Cookie from "js-cookie";
 
 function Home() {
 
-  const cart = Cookie.getJSON("cart");
+  const cart = Cookie.getJSON("cart") || {items: [], total: 0};
   const [ thisCart, setThisCart ] = useState(cart);
   const [ drawerOpen, setDrawerOpen] = useState('closed');
 

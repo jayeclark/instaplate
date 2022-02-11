@@ -8,7 +8,7 @@ import Cookie from "js-cookie";
 export default function Stores() {
 
   // TODO: Fix relevance sort (replace placeholder)
-  const cart = Cookie.getJSON("cart");
+  const cart = Cookie.getJSON("cart") || {items: [], total: 0};
   const [ thisCart, setThisCart ] = useState(cart);
   const [ drawerOpen, setDrawerOpen] = useState('closed');
 

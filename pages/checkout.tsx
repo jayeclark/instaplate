@@ -14,7 +14,7 @@ import Cookie from "js-cookie";
 function Checkout() {
   // get app context
   const {isAuthenticated} = useContext(UserContext);
-  const cart = Cookie.getJSON("cart");
+  const cart = Cookie.getJSON("cart") || {items: [], total: 0};
   console.log('cart', cart);
 
   // load stripe to inject into elements components
