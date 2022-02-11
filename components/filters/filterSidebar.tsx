@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function FilterSidebar({filters, handleAddQuery, handleRemoveQuery, handleSetSort}) {
 
   const [radioButton, setRadioButton] = useState("relevance");
+  const [staticPosition, setStatic] = useState(false);
+
+  const sideBarRef = useRef();
 
   const toggleDietary = (i) => {
     if (filters.dietary.includes(i)) {
@@ -21,32 +24,50 @@ export default function FilterSidebar({filters, handleAddQuery, handleRemoveQuer
   }
 
   const handleSetButton = (e: any) => {
-    console.log(e.target.value);
     setRadioButton(e.target.value);
     handleSetSort(e.target.value);
   }
+
+  useEffect(() => {
+
+    function handleSetSidebar() {
+
+      const sideBarEl: HTMLElement = sideBarRef.current;
+      const sideBarTop = sideBarEl.getBoundingClientRect().top;
+      if (sideBarTop < 92 && staticPosition === false) {
+        setStatic(true);
+      } else if (staticPosition === true) {
+        setStatic(false);
+      }
+    }
+
+    window.addEventListener('scroll', () => handleSetSidebar());
+
+    return window.removeEventListener('scroll', () => handleSetSidebar());
+  },[]);
 
   const vegetarian = (<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" className="cq ec ca cb"><path d="M14.083 2.833c-4.333 0-7.916 3.583-7.916 7.917v5.333L2.75 19.5l1.75 1.75 3.417-3.417h4.5a8.749 8.749 0 008.75-8.75v-6.25h-7.084zm0 2.5h3.75L8.667 14.5v-3.75c0-3 2.416-5.417 5.416-5.417z"></path></svg>);
   const vegan = (<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" className="cq ec ca cb"><path fillRule="evenodd" clipRule="evenodd" d="M12 5.182C13.09 4 14.546 2.909 16.546 2.909 19.727 2.91 22 5.546 22 8.82c0 1.636-.727 3-1.818 4.09L12 20.637l-8.182-7.728C2.636 11.91 2 10.455 2 8.82c0-3.273 2.273-5.91 5.455-5.91 2 0 3.454 1.182 4.545 2.273zm0 6.09l3.364-3.182 1.818 1.818-5.182 5-5.182-5L8.636 8.09 12 11.272z"></path></svg>);
   const gluten = (<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" className="cq ec ca cb"><path fillRule="evenodd" clipRule="evenodd" d="M12 5.182C13.09 4 14.546 2.909 16.546 2.909 19.727 2.91 22 5.546 22 8.82c0 1.636-.727 3-1.818 4.09L12 20.637l-8.182-7.728C2.636 11.91 2 10.455 2 8.82c0-3.273 2.273-5.91 5.455-5.91 2 0 3.454 1.182 4.545 2.273zm0 6.09l3.364-3.182 1.818 1.818-5.182 5-5.182-5L8.636 8.09 12 11.272z"></path></svg>);
 
   return (
-    <div className="side-bar" style={{ width: "fit-content", maxWidth: "390px", height: "100%", marginLeft:"30px" }}>
+    <div className="side-bar">
+      <div ref={sideBarRef} style={{ position: staticPosition ? "fixed" : "relative", top: staticPosition ? "92px" : null, width: "fit-content", maxWidth: "390px", height: "100%", marginLeft:"30px" }}>
       <h3 style={{fontWeight: "600", marginBottom: "0px"}}>{(filters.query === null || filters.query === '') ? "All Stores" : `"${filters.query}"`}</h3>
       {(filters.query === null || filters.query === '') ? null : (<span style={{display: "block", fontSize: "0.9rem"}}>Showing results for "{filters.query}"</span>)}
       <br></br>
       <h5>Sort</h5>
       <div style={{ padding: "5px 0px"}}>
-        <input className="radio-button" type="radio" checked={radioButton === "relevance"} name="sort" value="relevance" onClick={handleSetButton } /><label>&nbsp;&nbsp;Picked for you (default)</label><br />
+        <input className="radio-button" type="radio" checked={radioButton === "relevance"} name="sort" readOnly={true} value="relevance" onClick={handleSetButton } /><label>&nbsp;&nbsp;Picked for you (default)</label><br />
         </div>
       <div style={{ padding: "5px 0px"}}>
-        <input className="radio-button" type="radio" checked={radioButton === "popularity"} name="sort" value="popularity" onClick={handleSetButton }  /><label>&nbsp;&nbsp;Most popular</label><br />
+        <input className="radio-button" type="radio" checked={radioButton === "popularity"} name="sort" readOnly={true} value="popularity" onClick={handleSetButton }  /><label>&nbsp;&nbsp;Most popular</label><br />
         </div>
       <div style={{ padding: "5px 0px"}}>
-        <input className="radio-button" type="radio" checked={radioButton === "rating"} name="sort" value="rating" onClick={handleSetButton } /><label>&nbsp;&nbsp;Rating</label><br />
+        <input className="radio-button" type="radio" checked={radioButton === "rating"} name="sort" readOnly={true} value="rating" onClick={handleSetButton } /><label>&nbsp;&nbsp;Rating</label><br />
         </div>
       <div style={{ padding: "5px 0px"}}>
-        <input className="radio-button" type="radio" checked={radioButton === "delivery"} name="sort" value="delivery" onClick={handleSetButton } /><label>&nbsp;&nbsp;Delivery time</label><br />
+        <input className="radio-button" type="radio" checked={radioButton === "delivery"} name="sort" readOnly={true} value="delivery" onClick={handleSetButton } /><label>&nbsp;&nbsp;Delivery time</label><br />
       </div><br></br>
       <h5>Price Range</h5>
       <div style={{ display: "flex", flexWrap: "nowrap" }}>
@@ -63,6 +84,7 @@ export default function FilterSidebar({filters, handleAddQuery, handleRemoveQuer
       <div style={{ display: "flex", flexWrap: "wrap", maxWidth: "390px" }}>  
         <div className={filters.dietary.includes(3) ? "filter-option active" : "filter-option"} onClick={() => toggleDietary(3)} ><span style={{display: "inline-block", width:"18px"}}>{gluten}</span>&nbsp;Gluten-free</div>
       </div><br></br>
+      </div>
       <style jsx>{`
         h5 {
           font-size: 1.1rem;
@@ -74,6 +96,7 @@ export default function FilterSidebar({filters, handleAddQuery, handleRemoveQuer
           height: 100%;
           marginLeft: 30px;
           min-height: calc(100vh - 80px);
+          position: relative;
         }
 
         .radio-button {

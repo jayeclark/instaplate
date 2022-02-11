@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export default function LeftRightArrows({ numElements, children }) {
 
@@ -6,21 +6,50 @@ export default function LeftRightArrows({ numElements, children }) {
   const rightArrow = useRef();
   const wrapper = useRef();
 
+  const [parentElementWidth, setParentElementWidth] = useState(0);
+  const [elementWidth, setElementWidth] = useState(0);
+
+
+  console.log(elementWidth, parentElementWidth);
+
+  useEffect(() => {
+    const wrapperElement: HTMLElement = wrapper.current;
+    setElementWidth(wrapperElement.scrollWidth);
+
+    const parentElement: HTMLElement = wrapperElement.parentElement;
+    const parentStyle = window.getComputedStyle(parentElement);
+
+    function handleResize() {
+      setParentElementWidth(parseInt(parentStyle.width));
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
+  useEffect(() => {
+    const wrapperElement: HTMLElement = wrapper.current;
+    const parentElement: HTMLElement = wrapperElement.parentElement;
+
+    const parentStyle = window.getComputedStyle(parentElement);
+    setElementWidth(wrapperElement.scrollWidth);
+    setParentElementWidth(parseInt(parentStyle.width));
+  }, [numElements])
+
   const handleScroll = () => {
     const wrapperElement: HTMLElement = wrapper.current;
     const leftArrowElement: HTMLElement = leftArrow.current;
     const rightArrowElement: HTMLElement = rightArrow.current;
     const offset = wrapperElement.scrollLeft;
-    const width = wrapperElement.scrollWidth;
     const parentWidth = wrapperElement.parentElement.getBoundingClientRect().width;
-    if (offset >= width / numElements && leftArrowElement.style.display !== "block") {
+    if (offset >= elementWidth / numElements && leftArrowElement.style.display !== "block" && elementWidth > parentElementWidth) {
       leftArrowElement.style.display = "block"
-    } else if (offset < width / numElements && leftArrowElement.style.display !== "none"){
+    } else if ((offset < elementWidth / numElements && leftArrowElement.style.display !== "none") || elementWidth < parentElementWidth ){
       leftArrowElement.style.display = "none";
     }
-    if (offset < width - parentWidth - 10 && rightArrowElement.style.display !== "block") {
+    if (offset < elementWidth - parentWidth - 10 && rightArrowElement.style.display !== "block" && elementWidth > parentElementWidth) {
       rightArrowElement.style.display = "block";
-    } else if (offset >= width - parentWidth - 10 && rightArrowElement.style.display !== "none") {
+    } else if ((offset >= elementWidth - parentWidth - 10 && rightArrowElement.style.display !== "none") || elementWidth < parentElementWidth) {
       rightArrowElement.style.display = "none";
     }
   };
@@ -37,7 +66,7 @@ export default function LeftRightArrows({ numElements, children }) {
       >
         <svg width="1em" height="1em" viewBox="0 0 24 24" fill="#343538" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M7.121 12l5.94-5.94a1.5 1.5 0 00-2.122-2.12l-7 7a1.5 1.5 0 000 2.12l7 7a1.5 1.5 0 002.122-2.12L7.12 12z"></path></svg>
       </div>
-      <div className="right-arrow" ref={rightArrow} onClick={()=> {
+      <div className="right-arrow" style={{display: elementWidth < parentElementWidth ? "none" : "block"}} ref={rightArrow} onClick={()=> {
         const wrapperElement: HTMLElement = wrapper.current;
         wrapperElement.scrollLeft += wrapperElement.scrollWidth * 3 / numElements
         }}
