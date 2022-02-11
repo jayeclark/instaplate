@@ -2,6 +2,7 @@ import Icons from '../UI/icons/index';
 import { useState, useContext } from 'react';
 import CartContext from '../context/cartContext';
 import { parseSRC } from "../../scripts/utilities";
+import Cookie from "js-cookie";
 
 function DishDetail({ dish, handleCloseDish }) {
 
@@ -30,6 +31,7 @@ function DishDetail({ dish, handleCloseDish }) {
     }
     handleSetCart(newCart);
     handleCloseDish();
+    Cookie.set("cart", newCart);
   }
 
   return (

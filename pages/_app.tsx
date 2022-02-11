@@ -25,17 +25,20 @@ function MyApp(props: any){
 
   const [state, setState] = useState(initialState);
 
-  const initialCart = {
+  let initialCart = {
     items: [], 
     total: 0,
   };
 
+  const [cart, setCart] = useState(initialCart);
+  const handleSetCart = ({cart}) => {
+    console.log('set cart called');
+    setCart(cart);
+    setTimeout(() => console.log(cart), 50);
+  };
   const updateTotal = ({cart, count, price}) => {
     cart.total += price * count;
   }
-
-  //const [cart, dispatchCart] = useReducer(cartReducer, initialCart);
-  //const getCart = () => cart;
 
   const { Component, pageProps: {session, ...pageProps} } = props;
 
@@ -83,7 +86,8 @@ function MyApp(props: any){
             zipCode: state.zipCode,
             handleSetZip,
             API_URL,
-            cart: initialCart,
+            cart,
+            handleSetCart,
             updateTotal,
           }}>
             <ApolloProvider client={client}>

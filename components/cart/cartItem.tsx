@@ -4,11 +4,12 @@ import Icons from '../UI/icons/index';
 import { parseSRC } from '../../scripts/utilities';
 import UserContext from '../context/userContext';
 import CartContext from '../context/cartContext';
+import Cookie from "js-cookie";
 
 export default function CartItem({ item }) {
 
   const { cart: thisCart, handleSetCart } = useContext(CartContext);
-  const { cart, updateTotal} = useContext(UserContext);
+  const { cart, updateTotal, handleSetCart: handleSetMainCart} = useContext(UserContext);
 
   const { editOutlineIcon, trashOutlineIcon, plusIcon, minusIcon, trashIcon } = Icons;
   const handleAdd = ({item, count}) => {
@@ -20,7 +21,7 @@ export default function CartItem({ item }) {
     }
     newCart.total += item.price * count;
     handleSetCart(newCart);
-    updateTotal({cart, price: item.price, count})
+    Cookie.set("cart", newCart);
   }
 
   const handleRemove = ({item}) => {
@@ -32,7 +33,7 @@ export default function CartItem({ item }) {
     }
     newCart.total -= item.price;
     handleSetCart(newCart);
-    updateTotal({cart, price: item.price, count: -1})
+    Cookie.set("cart", newCart);
   }
   const handleRemoveAll = ({item}) => {
     const newCart = { ...thisCart };
@@ -40,7 +41,7 @@ export default function CartItem({ item }) {
     newCart.items = thisCart.items.filter(x => x.id !== item.id);
     newCart.total -= quantityInCart * item.price;
     handleSetCart(newCart);
-    updateTotal({cart, price: item.price, count: quantityInCart})
+    Cookie.set("cart", newCart);
   }
 
   return (

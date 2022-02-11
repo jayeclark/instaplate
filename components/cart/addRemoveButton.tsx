@@ -3,11 +3,12 @@ import styles from '../../styles/Dishes.module.css';
 import Icons from '../UI/icons/index';
 import UserContext from '../context/userContext';
 import CartContext from '../context/cartContext';
+import Cookie from "js-cookie";
 
 export default function AddRemoveButton({ item }) {
 
   const { cart: thisCart, handleSetCart } = useContext(CartContext);
-  const { cart, updateTotal } = useContext(UserContext);
+  const { cart, updateTotal, handleSetCart: handleSetMainCart } = useContext(UserContext);
 
   const handleAdd = ({item, count}) => {
     const newCart = {...thisCart};
@@ -18,7 +19,7 @@ export default function AddRemoveButton({ item }) {
     }
     newCart.total += item.price * count;
     handleSetCart(newCart);
-    updateTotal({cart, price: item.price, count});
+    Cookie.set("cart", newCart);
   }
   const handleRemove = ({item}) => {
     const newCart = { ...thisCart };
@@ -29,7 +30,7 @@ export default function AddRemoveButton({ item }) {
     }
     newCart.total -= item.price;
     handleSetCart(newCart);
-    updateTotal({cart, price: item.price, count: -1});
+    Cookie.set("cart", newCart);
   }
 
   const { plusIcon, minusIcon, trashIcon } = Icons;

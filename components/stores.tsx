@@ -1,14 +1,14 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import CategorySlider from "./filters/categorySlider";
 import CartIcon from "./cart/cartWidget";
 import SearchAndFilter from './searchAndFilter';
-import UserContext from './context/userContext';
 import CartContext from './context/cartContext';
+import Cookie from "js-cookie";
 
 export default function Stores() {
 
   // TODO: Fix relevance sort (replace placeholder)
-  const { cart } = useContext(UserContext);
+  const cart = Cookie.getJSON("cart");
   const [ thisCart, setThisCart ] = useState(cart);
   const [ drawerOpen, setDrawerOpen] = useState('closed');
 

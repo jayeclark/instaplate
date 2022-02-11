@@ -45,7 +45,7 @@ export default function FilterSidebar({filters, handleAddQuery, handleRemoveQuer
     window.addEventListener('scroll', () => handleSetSidebar());
 
     return window.removeEventListener('scroll', () => handleSetSidebar());
-  },[]);
+  });
 
   const vegetarian = (<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" className="cq ec ca cb"><path d="M14.083 2.833c-4.333 0-7.916 3.583-7.916 7.917v5.333L2.75 19.5l1.75 1.75 3.417-3.417h4.5a8.749 8.749 0 008.75-8.75v-6.25h-7.084zm0 2.5h3.75L8.667 14.5v-3.75c0-3 2.416-5.417 5.416-5.417z"></path></svg>);
   const vegan = (<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" className="cq ec ca cb"><path fillRule="evenodd" clipRule="evenodd" d="M12 5.182C13.09 4 14.546 2.909 16.546 2.909 19.727 2.91 22 5.546 22 8.82c0 1.636-.727 3-1.818 4.09L12 20.637l-8.182-7.728C2.636 11.91 2 10.455 2 8.82c0-3.273 2.273-5.91 5.455-5.91 2 0 3.454 1.182 4.545 2.273zm0 6.09l3.364-3.182 1.818 1.818-5.182 5-5.182-5L8.636 8.09 12 11.272z"></path></svg>);

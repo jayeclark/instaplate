@@ -8,10 +8,14 @@ import CheckoutForm from "../components/checkout/checkoutForm";
 import UserContext from "../components/context/userContext";
 import styles from "../styles/Checkout.module.css";
 import Link from "next/link";
+import CartContext from "../components/context/cartContext";
+import Cookie from "js-cookie";
 
 function Checkout() {
   // get app context
-  const {isAuthenticated, cart} = useContext(UserContext);
+  const {isAuthenticated} = useContext(UserContext);
+  const cart = Cookie.getJSON("cart");
+  console.log('cart', cart);
 
   // load stripe to inject into elements components
   const stripePromise = loadStripe(

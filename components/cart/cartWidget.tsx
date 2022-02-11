@@ -8,7 +8,8 @@ import Icons from '../UI/icons/index';
 const CartIcon = () => {
 
   const { cart: thisCart, openDrawer, closeDrawer, handleSetDrawer, drawerOpen } = useContext(CartContext)
-  const { items } = thisCart;
+  const { handleSetCart } = useContext(UserContext);
+  const { items } = thisCart ? thisCart : {items: []};
 
   const { shoppingCartDisabled, shoppingCartEnabled } = Icons;
   const drawerRef = useRef();

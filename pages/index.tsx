@@ -1,13 +1,13 @@
-import {useState, useContext} from 'react';
+import { useState } from 'react';
 import CategorySlider from "../components/filters/categorySlider";
 import CartIcon from "../components/cart/cartWidget";
 import SearchAndFilter from '../components/searchAndFilter';
 import CartContext from '../components/context/cartContext';
-import UserContext from '../components/context/userContext';
+import Cookie from "js-cookie";
 
 function Home() {
 
-  const { cart } = useContext(UserContext);
+  const cart = Cookie.getJSON("cart");
   const [ thisCart, setThisCart ] = useState(cart);
   const [ drawerOpen, setDrawerOpen] = useState('closed');
 
