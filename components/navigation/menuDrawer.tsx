@@ -24,7 +24,6 @@ export default function MenuDrawer({
     promoIcon,
     helpIcon,
     howIcon,
-    plusIcon,
     closeIcon,
     logOutIcon } = Icons;
 
@@ -40,7 +39,7 @@ export default function MenuDrawer({
           {user ? (
             <>
             <h5>{user.username || user.email.replace(/@.+/,'')}</h5>
-            <Link href="/account"><a className={styles.accountSettings}>Account settings</a></Link>
+            <a className={styles.accountSettings}>Account settings</a>
             </>
           ) : (
             <div className={styles.menuHeaderOptions}>

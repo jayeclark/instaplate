@@ -46,12 +46,7 @@ export default function SearchAndFilter({cuisine}) {
         </div>
       </div>
       <style jsx>{`
-      .side-bar-container {
-        width: 30%
-      }
-      .restaurants, .dishes {
-        width: 70%
-      }
+
       @media only screen and (max-width: 796px) {
         .side-bar-container {
           display: none;

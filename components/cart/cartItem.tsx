@@ -1,13 +1,47 @@
-import styles from '../../styles/Cart.module.css';
 import { useContext } from 'react';
-import HandlerContext from '../context/handlerContext';
+import styles from '../../styles/Cart.module.css';
 import Icons from '../UI/icons/index';
 import { parseSRC } from '../../scripts/utilities';
+import UserContext from '../context/userContext';
+import CartContext from '../context/cartContext';
 
 export default function CartItem({ item }) {
 
-  const { dispatchCart, getCart } = useContext(HandlerContext);
+  const { cart: thisCart, handleSetCart } = useContext(CartContext);
+  const { cart, updateTotal} = useContext(UserContext);
+
   const { editOutlineIcon, trashOutlineIcon, plusIcon, minusIcon, trashIcon } = Icons;
+  const handleAdd = ({item, count}) => {
+    const newCart = {...thisCart};
+    if (newCart.items.filter(x => x.id === item.id).length > 0) {
+      newCart.items.filter(x => x.id === item.id)[0].quantity += count;
+    } else {
+      newCart.items.push({...item, quantity: count})
+    }
+    newCart.total += item.price * count;
+    handleSetCart(newCart);
+    updateTotal({cart, price: item.price, count})
+  }
+
+  const handleRemove = ({item}) => {
+    const newCart = { ...thisCart };
+    if (newCart.items.filter(x => x.id === item.id)[0].quantity === 1) {
+      newCart.items = newCart.items.filter(x => x.id !== item.id);
+    } else {
+      newCart.items.filter(x => x.id === item.id)[0].quantity -= 1;
+    }
+    newCart.total -= item.price;
+    handleSetCart(newCart);
+    updateTotal({cart, price: item.price, count: -1})
+  }
+  const handleRemoveAll = ({item}) => {
+    const newCart = { ...thisCart };
+    const quantityInCart = newCart.items.filter(x => x.id === item.id)[0].quantity;
+    newCart.items = thisCart.items.filter(x => x.id !== item.id);
+    newCart.total -= quantityInCart * item.price;
+    handleSetCart(newCart);
+    updateTotal({cart, price: item.price, count: quantityInCart})
+  }
 
   return (
     <div
@@ -22,14 +56,14 @@ export default function CartItem({ item }) {
         <div>
           <div>{item.name}</div>
           <div className={styles.itemCount}>{item.quantity} ct</div>
-          <div className={styles.itemOptions}><div>{editOutlineIcon}Preferences&nbsp;&nbsp;&nbsp;</div><div><span style={{ cursor: "pointer" }} onClick={() => dispatchCart({type: 'removeItemEntirely', remove: {item}})}>{trashOutlineIcon}Remove</span></div></div>
+          <div className={styles.itemOptions}><div>{editOutlineIcon}Preferences&nbsp;&nbsp;&nbsp;</div><div><span style={{ cursor: "pointer" }} onClick={() => handleRemoveAll({item})}>{trashOutlineIcon}Remove</span></div></div>
         </div>
       </div>
       <div className={styles.itemQuantityLockup}>
         <div className={styles.itemQuantityGroup}>
-          <div className={styles.itemQuantityHidden} onClick={()=> dispatchCart({type: 'removeItem', remove: {item}})}>{item.quantity === 1 ? trashIcon : minusIcon}</div>
+          <div className={styles.itemQuantityHidden} onClick={()=> handleRemove({item})}>{item.quantity === 1 ? trashIcon : minusIcon}</div>
           <div className={styles.itemQuantity}>{item.quantity}</div>
-          <div className={styles.itemQuantityHidden} onClick={()=> dispatchCart({type: 'addItem', add: {item, count: 1}})}>{plusIcon}</div>
+          <div className={styles.itemQuantityHidden} onClick={()=> handleAdd({item, count: 1})}>{plusIcon}</div>
         </div>
         <div className={styles.itemTotalCost}>${item.price * item.quantity}</div>
       </div>

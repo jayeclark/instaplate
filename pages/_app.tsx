@@ -1,14 +1,12 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 
 import 'react-toastify/dist/ReactToastify.css';
 import { SessionProvider } from "next-auth/react"
 import { ToastContainer } from "react-toastify";
 import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 
-import { cartReducer } from "../scripts/reducer";
 import { getAPIUrl } from "../scripts/urls";
 import UserContext from "../components/context/userContext";
-import HandlerContext from "../components/context/handlerContext";
 import Layout from "../components/layout";
 import '../styles/globals.css';
 
@@ -27,10 +25,17 @@ function MyApp(props: any){
 
   const [state, setState] = useState(initialState);
 
-  const initialCart = {items: [], total: 0};
+  const initialCart = {
+    items: [], 
+    total: 0,
+  };
 
-  const [cart, dispatchCart] = useReducer(cartReducer, initialCart);
-  const getCart = () => cart;
+  const updateTotal = ({cart, count, price}) => {
+    cart.total += price * count;
+  }
+
+  //const [cart, dispatchCart] = useReducer(cartReducer, initialCart);
+  //const getCart = () => cart;
 
   const { Component, pageProps: {session, ...pageProps} } = props;
 
@@ -71,17 +76,15 @@ function MyApp(props: any){
 
   return (
     <SessionProvider session={session}>
-        <HandlerContext.Provider value={{
-          dispatchCart,
-          getCart, 
-        }}>
           <UserContext.Provider value={{ 
             user: state.user, 
             isAuthenticated: state.isAuthenticated, 
             handleSetUser,
             zipCode: state.zipCode,
             handleSetZip,
-            API_URL
+            API_URL,
+            cart: initialCart,
+            updateTotal,
           }}>
             <ApolloProvider client={client}>
               <Layout>
@@ -90,7 +93,6 @@ function MyApp(props: any){
               <ToastContainer />
             </ApolloProvider>
           </UserContext.Provider>
-        </HandlerContext.Provider>
     </SessionProvider>
   );
   

@@ -4,7 +4,7 @@ import { FormGroup, Input } from "reactstrap";
 import fetch from "isomorphic-fetch";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import CardSection from "./cardSection";
-import HandlerContext from "../context/handlerContext";
+import UserContext from "../context/userContext";
 import Cookies from "js-cookie";
 import styles from '../../styles/Checkout.module.css';
 import { toast } from "react-toastify";
@@ -27,8 +27,8 @@ function CheckoutForm() {
   const [error, setError] = useState([]);
   const stripe = useStripe();
   const elements = useElements();
-  const { getCart } = useContext(HandlerContext);
-  const cart: any = getCart();
+
+  const { cart } = useContext(UserContext);
 
   const validationFunctions = { address, address2, city, state, zip };
 
