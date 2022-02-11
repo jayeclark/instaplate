@@ -13,7 +13,7 @@ function Home() {
 
 
   const highlights = [
-    {title: 'In a rush?', subTitle: `Here's the fastest delivery for you`, ids: ['6205bbcb9bc0d23c302f19a6', '6205bc1f9bc0d23c302f19a8','6205ba9f9bc0d23c302f19a0', '6205baf29bc0d23c302f19a2']},
+    {title: 'In a rush?', subTitle: `Here's the fastest delivery for you`, ids: ['6205ba349bc0d23c302f199e', '6205bc1f9bc0d23c302f19a8','6202d343fd91dd000f4b2984', '6205bbcb9bc0d23c302f19a6']},
     {title: 'Popular near you', subTitle: null, ids: ['6205ba349bc0d23c302f199e', '6202d343fd91dd000f4b2984', '6205baf29bc0d23c302f19a2', '6205bc1f9bc0d23c302f19a8' ]},
     {title: 'Family favorites', subTitle: null, ids: ['6205bbcb9bc0d23c302f19a6', '6205bc1f9bc0d23c302f19a8','6205ba9f9bc0d23c302f19a0', '6205baf29bc0d23c302f19a2']}
   ]
