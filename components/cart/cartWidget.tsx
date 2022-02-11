@@ -1,24 +1,54 @@
 import UserContext from "../context/userContext";
-import { useContext, useRef } from "react";
+import CartContext from "../context/cartContext";
+import { useContext, useRef, useState, useEffect } from "react";
 import CartDrawer from "./cartDrawer";
 import styles from '../../styles/Cart.module.css';
 import Icons from '../UI/icons/index';
 
 const CartIcon = () => {
-  const { statefulCart: cart } = useContext(UserContext);
-  const { items } = cart;
+
+  const { cart: thisCart, openDrawer, closeDrawer, handleSetDrawer, drawerOpen } = useContext(CartContext)
+  const { items } = thisCart;
 
   const { shoppingCartDisabled, shoppingCartEnabled } = Icons;
   const drawerRef = useRef();
 
   const showCartDrawer = () => { 
-    const el: HTMLElement = drawerRef.current;
-    el.classList.add(styles.show);
+    console.log('show', drawerOpen);
+    openDrawer();
   }
   const hideCartDrawer = () => { 
-    const el: HTMLElement = drawerRef.current;
-    el.classList.remove(styles.show); 
+    console.log('hide', drawerOpen);
+    closeDrawer();
   }
+  
+  useEffect(() => {
+    const el: HTMLElement = drawerRef.current;
+    console.log(drawerOpen, el.classList.contains(styles.show));
+    let status: string;
+    let timeout : any;
+    if (drawerOpen === 'open' && !el.classList.contains(styles.show)) {
+      el.classList.add(styles.show);
+    }
+    if (drawerOpen === 'closed' &&el.classList.contains(styles.show)) {
+      el.classList.remove(styles.show);
+    }
+    if (drawerOpen === 'opening' && !el.classList.contains(styles.show)) {
+      setTimeout(() => el.classList.add(styles.show), 50);
+      status = 'open';
+    } else if (drawerOpen === 'closing' && el.classList.contains(styles.show)) {
+      setTimeout(() => el.classList.remove(styles.show), 50);  
+      status = 'closed';
+    }
+    if (status) {
+      timeout = () => handleSetDrawer(status);
+      setTimeout(timeout, 1000);
+    }
+    console.log(timeout);
+    if (timeout) {
+      return clearTimeout(timeout);
+    }
+  },[drawerOpen]);
 
   return (
     <div className={styles.cartWidget}>
@@ -26,7 +56,7 @@ const CartIcon = () => {
       {!items || items.length === 0 ? shoppingCartDisabled : shoppingCartEnabled}
       <span className={styles.itemCountWidget}>{!items ? 0 : items.reduce((a,b) => a + b.quantity, 0)}</span>
     </button>
-    <div ref={drawerRef} className={styles.cartDrawerContainer}>
+    <div ref={drawerRef} className={`${styles.cartDrawerContainer}${(drawerOpen === "open" || drawerOpen === "closing") ? ' ' : ''}${(drawerOpen === "open" || drawerOpen === "closing") ? styles.show : ''}`}>
       {items?.length > 0 ? <div className={styles.cartDrawerContainerBackground}></div> : null}
       {items?.length > 0 ? <CartDrawer handleCloseDrawer={hideCartDrawer}/> : null}
     </div>

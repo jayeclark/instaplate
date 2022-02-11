@@ -1,14 +1,12 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 
 import 'react-toastify/dist/ReactToastify.css';
 import { SessionProvider } from "next-auth/react"
 import { ToastContainer } from "react-toastify";
 import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 
-import { cartReducer } from "../scripts/reducer";
 import { getAPIUrl } from "../scripts/urls";
 import UserContext from "../components/context/userContext";
-import HandlerContext from "../components/context/handlerContext";
 import Layout from "../components/layout";
 import '../styles/globals.css';
 
@@ -32,33 +30,10 @@ function MyApp(props: any){
     total: 0,
   };
 
-  const [statefulCart, setStatefulCart] = useState(initialCart);
-
-  const add = ({cart, item, count}) => {
-    if (cart.items.filter(x => x.id === item.id).length > 0) {
-      cart.items.filter(x => x.id === item.id)[0].quantity += count;
-    } else {
-      cart.items.push({...item, quantity: count})
-    }
-    setStatefulCart(cart);
-    return true;
-  };
-  const remove = ({cart, item}) => {
-    if (cart.items.filter(x => x.id === item.id)[0].quantity === 1) {
-      const newItems = this.items.filter(x => x.id !== item.id)
-      cart.items = newItems;
-    } else {
-      cart.items.filter(x => x.id)[0].quantity -= 1;
-    }
-    setStatefulCart(cart);
-    return true;
-  };
-  const removeAll = ({cart, item}) => {
-    const newItems = cart.items.filter(x => x.id !== item.id);
-    cart.items = newItems;
-    setStatefulCart(cart);
-    return true;
+  const updateTotal = ({cart, count, price}) => {
+    cart.total += price * count;
   }
+
   //const [cart, dispatchCart] = useReducer(cartReducer, initialCart);
   //const getCart = () => cart;
 
@@ -109,10 +84,7 @@ function MyApp(props: any){
             handleSetZip,
             API_URL,
             cart: initialCart,
-            statefulCart,
-            add,
-            remove,
-            removeAll
+            updateTotal,
           }}>
             <ApolloProvider client={client}>
               <Layout>

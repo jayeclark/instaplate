@@ -1,7 +1,6 @@
 import Icons from '../UI/icons/index';
 import { useState, useContext } from 'react';
-import HandlerContext from '../context/handlerContext';
-import UserContext from '../context/userContext';
+import CartContext from '../context/cartContext';
 import { parseSRC } from "../../scripts/utilities";
 
 function DishDetail({ dish, handleCloseDish }) {
@@ -14,10 +13,23 @@ function DishDetail({ dish, handleCloseDish }) {
     }
   }
 
-  const { cart, add } = useContext(UserContext);
+  const { cart, handleSetCart } = useContext(CartContext);
 
   if (dish === null) {
     return null;
+  }
+
+  const handleAdd = ({item, count}) => {
+    const newCart = {...cart};
+    if (cart.items.filter(x => x.id === item.id).length > 0) {
+      newCart.items.filter(x => x.id === item.id)[0].quantity += count;
+      newCart.total += item.price * count;
+    } else {
+      newCart.items.push({...item, quantity: count});
+      newCart.total += item.price * count;
+    }
+    handleSetCart(newCart);
+    handleCloseDish();
   }
 
   return (
@@ -39,7 +51,7 @@ function DishDetail({ dish, handleCloseDish }) {
           <div style={{textAlign: "center", minWidth: "35px", fontSize: "1.2rem"}}>{numItems}</div>
           <div onClick={() => updateItemCount(1)} className="round-button lightgray">{Icons.plusIcon}</div>
         </div>
-        <div onClick={(e) => add({ cart, item: dish, count: numItems })} className="add-to-cart">
+        <div onClick={(e) => handleAdd({ item: dish, count: numItems })} className="add-to-cart">
           Add {numItems} to order
           <div className="price-total">
             ${(dish.price * numItems).toFixed(2)}

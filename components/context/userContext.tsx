@@ -32,10 +32,7 @@ const UserContext = React.createContext(
         handleSetZip: (str: string) => {},
         API_URL: null,
         cart: null,
-        statefulCart: null,
-        add: ({cart, item, count}) => {},
-        remove: ({cart, item}) => {},
-        removeAll: ({cart, item}) => {},
+        updateTotal: ({cart, count, price}) => {}
     });
 
 export default UserContext;

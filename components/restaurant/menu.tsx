@@ -1,9 +1,31 @@
+import { useState, useContext } from "react";
 import { Row } from "reactstrap";
 import { isAvailable } from '../../scripts/time';
 import DishCard from '../dish/dishCard';
 import CartIcon from "../cart/cartWidget";
+import UserContext from "../context/userContext";
+import CartContext from "../context/cartContext";
 
 function Menu({ restId, menu, style }){
+
+  const { cart } = useContext(UserContext);
+  const [ thisCart, setThisCart ] = useState(cart);
+  const [ drawerOpen, setDrawerOpen] = useState('closed');
+
+  const openDrawer = () => {
+    setDrawerOpen('opening');
+  }
+  const closeDrawer = () => {
+    setDrawerOpen('closing')
+  }
+  const handleSetDrawer = (state) => {
+    setDrawerOpen(state);
+  }
+
+  const handleSetCart = (newCart) => {
+    console.log("set cart called");
+    setThisCart(newCart);
+  };
 
   const isThisMenuAvailable = menu ? isAvailable(menu.menuStart, menu.menuEnd, [menu.mon, menu.tue, menu.wed, menu.thu, menu.fri, menu.sat, menu.sun]) : false;
 
@@ -11,7 +33,7 @@ function Menu({ restId, menu, style }){
   if (dishes.length === 0) { return null;}
 
   return (
-      <>
+      <CartContext.Provider value={{cart: thisCart, handleSetCart, drawerOpen, handleSetDrawer, openDrawer, closeDrawer}}>
         <CartIcon />
         <Row style={{margin: "0px", padding: "20px 15px 40px 15px"}}>
         <h2 style={{marginBottom: "0px", paddingBottom: "0px"}}>{name}</h2>
@@ -32,7 +54,7 @@ function Menu({ restId, menu, style }){
             }
           `}
         </style>
-      </>
+      </CartContext.Provider>
     )
   }
 
