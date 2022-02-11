@@ -23,7 +23,6 @@ function Menu({ restId, menu, style }){
   }
 
   const handleSetCart = (newCart) => {
-    console.log("set cart called");
     setThisCart(newCart);
   };
 

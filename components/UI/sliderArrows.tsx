@@ -9,9 +9,6 @@ export default function LeftRightArrows({ numElements, children }) {
   const [parentElementWidth, setParentElementWidth] = useState(0);
   const [elementWidth, setElementWidth] = useState(0);
 
-
-  console.log(elementWidth, parentElementWidth);
-
   useEffect(() => {
     const wrapperElement: HTMLElement = wrapper.current;
     setElementWidth(wrapperElement.scrollWidth);

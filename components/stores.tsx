@@ -23,7 +23,6 @@ export default function Stores() {
   }
 
   const handleSetCart = (newCart) => {
-    console.log("set cart called");
     setThisCart(newCart);
   };
 
@@ -40,7 +39,7 @@ export default function Stores() {
         <CategorySlider cuisine={cuisine} handleSetCuisine={handleSetCuisine}/>
       </div>
       <div className="flex">
-        <SearchAndFilter cuisine={cuisine}/>
+        <SearchAndFilter highlights={[]} cuisine={cuisine}/>
       </div>
     <style jsx>{`
       .flex {

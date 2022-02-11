@@ -3,8 +3,9 @@ import FilterSidebar from "./filters/filterSidebar";
 import Search from "./filters/search";
 import RestaurantCardsWrapper from "./restaurantCardsWrapper";
 import RecommendedDishesWrapper from "./recommendedDishesWrapper";
+import RestaurantsWrapper from './recommendedRestaurantsWrapper';
 
-export default function SearchAndFilter({cuisine}) {
+export default function SearchAndFilter({cuisine, highlights}) {
 
   const [sort, setSort] = useState('relevance');
   const [query, setQuery] = useState('');
@@ -38,10 +39,13 @@ export default function SearchAndFilter({cuisine}) {
     <>
       <Search global={true} handleSetQuery={handleSetQuery}/>
       <div style={{display: "flex", width: "100vw", flexWrap: "nowrap"}}>
-        <div className="side-bar-container">
+        <div className="side-bar-container" style={{width: "30%", maxWidth: "390px"}}>
           <FilterSidebar handleAddQuery={handleAddQuery} handleRemoveQuery={handleRemoveQuery} filters={filters} handleSetSort={handleSetSort} />
         </div>
         <div style={{width: "70%"}}>
+          {query && query !== '' ? null : highlights.map((highlight, i) => (
+            <RestaurantsWrapper ids={highlight.ids} title={highlight.title} subTitle={highlight.subTitle} />
+          ))}
           <div className="restaurants">
           <RestaurantCardsWrapper sort={sort} cuisine={cuisine} filters={filters} query={query}/>
           </div>

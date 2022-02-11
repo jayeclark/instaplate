@@ -14,17 +14,14 @@ const CartIcon = () => {
   const drawerRef = useRef();
 
   const showCartDrawer = () => { 
-    console.log('show', drawerOpen);
     openDrawer();
   }
   const hideCartDrawer = () => { 
-    console.log('hide', drawerOpen);
     closeDrawer();
   }
   
   useEffect(() => {
     const el: HTMLElement = drawerRef.current;
-    console.log(drawerOpen, el.classList.contains(styles.show));
     let status: string;
     let timeout : any;
     if (drawerOpen === 'open' && !el.classList.contains(styles.show)) {
@@ -44,7 +41,6 @@ const CartIcon = () => {
       timeout = () => handleSetDrawer(status);
       setTimeout(timeout, 1000);
     }
-    console.log(timeout);
     if (timeout) {
       return clearTimeout(timeout);
     }

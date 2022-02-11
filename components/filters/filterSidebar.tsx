@@ -36,7 +36,7 @@ export default function FilterSidebar({filters, handleAddQuery, handleRemoveQuer
       const sideBarTop = sideBarEl.getBoundingClientRect().top;
       if (sideBarTop < 92) {
         setStatic(true);
-      } else {
+      } else if (sideBarTop > 92) {
         setStatic(false);
       }
     }
@@ -95,7 +95,7 @@ export default function FilterSidebar({filters, handleAddQuery, handleRemoveQuer
           overflowX: hidden;
           height: 100%;
           marginLeft: 30px;
-          min-height: calc(100vh - 80px);
+          min-height: calc(100vh - 75px);
           position: relative;
         }
 

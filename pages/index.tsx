@@ -11,6 +11,13 @@ function Home() {
   const [ thisCart, setThisCart ] = useState(cart);
   const [ drawerOpen, setDrawerOpen] = useState('closed');
 
+
+  const highlights = [
+    {title: 'In a rush?', subTitle: `Here's the fastest delivery for you`, ids: ['6205bbcb9bc0d23c302f19a6', '6205bc1f9bc0d23c302f19a8','6205ba9f9bc0d23c302f19a0', '6205baf29bc0d23c302f19a2']},
+    {title: 'Popular near you', subTitle: null, ids: ['6205bbcb9bc0d23c302f19a6', '6205bc1f9bc0d23c302f19a8','6205ba9f9bc0d23c302f19a0', '6205baf29bc0d23c302f19a2']},
+    {title: 'Family favorites', subTitle: null, ids: ['6205bbcb9bc0d23c302f19a6', '6205bc1f9bc0d23c302f19a8','6205ba9f9bc0d23c302f19a0', '6205baf29bc0d23c302f19a2']}
+  ]
+
   const openDrawer = () => {
     setDrawerOpen('opening');
   }
@@ -22,7 +29,6 @@ function Home() {
   }
 
   const handleSetCart = (newCart) => {
-    console.log("set cart called");
     setThisCart(newCart);
   };
 
@@ -48,7 +54,7 @@ function Home() {
           </div>
           
           <div className="flex">
-            <SearchAndFilter cuisine={cuisine} />
+            <SearchAndFilter cuisine={cuisine} highlights={highlights}/>
           </div>
         <style jsx>{`
           .flex {

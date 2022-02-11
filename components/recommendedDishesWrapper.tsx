@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client';
 import RecommendedDishes from './recommendedDishes';
 import { GET_DISHES } from '../scripts/queries';
 
-function RestaurantCardsWrapper({query, sort, filters}) {
+function DishesWrapper({query, sort, filters}) {
 
   const { loading, error, data } = useQuery(GET_DISHES)
   
@@ -14,5 +14,5 @@ function RestaurantCardsWrapper({query, sort, filters}) {
 
 }
 
-export default RestaurantCardsWrapper;
+export default DishesWrapper;
 

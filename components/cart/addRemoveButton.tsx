@@ -10,10 +10,8 @@ export default function AddRemoveButton({ item }) {
   const { cart, updateTotal } = useContext(UserContext);
 
   const handleAdd = ({item, count}) => {
-    console.log('handle add called')
     const newCart = {...thisCart};
     if (newCart.items.filter(x => x.id === item.id).length > 0) {
-      console.log(newCart.items.filter(x => x.id === item.id)[0].quantity, count);
       newCart.items.filter(x => x.id === item.id)[0].quantity += count;
     } else {
       newCart.items.push({...item, quantity: count})
@@ -37,7 +35,6 @@ export default function AddRemoveButton({ item }) {
   const { plusIcon, minusIcon, trashIcon } = Icons;
 
   const quantityInCart = thisCart.items?.find(x => x.id === item.id)?.quantity || 0;
-  console.log(quantityInCart);
 
   return (
     <div className={styles["button-container"]}>
