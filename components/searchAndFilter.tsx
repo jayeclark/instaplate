@@ -42,7 +42,7 @@ export default function SearchAndFilter({cuisine, highlights}) {
         <div className="side-bar-container" style={{width: "30%", maxWidth: "390px"}}>
           <FilterSidebar handleAddQuery={handleAddQuery} handleRemoveQuery={handleRemoveQuery} filters={filters} handleSetSort={handleSetSort} />
         </div>
-        <div style={{width: "70%"}}>
+        <div className="right-side">
           {query && query !== '' ? null : highlights.map((highlight, i) => (
             <RestaurantsWrapper key={i} ids={highlight.ids} title={highlight.title} subTitle={highlight.subTitle} />
           ))}
@@ -55,10 +55,15 @@ export default function SearchAndFilter({cuisine, highlights}) {
         </div>
       </div>
       <style jsx>{`
-
+      .right-side {
+        width: 70%;
+      }
       @media only screen and (max-width: 796px) {
         .side-bar-container {
           display: none;
+        }
+        .right-side {
+          width: 100vw;
         }
         .restaurants,
         .dishes {

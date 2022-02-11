@@ -36,7 +36,7 @@ function RecommendedRestaurants({ title, restaurants, subTitle }){
             <LeftRightArrows numElements={restaurants.length}>
               <div style={{display:"flex"}}>
               {restaurants.map((rest: any, i: number) => (
-              <Col xs="12" sm="6" lg="4" key={i}>
+              <Col xs="12" sm="6" md="4" key={i}>
               <Link as={"/restaurants/"+rest.id} href="/restaurants/[id]">
                 <a>
                   <Card style={{ margin: "0 8px 20px 8px", border: "none" }}>
