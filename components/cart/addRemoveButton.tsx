@@ -1,41 +1,39 @@
 import { useContext } from 'react';
 import styles from '../../styles/Dishes.module.css';
 import Icons from '../UI/icons/index';
-import UserContext from '../context/userContext';
 import CartContext from '../context/cartContext';
 import Cookie from "js-cookie";
 
 export default function AddRemoveButton({ item }) {
 
-  const { cart: thisCart, handleSetCart } = useContext(CartContext);
-  const { cart, updateTotal, handleSetCart: handleSetMainCart } = useContext(UserContext);
+  const { cart, handleSetCart } = useContext(CartContext);
 
   const handleAdd = ({item, count}) => {
-    const newCart = {...thisCart};
+    const newCart = {...cart};
     if (newCart.items.filter(x => x.id === item.id).length > 0) {
       newCart.items.filter(x => x.id === item.id)[0].quantity += count;
     } else {
       newCart.items.push({...item, quantity: count})
     }
     newCart.total += item.price * count;
-    handleSetCart(newCart);
     Cookie.set("cart", newCart);
+    handleSetCart(newCart);
   }
   const handleRemove = ({item}) => {
-    const newCart = { ...thisCart };
+    const newCart = { ...cart };
     if (newCart.items.filter(x => x.id === item.id)[0].quantity === 1) {
       newCart.items = newCart.items.filter(x => x.id !== item.id);
     } else {
       newCart.items.filter(x => x.id === item.id)[0].quantity -= 1;
     }
     newCart.total -= item.price;
-    handleSetCart(newCart);
     Cookie.set("cart", newCart);
+    handleSetCart(newCart);
   }
 
   const { plusIcon, minusIcon, trashIcon } = Icons;
 
-  const quantityInCart = thisCart.items?.find(x => x.id === item.id)?.quantity || 0;
+  const quantityInCart = cart.items?.find(x => x.id === item.id)?.quantity || 0;
 
   return (
     <div className={styles["button-container"]}>

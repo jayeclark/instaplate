@@ -7,8 +7,8 @@ import Icons from '../UI/icons/index';
 
 const CartIcon = () => {
 
-  const { cart: thisCart, openDrawer, closeDrawer, handleSetDrawer, drawerOpen } = useContext(CartContext)
-  const { handleSetCart } = useContext(UserContext);
+  const { cart: thisCart, openDrawer, closeDrawer, handleSetDrawer, drawerOpen } = useContext(CartContext);
+  console.log(thisCart);
   const { items } = thisCart ? thisCart : {items: []};
 
   const { shoppingCartDisabled, shoppingCartEnabled } = Icons;
@@ -49,8 +49,8 @@ const CartIcon = () => {
 
   return (
     <div className={styles.cartWidget}>
-    <button type="button" disabled={!items || items.length === 0} onClick={showCartDrawer}>
-      {!items || items.length === 0 ? shoppingCartDisabled : shoppingCartEnabled}
+    <button type="button" disabled={items.length === 0} onClick={showCartDrawer}>
+      {items.length === 0 ? shoppingCartDisabled : shoppingCartEnabled}
       <span className={styles.itemCountWidget}>{!items ? 0 : items.reduce((a,b) => a + b.quantity, 0)}</span>
     </button>
     <div ref={drawerRef} className={`${styles.cartDrawerContainer}${(drawerOpen === "open" || drawerOpen === "closing") ? ' ' : ''}${(drawerOpen === "open" || drawerOpen === "closing") ? styles.show : ''}`}>
