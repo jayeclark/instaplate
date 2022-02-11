@@ -34,9 +34,9 @@ export default function FilterSidebar({filters, handleAddQuery, handleRemoveQuer
 
       const sideBarEl: HTMLElement = sideBarRef.current;
       const sideBarTop = sideBarEl.getBoundingClientRect().top;
-      if (sideBarTop < 92 && staticPosition === false) {
+      if (sideBarTop < 92) {
         setStatic(true);
-      } else if (staticPosition === true) {
+      } else {
         setStatic(false);
       }
     }
