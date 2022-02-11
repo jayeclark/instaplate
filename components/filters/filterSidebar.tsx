@@ -64,6 +64,9 @@ export default function FilterSidebar({filters, handleAddQuery, handleRemoveQuer
         <div className={filters.dietary.includes(3) ? "filter-option active" : "filter-option"} onClick={() => toggleDietary(3)} ><span style={{display: "inline-block", width:"18px"}}>{gluten}</span>&nbsp;Gluten-free</div>
       </div><br></br>
       <style jsx>{`
+        h5 {
+          font-size: 1.1rem;
+        }
         .side-bar {
           width: 390px;
           max-width: 390px;
