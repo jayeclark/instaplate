@@ -4,14 +4,20 @@ import { useContext, useRef, useState, useEffect } from "react";
 import CartDrawer from "./cartDrawer";
 import styles from '../../styles/Cart.module.css';
 import Icons from '../UI/icons/index';
+import Cookies from "js-cookie";
 
 const CartIcon = () => {
 
-  const { cart: thisCart, openDrawer, closeDrawer, handleSetDrawer, drawerOpen } = useContext(CartContext);
-  console.log(thisCart);
-  const { items } = thisCart ? thisCart : {items: []};
+  let { cart: thisCart, openDrawer, handleSetCart, closeDrawer, handleSetDrawer, drawerOpen } = useContext(CartContext);
 
-  const { shoppingCartDisabled, shoppingCartEnabled } = Icons;
+  let { items } = thisCart ? thisCart : { items: [] };
+  if (items.length === 0 && Cookies.getJSON("cart")) {
+    thisCart = Cookies.getJSON("cart");
+    handleSetCart(thisCart);
+  }
+
+  const [button, setButton] = useState(items.length === 0);
+  const { shoppingCart } = Icons;
   const drawerRef = useRef();
 
   const showCartDrawer = () => { 
@@ -42,6 +48,9 @@ const CartIcon = () => {
       timeout = () => handleSetDrawer(status);
       setTimeout(timeout, 1000);
     }
+    if (items.length > 0) {
+      setButton(true);
+    }
     if (timeout) {
       return clearTimeout(timeout);
     }
@@ -49,8 +58,12 @@ const CartIcon = () => {
 
   return (
     <div className={styles.cartWidget}>
-    <button type="button" disabled={items.length === 0} onClick={showCartDrawer}>
-      {items.length === 0 ? shoppingCartDisabled : shoppingCartEnabled}
+    <button 
+      type="button" 
+      disabled={items.reduce((a,b) => a + b.quantity, 0) === 0} 
+      onClick={showCartDrawer}
+    >
+      {shoppingCart}
       <span className={styles.itemCountWidget}>{!items ? 0 : items.reduce((a,b) => a + b.quantity, 0)}</span>
     </button>
     <div ref={drawerRef} className={`${styles.cartDrawerContainer}${(drawerOpen === "open" || drawerOpen === "closing") ? ' ' : ''}${(drawerOpen === "open" || drawerOpen === "closing") ? styles.show : ''}`}>

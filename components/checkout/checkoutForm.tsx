@@ -29,7 +29,6 @@ function CheckoutForm() {
   const elements = useElements();
 
   const { cart } = useContext(UserContext);
-  console.log(cart);
 
   const validationFunctions = { address, address2, city, state, zip };
 

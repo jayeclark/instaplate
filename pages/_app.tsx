@@ -32,9 +32,7 @@ function MyApp(props: any){
 
   const [cart, setCart] = useState(initialCart);
   const handleSetCart = ({cart}) => {
-    console.log('set cart called');
     setCart(cart);
-    setTimeout(() => console.log(cart), 50);
   };
   const updateTotal = ({cart, count, price}) => {
     cart.total += price * count;

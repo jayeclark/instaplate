@@ -17,6 +17,7 @@ import { ordersIcon } from "./orders";
 import { plusIcon } from "./plus";
 import { promoIcon } from "./promo";
 import { restaurantIcon } from "./restaurant";
+import { shoppingCart } from "./shoppingCart";
 import { shoppingCartDisabled } from "./shoppingCartDisabled";
 import { shoppingCartEnabled } from "./shoppingCartEnabled";
 import { trashIcon } from "./trash";
@@ -42,6 +43,7 @@ const icons = {
   plusIcon,
   promoIcon,
   restaurantIcon,
+  shoppingCart,
   shoppingCartDisabled,
   shoppingCartEnabled,
   trashIcon,
