@@ -120,7 +120,7 @@ function Login(props: any) {
 
                           // set authed User in global context to update header/app state
 
-                          handleSetUser(res.data.user);
+                          handleSetUser(res.data.user, res.data.jwt);
                           window.localStorage.setItem("loggedInUser", res.data.user);
                         })
                         .catch((error) => {

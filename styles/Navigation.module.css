@@ -41,8 +41,10 @@
   position: fixed;
   top: 0px;
   left: 0px;
-  background-color: rgb(0,0,0,0.6);
+  background-color: rgba(0,0,0,0.6);
+  opacity: 0;
   z-index: 9990;
+  transition: opacity 0.7s ease;
 }
 
 

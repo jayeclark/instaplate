@@ -60,8 +60,8 @@ export default function MenuDrawer({
           )}
       </div>
       <hr />
-      <div className={styles.menuItem}>{restaurantIcon}<div>Stores</div></div>
-      <div className={styles.menuItem}>{ordersIcon}<div>Your Orders</div></div>
+      <Link href="/restaurants"><div style={{cursor: "pointer"}} onClick={toggleNavContent} className={styles.menuItem}>{restaurantIcon}<div>Stores</div></div></Link>
+      <Link href="/store/account/orders"><div style={{cursor: "pointer"}} onClick={toggleNavContent}  className={styles.menuItem}>{ordersIcon}<div>Your Orders</div></div></Link>
       <div className={styles.menuItem}>{favoritesIcon}<div>Your Favorites</div></div>
       <div className={styles.menuItem}>{instantIcon}<div>Instaplate Express</div></div>
       <hr/>
@@ -102,7 +102,7 @@ export default function MenuDrawer({
       <hr />
       <div>
         <h6 className={styles.menuFooter}>
-          Press · Jobs · Terms · Privacy
+          Press · Jobs · <Link href="/terms"><span className={styles.menuFooter} style={{cursor: "pointer"}} onClick={toggleNavContent}>Terms</span></Link> · <Link href="/privacy"><span className={styles.menuFooter} style={{cursor: "pointer"}} onClick={toggleNavContent}>Privacy</span></Link>
         </h6>
       </div>
     </div>

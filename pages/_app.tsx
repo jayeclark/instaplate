@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { SessionProvider } from "next-auth/react"
 import { ToastContainer } from "react-toastify";
 import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import Cookie from "js-cookie";
 
 import { getAPIUrl } from "../scripts/urls";
 import UserContext from "../components/context/userContext";
@@ -11,11 +12,6 @@ import Layout from "../components/layout";
 import '../styles/globals.css';
 
 function MyApp(props: any){
-
-  const API_URL = getAPIUrl();
-  const link = new HttpLink({ uri: `${API_URL}/graphql` })
-  const cache = new InMemoryCache()
-  const client = new ApolloClient({link,cache});
 
   const initialState = {
     zipCode: "00901",
@@ -56,6 +52,7 @@ function MyApp(props: any){
       if (window.localStorage.getItem("instacart_auth_token") && !tempState.isAuthenticated) {
         tempState.isAuthenticated = true;
         stateChanged = true;
+        tempState.user.token = window.localStorage.getItem("instacart_auth_token");
       }
       if (stateChanged) {
         setState(tempState);
@@ -63,9 +60,10 @@ function MyApp(props: any){
     }
   }, [])
 
-  const handleSetUser = (user: any) => {
+  const handleSetUser = (user: any, token: any) => {
     const tempState = { ...state, user};
     tempState.isAuthenticated = true;
+    tempState.user.token = token;
     setState(tempState);
   };
 
@@ -75,6 +73,11 @@ function MyApp(props: any){
     setState(tempState);
   }
 
+  const API_URL = getAPIUrl();
+  const link = new HttpLink({ uri: `${API_URL}/graphql` })
+  const cache = new InMemoryCache()
+  const headers = state.isAuthenticated ? {authorization: `bearer ${Cookie.get("token")}`} : null;
+  const client = new ApolloClient({link,cache, headers});
   return (
     <SessionProvider session={session}>
           <UserContext.Provider value={{ 

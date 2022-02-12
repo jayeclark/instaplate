@@ -62,6 +62,24 @@ export const GET_RESTAURANTS = gql`
   }
 `;
 
+export const GET_ORDERS = gql`
+  query GetOrders($email: String) {
+    orders(where: {
+      user: {
+        email: $email
+      }
+    }) {
+      id
+      createdAt
+      user {
+        email
+      }
+      amount
+      dishes
+    }
+  }
+`
+
 export const GET_RESTAURANT = gql`
   query GetRestaurant($id: ID!) {
     restaurant(id: $id) { 

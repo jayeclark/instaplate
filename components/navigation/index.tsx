@@ -23,13 +23,14 @@ const Navigation = (props) => {
   useEffect(() => {
     if (sessionData?.user && !user) {
       const token: any = sessionData.token;
-      const tempUser = {...sessionData.user, username: null, provider: null};
+      const tempUser = {...sessionData.user, username: null, provider: null, token: null};
       tempUser.username = tempUser.email.replace(/@.+/,'');
       tempUser.provider = "google";
+      tempUser.token = token;
       Cookie.set("token", token.jwt);
-      handleSetUser(tempUser);
+      handleSetUser(tempUser, token);
     } else if (user?.provider === "google" && !sessionData?.user) {
-      handleSetUser(null);
+      handleSetUser(null, null);
     }
   }, [user, handleSetUser, sessionData])
 
@@ -49,12 +50,14 @@ const Navigation = (props) => {
     if (!modalContent.classList.contains(styles.modalMenuExpanded)) {
       modalContent.classList.add(styles.modalMenuExpanded);
       background.style.display = "block";
+      setTimeout(() => {background.style.opacity = "1"}, 10);
       return true;
     }
     
     modalContent.classList.remove(styles.modalMenuExpanded);
     if (!loginVisible() && !registerVisible()) {
-      setTimeout(() => background.style.display = "none", 300);
+      background.style.opacity = "0";
+      setTimeout(() => {background.style.display = "none"}, 700);
     }
     return false;
 
@@ -69,7 +72,8 @@ const Navigation = (props) => {
     
     modalContent.classList.remove(styles.modalMenuExpanded);
     if (!loginVisible() && !registerVisible()) {
-      setTimeout(() => background.style.display = "none", 500);
+      background.style.opacity = "0";
+      setTimeout(() => background.style.display = "none", 700);
     }
     return false;
   }
@@ -104,7 +108,7 @@ const Navigation = (props) => {
       </div>
 
     </Nav>
-    <div ref={modalBackgroundRef} className={styles.modalBackground} onClick={closeNavContent}></div>
+    <div id="modalBackground" ref={modalBackgroundRef} className={styles.modalBackground} onClick={closeNavContent}></div>
     <MenuDrawer 
       navContentRef={navContentRef}
       handleSetUser={handleSetUser}
@@ -121,6 +125,7 @@ const Navigation = (props) => {
           current(registerRef).classList.add(styles.showLoginDrawerContainer);
         }}
         handleCloseDrawer={() => {
+          current(modalBackgroundRef).style.opacity = "0";
           setTimeout(() => current(modalBackgroundRef).style.display = "none", 800);
           current(loginRef).classList.remove(styles.showLoginDrawerContainer);
       }} 
@@ -133,6 +138,7 @@ const Navigation = (props) => {
           current(loginRef).classList.add(styles.showLoginDrawerContainer);
         }} 
         handleCloseDrawer={() => {
+          current(modalBackgroundRef).style.opacity = "0";
           setTimeout(() => current(modalBackgroundRef).style.display = "none", 800);
           current(registerRef).classList.remove(styles.showLoginDrawerContainer)
         }} 

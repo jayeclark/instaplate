@@ -7,8 +7,8 @@ import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../components/checkout/checkoutForm";
 import UserContext from "../components/context/userContext";
 import styles from "../styles/Checkout.module.css";
+import navStyles from "../styles/Navigation.module.css";
 import Link from "next/link";
-import CartContext from "../components/context/cartContext";
 import Cookie from "js-cookie";
 
 function Checkout() {
@@ -16,10 +16,23 @@ function Checkout() {
   const {isAuthenticated} = useContext(UserContext);
   const cart = Cookie.getJSON("cart") || {items: [], total: 0};
 
+  const { total } = cart;
+  const [serviceFee, deliveryFee] = [total * 0.10 + 0.01, cart.items[0].restaurant.deliveryFee];
+  const grandTotal = (total + serviceFee + deliveryFee).toFixed(2);
+
   // load stripe to inject into elements components
   const stripePromise = loadStripe(
     "pk_test_51K9s9CKfDYuSYV2wNyHJYXZADEwza6qOZtQljALfWU0f4CTtH4hUR41XbdLWxCtXfPTyNjgb8lsD2TOA9ykh9PtD00e13yO8Bg"
   );
+
+  const handleToggleSignIn = () => {
+    const element = document.getElementById("loginScreen");
+    const background = document.getElementById("modalBackground");
+    console.log(element);
+    background.style.display = "block";
+    setTimeout(() => {background.style.opacity = "1"}, 20);
+    setTimeout(() => {element.classList.add(navStyles.showLoginDrawerContainer)},20);
+  }
 
   return (
     <Container className="checkout" style={{minHeight: "calc(100vh - 70px)", backgroundColor: "rgb(246, 249, 252)"}}>
@@ -30,7 +43,7 @@ function Checkout() {
           {cart.items.length > 0 && !isAuthenticated && (
             <div className={styles.paper}>
               <div style={{height: "fit-content"}}>
-                Please <a style={{cursor: "pointer"}} onClick={() => document.getElementById('loginScreen').classList.add(styles.showLoginDrawerContainer)}>sign in</a> order to continue.
+                Please <a style={{cursor: "pointer"}} onClick={handleToggleSignIn}>sign in</a> order to continue.
               </div>
             </div>
           )}          
@@ -54,18 +67,22 @@ function Checkout() {
           </div>
           <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", paddingBottom: "5px"}}>
             <div style={{fontWeight: "600", fontSize: "0.75rem"}}>Item subtotal</div>
-            <div style={{fontSize: "0.75rem"}}>${cart.total.toFixed(2)}</div>
+            <div style={{fontSize: "0.75rem"}}>${total.toFixed(2)}</div>
+          </div>
+          <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", paddingBottom: "5px"}}>
+            <div style={{fontWeight: "600", fontSize: "0.75rem"}}>Delivery fee</div>
+            <div style={{fontSize: "0.75rem"}}>${deliveryFee.toFixed(2)}</div>
           </div>
           <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", paddingBottom: "5px"}}>
             <div style={{fontWeight: "600", fontSize: "0.75rem"}}>Service fee</div>
-            <div style={{fontSize: "0.75rem"}}>${(cart.total * 0.1).toFixed(2)}</div>
+            <div style={{fontSize: "0.75rem"}}>${serviceFee.toFixed(2)}</div>
           </div>
           <div style={{display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 0px", borderBottom: "1px solid #efefef", borderTop: "1px solid #efefef"}}>
             <div style={{fontWeight: "600", fontSize: "0.75rem"}}>Subtotal</div>
-            <div style={{fontWeight: "600", fontSize: "0.75rem"}}>${(Number(cart.total.toFixed(2)) + Number((cart.total * 0.1).toFixed(2))).toFixed(2)}</div>
+            <div style={{fontWeight: "600", fontSize: "0.75rem"}}>${grandTotal}</div>
           </div>
           <div style={{color:"rgb(10, 173, 10)", fontSize: "0.9rem", padding: "40px 0px", textAlign: "center"}}>Add promo code or gift card</div>
-          <div style={{backgroundColor: "rgb(250,250,250)", fontSize: "0.6rem"}}><p>By placing your order, you agree to be bound by the Instacart <Link href="/terms"><a>Terms of Service</a></Link> and <Link href="/privacy"><a>Privacy Policy</a></Link>. Your credit/debit card will be <b>temporarily authorized for ${(Number(cart.total.toFixed(2)) + Number((cart.total * 1.1).toFixed(2))).toFixed(2)}</b>. Your statement will reflect the final order total after order completion. <Link href="/info"><a>Learn more</a></Link>
+          <div style={{backgroundColor: "rgb(250,250,250)", fontSize: "0.6rem"}}><p>By placing your order, you agree to be bound by the Instacart <Link href="/terms"><a>Terms of Service</a></Link> and <Link href="/privacy"><a>Privacy Policy</a></Link>. Your credit/debit card will be <b>temporarily authorized for ${grandTotal}</b>. Your statement will reflect the final order total after order completion. <Link href="/info"><a>Learn more</a></Link>
           </p>
           <p>Prices may vary from those in restaurant.</p></div>
         </div>

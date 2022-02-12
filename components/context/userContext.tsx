@@ -27,7 +27,7 @@ const recallZip = () => {
 const UserContext = React.createContext(
     {   user: recallUser(), 
         isAuthenticated: recallAuth(), 
-        handleSetUser: (user: any) => {},
+        handleSetUser: (user: any, token: any) => {},
         zipCode: recallZip(),
         handleSetZip: (str: string) => {},
         API_URL: null,
