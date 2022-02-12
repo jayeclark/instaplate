@@ -11,7 +11,7 @@ export default function Orders() {
   const { user, isAuthenticated } = useContext(UserContext)
 
   if (!isAuthenticated && !user) {
-    return <Unauthorized />
+    return <Unauthorized type="signIn" />
   }
 
   const { loading, error, data } = useQuery(GET_ORDERS, { variables: { authorization: `Bearer ${user.token}`, email: user.email }})
