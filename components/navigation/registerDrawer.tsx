@@ -123,7 +123,7 @@ function Register(props: any) {
                         registerUser(data.username, data.email, data.password)
                           .then((res: any) => {
                             // set authed user in global context object
-                            if (res.data) {handleSetUser(res.data.user)};
+                            if (res.data) {handleSetUser(res.data.user, res.data.jwt)};
                             setLoading(false);
                             handleCloseDrawer();
                             toast.success("Your account has been registered and you have automatically been logged in!")
