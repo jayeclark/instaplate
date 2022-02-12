@@ -73,7 +73,7 @@ function RestaurantCards({ list, filters, cuisine, sort }) {
 
   return(
 
-      <Container style={{width: "100%", padding: "0px 12px"}}>
+      <Container style={{width: "100%", padding: "0px 36px 0px 12px"}}>
       <Row xs='3'>
         {restList}
       </Row> 

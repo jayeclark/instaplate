@@ -53,7 +53,7 @@ export default function FilterSidebar({filters, handleAddQuery, handleRemoveQuer
 
   return (
     <div ref={parentRef} className="side-bar">
-      <div ref={sideBarRef} style={{ position: staticPosition ? "fixed" : "relative", top: staticPosition ? "92px" : null, width: "fit-content", maxWidth: "390px", height: "100%", marginLeft:"30px" }}>
+      <div ref={sideBarRef} style={{ position: staticPosition ? "fixed" : "relative", top: staticPosition ? "92px" : null, width: "fit-content", maxWidth: "calc(min(calc(30vw - 40px), 390px))", height: "100%", marginLeft:"30px" }}>
       <h3 style={{fontWeight: "600", marginBottom: "0px"}}>{(filters.query === null || filters.query === '') ? "All Stores" : `"${filters.query}"`}</h3>
       {(filters.query === null || filters.query === '') ? null : (<span style={{display: "block", fontSize: "0.9rem"}}>Showing results for "{filters.query}"</span>)}
       <br></br>
