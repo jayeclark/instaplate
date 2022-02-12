@@ -17,7 +17,7 @@ function Checkout() {
   const cart = Cookie.getJSON("cart") || {items: [], total: 0};
 
   const { total } = cart;
-  const [serviceFee, deliveryFee] = [total * 0.10 + 0.01, cart.items[0].restaurant.deliveryFee];
+  const [serviceFee, deliveryFee] = [total * 0.10 + 0.01, cart.items.length > 0 ? cart.items[0].restaurant.deliveryFee : 0];
   const grandTotal = (total + serviceFee + deliveryFee).toFixed(2);
 
   // load stripe to inject into elements components
