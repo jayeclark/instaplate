@@ -5,7 +5,6 @@ import { parseSRC } from '../../scripts/utilities';
 export default function OrderItem({ item }) {
 
   const { editOutlineIcon } = Icons;
-  console.log(item);
 
   return (
     <div

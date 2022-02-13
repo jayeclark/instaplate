@@ -8,7 +8,6 @@ export default function Unauthorized({type}) {
   const handleOpenSignIn = () => {
     const element = document.getElementById("loginScreen");
     const background = document.getElementById("modalBackground");
-    console.log(background);
     background.style.display = "block";
     setTimeout(() => {background.style.opacity = "1"}, 20);
     setTimeout(() => {element.classList.add(navStyles.showLoginDrawerContainer)},20);

@@ -28,7 +28,6 @@ function Checkout() {
   const handleToggleSignIn = () => {
     const element = document.getElementById("loginScreen");
     const background = document.getElementById("modalBackground");
-    console.log(element);
     background.style.display = "block";
     setTimeout(() => {background.style.opacity = "1"}, 20);
     setTimeout(() => {element.classList.add(navStyles.showLoginDrawerContainer)},20);
