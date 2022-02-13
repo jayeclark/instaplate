@@ -203,8 +203,9 @@
   }
 
   .menuDrawer {
-    width: 100vw;
+    transition: left 0s;
     left: calc(-100vw - 5px);
+    width: 100vw;
   }
 
   .menuItem {

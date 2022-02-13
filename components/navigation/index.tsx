@@ -20,6 +20,11 @@ const Navigation = (props) => {
   const { user, handleSetUser, zipCode } = useContext(UserContext);
   const { data: sessionData } = useSession();
 
+  const modalBackgroundRef = useRef();
+  const navContentRef = useRef();
+  const loginRef = useRef();
+  const registerRef = useRef();
+
   useEffect(() => {
     if (sessionData?.user && !user) {
       const token: any = sessionData.token;
@@ -34,10 +39,19 @@ const Navigation = (props) => {
     }
   }, [user, handleSetUser, sessionData])
 
-  const modalBackgroundRef = useRef();
-  const navContentRef = useRef();
-  const loginRef = useRef();
-  const registerRef = useRef();
+  useEffect(() => {
+    const addTransition = () => {
+      const el: HTMLElement = navContentRef.current;
+      if (Number(window.innerWidth) < 576 && !el.style.transition.includes("0.7s")) {
+        setTimeout(() => {el.style.transition = "left 0.7s"}, 20);
+      }
+      if (Number(window.innerWidth) >= 576 && el.style.transition.includes("0.7s")) {
+        el.style.transition = null;
+      }
+    }
+    window.addEventListener("resize", () => addTransition());
+    return window.removeEventListener("resize", () => addTransition());
+  },[])
 
   const { hamburgerMenu, mapMarker } = Icons;
 
