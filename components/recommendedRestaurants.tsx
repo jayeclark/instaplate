@@ -40,10 +40,10 @@ function RecommendedRestaurants({ title, restaurants, subTitle }){
               <Link as={"/restaurants/"+rest.id} href="/restaurants/[id]">
                 <a>
                   <Card style={{ margin: "0 8px 20px 8px", border: "none" }}>
-                    <div style={{width: "100%", height: "120px", overflow: "hidden", backgroundSize: "100% auto", backgroundImage: `url(${API_URL + rest.image.url})`}}>
+                    <div style={{height: "120px", overflow: "hidden", backgroundSize: "100% auto", backgroundImage: `url(${API_URL + rest.image.url})`}}>
                       <div style={{backdropFilter: "blur(8px)", height:"100%",  width: "100%"}}>
                         <img
-                          height="100%"
+                          width="100%"
                           style={{position: "relative", left: "50%", top: "50%", transform: "translate(-50%, -50%)" }}
                           src={
                           API_URL + rest.image.url

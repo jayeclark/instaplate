@@ -44,7 +44,7 @@ function CategorySlider({ handleSetCuisine, cuisine }) {
         }
         .categories {
           display: flex;
-          justify-content: left;
+          justify-content: space-between;
           padding: 16px 0px 8px 12px;
         }
       `}</style>
