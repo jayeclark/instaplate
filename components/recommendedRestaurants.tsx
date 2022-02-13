@@ -41,15 +41,13 @@ function RecommendedRestaurants({ title, restaurants, subTitle }){
                 <a>
                   <Card style={{ margin: "0 8px 20px 8px", border: "none" }}>
                     <div style={{height: "120px", overflow: "hidden", backgroundSize: "100% auto", backgroundImage: `url(${API_URL + rest.image.url})`}}>
-                      <div style={{backdropFilter: "blur(8px)", height:"100%",  width: "100%"}}>
-                        <img
+                      <img
                           width="100%"
                           style={{position: "relative", left: "50%", top: "50%", transform: "translate(-50%, -50%)" }}
                           src={
                           API_URL + rest.image.url
                           }
                         />
-                      </div>
                     </div>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 0px 0px 0px"}}>
                       <span style={{textDecoration: "none", color: "#666"}}><b>{rest.name}</b></span>
