@@ -17,20 +17,21 @@ Instaplate is a full-stack demo web app where you can:
 The front end is built with React and Typescript, and uses minimal libraries to achieve complicated CSS animations that interact with state, such as the menu/login/register drawer opening and closing behavior.
 
 ## Developing
+
 ### Install Locally Using Docker
 
-- 1. Clone the repository.
-- 2. Make sure you have Docker installed and that it is running in the background
-- 3. Copy the .env.example file (remove the .example) and enter values for the private keys
-- 4. Run ```docker build .```
-- 5. Run the container after it is finished building
+1. Clone the repository.
+2. Make sure you have Docker installed and that it is running in the background
+3. Copy the .env.example file (remove the .example) and enter values for the private keys
+4. Run ```docker build .```
+5. Run the container after it is finished building
 
 ### Install Locally Using NPM
 
-- 1. Clone the repository.
-- 2. Make sure you are using Node 14 or 12. (Project may break on 16 or 17)
-- 2. Run ```npm install``` to install dependencies.
-- 3. After npm has finished installing, run ``npm run -p 3000`` to start the development server
+1. Clone the repository.
+2. Make sure you are using Node 14 or 12. (Project may break on 16 or 17)
+3. Run ```npm install``` to install dependencies.
+4. After npm has finished installing, run ``npm run -p 3000`` to start the development server
 
 ## Learn More
 
