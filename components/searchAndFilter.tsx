@@ -52,8 +52,12 @@ export default function SearchAndFilter({cuisine, highlights}) {
         </div>
         <div className="right-side">
           {shouldHideFeaturedRestaurants() ? null : highlights.map((highlight: any, i: number) => (
-            <RestaurantsWrapper key={i} ids={highlight.ids} title={highlight.title} subTitle={highlight.subTitle} />
+            <RestaurantsWrapper key={i} ids={highlight.ids} sort={highlight.sort} title={highlight.title} subTitle={highlight.subTitle} />
           ))}
+          {shouldHideFeaturedRestaurants() ? null :  (
+            <div style={{marginRight: "40px", marginLeft: "15px", borderBottom: "3px solid #666", marginBottom: "30px"}}>
+            </div>
+          )}
           <div className="restaurants">
           <RestaurantCardsWrapper sort={sort} cuisine={cuisine} filters={filters} query={query}/>
           </div>

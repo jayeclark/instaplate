@@ -58,16 +58,16 @@ export default function FilterSidebar({filters, handleAddQuery, handleRemoveQuer
       {(filters.query === null || filters.query === '') ? null : (<span style={{display: "block", fontSize: "0.9rem"}}>Showing results for "{filters.query}"</span>)}
       <br></br>
       <h5>Sort</h5>
-      <div style={{ padding: "5px 0px"}}>
+      <div className="sort-option">
         <input className="radio-button" type="radio" checked={radioButton === "relevance"} name="sort" readOnly={true} value="relevance" onClick={handleSetButton } /><label>&nbsp;&nbsp;Picked for you (default)</label><br />
         </div>
-      <div style={{ padding: "5px 0px"}}>
+      <div className="sort-option">
         <input className="radio-button" type="radio" checked={radioButton === "popularity"} name="sort" readOnly={true} value="popularity" onClick={handleSetButton }  /><label>&nbsp;&nbsp;Most popular</label><br />
         </div>
-      <div style={{ padding: "5px 0px"}}>
+      <div className="sort-option">
         <input className="radio-button" type="radio" checked={radioButton === "rating"} name="sort" readOnly={true} value="rating" onClick={handleSetButton } /><label>&nbsp;&nbsp;Rating</label><br />
         </div>
-      <div style={{ padding: "5px 0px"}}>
+      <div className="sort-option">
         <input className="radio-button" type="radio" checked={radioButton === "delivery"} name="sort" readOnly={true} value="delivery" onClick={handleSetButton } /><label>&nbsp;&nbsp;Delivery time</label><br />
       </div><br></br>
       <h5>Price Range</h5>
@@ -89,6 +89,14 @@ export default function FilterSidebar({filters, handleAddQuery, handleRemoveQuer
       <style jsx>{`
         h5 {
           font-size: 1.1rem;
+        }
+        .sort-option {
+          padding: 5px 0px; 
+          font-size: 0.9rem;
+        }
+
+        .sort-option label {
+          margin-left: 5px;
         }
         .side-bar {
           width: 390px;
