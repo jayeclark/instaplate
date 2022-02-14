@@ -11,8 +11,10 @@ const CartIcon = () => {
   const buttonRef = useRef();
 
   let { cart: thisCart, openDrawer, closeDrawer, handleSetDrawer, drawerOpen } = useContext(CartContext);
+  let { user } = useContext(UserContext);
 
   let { items } = thisCart ? thisCart : { items: [] };
+  const numItems = items.reduce((a,b) => a + b.quantity, 0);
 
   const cookieCart = Cookies.getJSON("cart");
 
@@ -27,18 +29,27 @@ const CartIcon = () => {
   }
 
   useEffect(() => {
+    const el: HTMLButtonElement = buttonRef.current;
+
+    if (items.length > 0 && el.disabled === true) {
+      el.disabled = false;
+    }
+
     if (items.length === 0 && Cookies.getJSON("cart")) {
       thisCart = cookieCart;
       items = cookieCart.items;
-      const el: HTMLButtonElement = buttonRef.current;
 
       if (thisCart?.items.length > 0) {
-        if (el) {el.disabled = false;} 
+        if (el) {
+          el.disabled = false;
+          const span = el.getElementsByTagName('span')[0];
+          span.innerHTML = items.reduce((a,b) => a + b.quantity, 0);
+        } 
       } else {
         if (el) {el.disabled = true;}
       }
     }
-  },[cookieCart])
+  },[cookieCart, user])
 
   const openTimeout = () => { if (drawerOpen === 'opening') { handleSetDrawer('open'); }}
   const closeTimeout = () => { if (drawerOpen === 'closing') { handleSetDrawer('closed') }}
@@ -103,7 +114,7 @@ const CartIcon = () => {
       onClick={showCartDrawer}
     >
       {shoppingCart}
-      <span className={styles.itemCountWidget}>{!items ? 0 : items.reduce((a,b) => a + b.quantity, 0)}</span>
+      <span className={styles.itemCountWidget}>{numItems}</span>
     </button>
     <div ref={drawerRef} className={`${styles.cartDrawerContainer}${(drawerOpen === "open" || drawerOpen === "closing") ? ' ' : ''}${(drawerOpen === "open" || drawerOpen === "closing") ? styles.show : ''}`}>
       {items?.length > 0 ? <div className={styles.cartDrawerContainerBackground}></div> : null}
