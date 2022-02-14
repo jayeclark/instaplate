@@ -6,7 +6,7 @@ function DishesWrapper({query, sort, filters}) {
 
   const { loading, error, data } = useQuery(GET_DISHES)
   
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <div style={{minHeight: "422px"}}><p>Loading...</p></div>;
   if (error) return <p>Error: {JSON.stringify(error)}</p>;
   if (!data) return <p>Not found</p>;
 

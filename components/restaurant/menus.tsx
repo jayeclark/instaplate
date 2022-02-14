@@ -29,7 +29,7 @@ function Menus({restaurantID, initialMenu}) {
   })
 
   const { loading, error, data } = useQuery(GET_RESTAURANT, { variables: { id: restaurantID }})
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <div style={{padding: "100px", minHeight: "400px", textAlign: "center"}}><p>Loading menus...</p></div>;
   if (error) return <p>Error: {JSON.stringify(error)}</p>;
   if (!data) return <p>Not found</p>;
 

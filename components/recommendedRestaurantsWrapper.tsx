@@ -12,7 +12,7 @@ function RestaurantsWrapper({ids, title, subTitle, sort}) {
   }
   const { loading, error, data } = useQuery(GET_RESTAURANTS)
   
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <div style={{display: "flex", justifyContent: "center", alignItems: "center", minHeight: "800px"}}><p>Loading...</p></div>;
   if (error) return <p>Error: {JSON.stringify(error)}</p>;
   if (!data) return <p>Not found</p>;
 
