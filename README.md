@@ -1,6 +1,7 @@
 # Instaplate
 
-THE INSTACART RESTAURANT DELIVERY CLONE
+## THE INSTACART RESTAURANT DELIVERY CLONE**
+
 <img width="100%" src='instaplate.png'>
 
 Have you ever wondered what it would look like if Instacart copied Uber Eats? Look no further, my friend.
@@ -15,7 +16,8 @@ Instaplate is a full-stack demo web app where you can:
 
 The front end is built with React and Typescript, and uses minimal libraries to achieve complicated CSS animations that interact with state, such as the menu/login/register drawer opening and closing behavior.
 
-## To Install Locally Using Docker
+## Developing
+### Install Locally Using Docker
 
 - 1. Clone the repository.
 - 2. Make sure you have Docker installed and that it is running in the background
@@ -23,7 +25,7 @@ The front end is built with React and Typescript, and uses minimal libraries to 
 - 4. Run ```docker build .```
 - 5. Run the container after it is finished building
 
-## To Install Locally Using NPM
+### Install Locally Using NPM
 
 - 1. Clone the repository.
 - 2. Make sure you are using Node 14 or 12. (Project may break on 16 or 17)
