@@ -4,6 +4,7 @@ import {
   FormGroup,
   Input,
 } from "reactstrap";
+import { useRouter } from "next/router";
 import { login } from "../auth";
 import UserContext from "../context/userContext";
 import styles from "../../styles/Dialog.module.css";
@@ -22,6 +23,9 @@ function Login(props: any) {
   const { isAuthenticated, user, handleSetUser } = useContext(UserContext);
 
   const { handleCloseDrawer, handleToggle } = props;
+
+  const router = useRouter();
+  const currentPage = router.pathname;
 
   useEffect(() => {
     if (isAuthenticated && user) {
@@ -114,7 +118,7 @@ function Login(props: any) {
                     onClick={(e) => {
                       e.preventDefault();
                       setLoading(true);
-                      login(data.identifier, data.password)
+                      login(data.identifier, data.password, currentPage)
                         .then((res: any) => {
                           setLoading(false);
 
