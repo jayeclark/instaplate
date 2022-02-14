@@ -8,15 +8,14 @@ import Cookies from "js-cookie";
 
 const CartIcon = () => {
 
-  let { cart: thisCart, openDrawer, handleSetCart, closeDrawer, handleSetDrawer, drawerOpen } = useContext(CartContext);
+  const buttonRef = useRef();
+
+  let { cart: thisCart, openDrawer, closeDrawer, handleSetDrawer, drawerOpen } = useContext(CartContext);
 
   let { items } = thisCart ? thisCart : { items: [] };
-  if (items.length === 0 && Cookies.getJSON("cart")) {
-    thisCart = Cookies.getJSON("cart");
-    //handleSetCart(thisCart);
-  }
 
-  const [button, setButton] = useState(items.length === 0);
+  const cookieCart = Cookies.getJSON("cart");
+
   const { shoppingCart } = Icons;
   const drawerRef = useRef();
 
@@ -27,15 +26,27 @@ const CartIcon = () => {
     closeDrawer();
   }
 
+  useEffect(() => {
+    if (items.length === 0 && Cookies.getJSON("cart")) {
+      thisCart = cookieCart;
+      items = cookieCart.items;
+      const el: HTMLButtonElement = buttonRef.current;
+
+      if (thisCart?.items.length > 0) {
+        if (el) {el.disabled = false;} 
+      } else {
+        if (el) {el.disabled = true;}
+      }
+    }
+  },[cookieCart])
+
   const openTimeout = () => { if (drawerOpen === 'opening') { handleSetDrawer('open'); }}
-  
   const closeTimeout = () => { if (drawerOpen === 'closing') { handleSetDrawer('closed') }}
 
   useEffect(() => {
     const el: HTMLElement = drawerRef.current;
     const classes = el.classList;
     let timeout : any;
-    let backgroundTimeout: any;
 
     if (drawerOpen === 'open') {
       if (!classes.contains(styles.show)) {classes.add(styles.show);}
@@ -78,9 +89,6 @@ const CartIcon = () => {
       setTimeout(timeout, 1000);
     }
 
-    if (items.length > 0) {
-      setButton(true);
-    }
     if (timeout) {
       return clearTimeout(timeout);
     }
@@ -90,6 +98,7 @@ const CartIcon = () => {
     <div className={styles.cartWidget}>
     <button 
       type="button" 
+      ref={buttonRef}
       disabled={items.reduce((a,b) => a + b.quantity, 0) === 0} 
       onClick={showCartDrawer}
     >

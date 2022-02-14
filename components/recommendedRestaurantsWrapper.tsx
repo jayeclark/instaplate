@@ -5,8 +5,6 @@ import { GET_RESTAURANTS } from '../scripts/queries';
 
 function RestaurantsWrapper({ids, title, subTitle, sort}) {
 
-  console.log(sort);
-  
   if (!sort) {
     sort = (a, b) => b.price - a.price;
   }
