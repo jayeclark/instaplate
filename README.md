@@ -1,30 +1,34 @@
-#Next-React Frontend for Restaurants
-Exercise03 is full rendering
-<img src = 'restaurants.png'>
+# Instaplate
 
-## use yarn and then yarn dev to run the code
+THE INSTACART RESTAURANT DELIVERY CLONE
+<img width="100%" src='instaplate.png'>
 
-Do NOT do a yarn build since we are not going to deploy it anywhere
-Exercise03 is full rendering
-index3.js (Data is hardcoded)
-index.js (Get data from Strapi using Apollo and GraphQL)
-restaurantList.js is Web Component to render restaurants
+Have you ever wondered what it would look like if Instacart copied Uber Eats? Look no further, my friend.
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Instaplate is a full-stack demo web app where you can:
 
-## Getting Started
+- Browse, sort, search, and filter restaurants
+- Browse and search dishes
+- Add, remove, and adjust the quantity of dishes to your shopping cart
+- Checkout using Stripe's test card credentials
+- Register and login using email or your Google account
 
-First, run the development server:
+The front end is built with React and Typescript, and uses minimal libraries to achieve complicated CSS animations that interact with state, such as the menu/login/register drawer opening and closing behavior.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## To Install Locally Using Docker
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 1. Clone the repository.
+- 2. Make sure you have Docker installed and that it is running in the background
+- 3. Copy the .env.example file (remove the .example) and enter values for the private keys
+- 4. Run ```docker build .```
+- 5. Run the container after it is finished building
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## To Install Locally Using NPM
+
+- 1. Clone the repository.
+- 2. Make sure you are using Node 14 or 12. (Project may break on 16 or 17)
+- 2. Run ```npm install``` to install dependencies.
+- 3. After npm has finished installing, run ``npm run -p 3000`` to start the development server
 
 ## Learn More
 
@@ -34,9 +38,3 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

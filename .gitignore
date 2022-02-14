@@ -3,7 +3,7 @@ node_modules
 services
 .env.development
 .env.production
-.env*
+.env
 yarn.lock
 package-lock.json
 .DS_Store
