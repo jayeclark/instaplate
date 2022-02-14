@@ -1,5 +1,9 @@
-.content {
+.content-scroll-container {
   overflow-y: scroll;
+  height: calc(100% - 45px);
+}
+
+.content {
   height: fit-content;
 }
 
@@ -40,9 +44,10 @@
 .login-container {
   background-color: white;
   position: relative;
-  min-height: fit-content;
+  height: fit-content;
+  max-height: calc(100vh - 50px);
+  overflow-y: hidden;
   width: 100%;
-  overflow: scroll;
 }
 
 .background {
