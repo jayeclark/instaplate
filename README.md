@@ -4,7 +4,7 @@
 
 <img width="100%" src='instaplate.png'>
 
-Have you ever wondered what it would look like if Instacart copied Uber Eats? Look no further, my friend.
+Have you ever wondered what it would look like if Instacart got into the restaurant delivery business, while simultaneously ripping off UberEats's UI? Look no further, my friends.
 
 Instaplate is a full-stack demo web app where you can:
 
@@ -14,7 +14,11 @@ Instaplate is a full-stack demo web app where you can:
 - Checkout using Stripe's test card credentials
 - Register and login using email or your Google account
 
-The front end is built with React and Typescript, and uses minimal libraries to achieve complicated CSS animations that interact with state, such as the menu/login/register drawer opening and closing behavior.
+The front end is built with React and Typescript, and uses minimal libraries to achieve complex CSS animations that interact with state, such as the menu/login/register drawer opening and closing behavior.
+
+See it in action at [instaplate.herokuapp.com](http://instaplate.herokuapp.com)!
+
+For the backend, visit the [instaplate-backend](https://github.com/jayeclark/instaplate-backend) repository.
 
 ## Developing
 
