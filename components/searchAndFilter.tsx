@@ -55,7 +55,7 @@ export default function SearchAndFilter({cuisine, highlights}) {
             <RestaurantsWrapper key={i} ids={highlight.ids} sort={highlight.sort} title={highlight.title} subTitle={highlight.subTitle} />
           ))}
           {shouldHideFeaturedRestaurants() ? null :  (
-            <div style={{marginRight: "40px", marginLeft: "15px", borderBottom: "3px solid #666", marginBottom: "30px"}}>
+            <div className="feature-divider">
             </div>
           )}
           <div className="restaurants">
@@ -69,6 +69,13 @@ export default function SearchAndFilter({cuisine, highlights}) {
       <style jsx>{`
       .right-side {
         width: 70%;
+        padding-right: 20px;
+      }
+      .feature-divider {
+        margin-right: 15px;
+        margin-left: 15px; 
+        border-bottom: 3px solid #666; 
+        margin-bottom: 30px;
       }
       @media only screen and (max-width: 796px) {
         .side-bar-container {
@@ -81,6 +88,10 @@ export default function SearchAndFilter({cuisine, highlights}) {
         .dishes {
           width: 100vw;
           overflow: hidden;
+        }
+        .feature-divider {
+          margin-right: 20px;
+          margin-left: 40px; 
         }
       }
       `}</style>

@@ -73,10 +73,22 @@ function RestaurantCards({ list, filters, cuisine, sort }) {
 
   return(
 
-      <Container style={{width: "100%", padding: "0px 36px 0px 12px"}}>
+      <Container className="centered-container">
       <Row xs='3'>
         {restList}
       </Row> 
+      <style jsx>{`
+        .centered-container {
+          width: 100%!important;
+          padding: 0px 36px 0px 12px!important;
+        }
+        @media only screen and (max-width: 796px) {
+          .centered-container {
+            padding: 0px 12px 0px 12px!important;
+          }
+        }
+
+      `}</style>
       </Container>
   
     )

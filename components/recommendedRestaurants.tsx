@@ -28,36 +28,38 @@ function RecommendedRestaurants({ title, restaurants, subTitle }){
 
   return (
     <>
-      <Container className="restaurant-line-container">
+      <div className="restaurant-line-container">
+      <Container>
           <Row>
-            <div style={{padding: "0px 16px 8px 16px"}}><h2 style={{marginBottom: "0px", paddingBottom: "0px"}}>{title}</h2>{subTitle ? <small>{subTitle}</small> : null}</div>
+            <div className="title"><h2 style={{marginBottom: "0px", paddingBottom: "0px"}}>{title}</h2>{subTitle ? <small>{subTitle}</small> : null}</div>
           </Row>
-          <Row style={{width: "100%", overflowX:"scroll"}}>
+          <Row xs="3" style={{overflowX:"scroll"}}>
             <LeftRightArrows numElements={restaurants.length}>
               <div style={{display:"flex"}}>
               {restaurants.map((rest: any, i: number) => (
               <Col xs="12" sm="6" lg="4" key={i}>
-                <div className="right-margin">
                   <Link as={"/restaurants/"+rest.id} href="/restaurants/[id]">
                     <a>
-                      <Card style={{ margin: "0 8px 20px 8px", border: "none" }}>
-                        <div className="image-container">
-                          <img
-                              width="100%"
-                              src={parseSRC(rest)}
-                            />
-                        </div>
-                        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 0px 0px 0px"}}>
-                          <span style={{textDecoration: "none", color: "#666"}}><b>{rest.name}</b></span>
-                          <div style={{top: "-5px", backgroundColor: "#efefef", fontWeight: "bold", color: "#666", fontSize: "0.8rem", padding: "5px 8px", borderRadius: "15px"}}>{rest.rating}</div>
-                        </div>
-                        <div style={{ color: "#666", fontSize: "0.8rem" }}>
-                          ${rest.deliveryFee} Delivery • {rest.deliveryTime}
+                      <Card style={{ margin: "0px 8px 20px 8px", border: "none" }}>
+                        <div className="right-margin">
+                          <div className="image-container">
+                            <img
+                                width="100%"
+                                style={{ position: "relative", left: "50%", top: "50%", transform: "translate(-50%, -50%)" }}
+                                src={parseSRC(rest)}
+                              />
+                          </div>
+                          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 0px 0px 0px"}}>
+                            <span style={{textDecoration: "none", color: "#666"}}><b>{rest.name}</b></span>
+                            <div style={{top: "-5px", backgroundColor: "#efefef", fontWeight: "bold", color: "#666", fontSize: "0.8rem", padding: "5px 8px", borderRadius: "15px"}}>{rest.rating}</div>
+                          </div>
+                          <div style={{ color: "#666", fontSize: "0.8rem" }}>
+                            ${rest.deliveryFee} Delivery • {rest.deliveryTime}
+                          </div>
                         </div>
                       </Card>
                     </a>
                   </Link>
-                </div>
               </Col>
                 )
               )}
@@ -65,20 +67,25 @@ function RecommendedRestaurants({ title, restaurants, subTitle }){
             </LeftRightArrows>
           </Row>
       </Container>
+      </div>
       <style jsx>{`
           .restaurant-line-container {
-            width: 100%
-            padding: 0px 12px;
-            marginBottom: 25px; 
-            borderBottom: 1px solid #efefef;
+            margin-bottom: 0px; 
             overflowX: hidden;
+            margin-left: -10px;
+            margin-right: -10px;
+          }
+          .title {
+            padding: 0px 16px 8px 26px;
           }
           .restaurant-card {
             margin: 0 8px 20px 8px;
             border: none;
+            max-width: 20vw;
           }
           .right-margin {
-            margin-right: 20px;
+            margin-right: 10px;
+            margin-left: 10px;
           }
           .dish-lockup {
             position: relative;
@@ -111,13 +118,11 @@ function RecommendedRestaurants({ title, restaurants, subTitle }){
             border-radius: 12px;
           }
 
-          @media only screen and (max-width: 796) {
-            .restaurant-line-container {
-              width: 100%
-              padding: 0px 12px;
-              marginBottom: 25px; 
-              borderBottom: 1px solid #efefef;
-              overflowX: hidden;
+          @media only screen and (max-width: 796px) {
+
+            .right-margin {
+              margin-right: 0px;
+              margin-left: 20px;
             }
           }
         `}</style>
