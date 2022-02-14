@@ -22,8 +22,9 @@
   position: fixed;
   top: 0px;
   left: 0px;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0,0,0,0);
   z-index: 998;
+  transition: background-color 1s ease;
 }
 
 .itemCount {
@@ -36,8 +37,13 @@
   transition: left 1s ease!important;
 }
 
-.show .cartDrawerContainerBackground {
+.changeBackgroundDisplay .cartDrawerContainerBackground {
   display: block!important;
+}
+
+.changeBackgroundColor .cartDrawerContainerBackground {
+  background-color: rgba(0,0,0,0.3)!important;
+  transition: background-color 1s ease!important;
 }
 
 .cartDrawer {

@@ -35,6 +35,14 @@ export default function SearchAndFilter({cuisine, highlights}) {
     setSort(str);
   }
 
+  const shouldHideFeaturedRestaurants = () => {
+    return ((query && query !== '') 
+            || filters.cuisine 
+            || filters.price.length > 0 
+            || filters.dietary.length > 0 
+            || sort !== 'relevance')
+  }
+
   return (
     <>
       <Search global={true} handleSetQuery={handleSetQuery}/>
@@ -43,7 +51,7 @@ export default function SearchAndFilter({cuisine, highlights}) {
           <FilterSidebar handleAddQuery={handleAddQuery} handleRemoveQuery={handleRemoveQuery} filters={filters} handleSetSort={handleSetSort} />
         </div>
         <div className="right-side">
-          {query && query !== '' ? null : highlights.map((highlight, i) => (
+          {shouldHideFeaturedRestaurants() ? null : highlights.map((highlight: any, i: number) => (
             <RestaurantsWrapper key={i} ids={highlight.ids} title={highlight.title} subTitle={highlight.subTitle} />
           ))}
           <div className="restaurants">

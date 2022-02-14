@@ -28,7 +28,7 @@ function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
 
-  const { cart } = useContext(UserContext);
+  const cart = Cookies.getJSON("cart");
 
   const validationFunctions = { address, address2, city, state, zip };
 

@@ -109,12 +109,12 @@ const Navigation = (props) => {
       <NavItem>
         <div className={styles.mapMarker}>
           { user && 
-              <div>{user.username || user.email.replace(/@.+/,'')}</div>
+              <div id="user-id">{user.username || user.email.replace(/@.+/,'')}</div>
           }
           { !user && 
             (<> 
-              <div>{zipCode ? mapMarker : null}</div>
-              <div>{zipCode}</div>
+              <div id="zip-marker">{zipCode ? mapMarker : null}</div>
+              <div id="zip-value">{zipCode}</div>
             </>)
           }
         </div>

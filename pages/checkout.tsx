@@ -1,6 +1,6 @@
 /* pages/checkout.js */
 
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
@@ -14,10 +14,18 @@ import Cookie from "js-cookie";
 function Checkout() {
   // get app context
   const {isAuthenticated} = useContext(UserContext);
-  const cart = Cookie.getJSON("cart") || {items: [], total: 0};
 
-  const { total } = cart;
-  const [serviceFee, deliveryFee] = [total * 0.10 + 0.01, cart.items.length > 0 ? cart.items[0].restaurant.deliveryFee : 0];
+  const [currentCart, setCurrentCart] = useState({items: [], total: 0});
+
+  const cart = Cookie.getJSON("cart") || {items: [], total: 0};
+    
+  useEffect(() => {
+    setCurrentCart(cart);
+  },[]);
+
+  const {total} = currentCart;
+  const serviceFee = total * 0.10 + 0.01;
+  const deliveryFee = currentCart.items.length > 0 ? currentCart.items[0].restaurant.deliveryFee : 0;
   const grandTotal = (total + serviceFee + deliveryFee).toFixed(2);
 
   // load stripe to inject into elements components
@@ -38,15 +46,15 @@ function Checkout() {
     <Row>
       <Col style={{ paddingLeft: 5,  paddingRight: 5 }} xs={{ size: 10, order: 1, offset: 1 }} sm={{ size: 6, order: 1, offset: 1 }}>
         <Elements stripe={stripePromise}>
-          {cart.items.length > 0 && isAuthenticated && <CheckoutForm />}
-          {cart.items.length > 0 && !isAuthenticated && (
+          {currentCart.items.length > 0 && isAuthenticated && <CheckoutForm />}
+          {currentCart.items.length > 0 && !isAuthenticated && (
             <div className={styles.paper}>
               <div style={{height: "fit-content"}}>
-                Please <a style={{cursor: "pointer"}} onClick={handleToggleSignIn}>sign in</a> order to continue.
+                Please <a style={{cursor: "pointer"}} onClick={handleToggleSignIn}>sign in</a> to continue with checkout.
               </div>
             </div>
           )}          
-          {cart.items.length === 0 && (
+          {currentCart.items.length === 0 && (
             <div className={styles.paper}>
               <div style={{height: "fit-content"}}>
                 There are no items in your cart. Please add items to your cart in order to check out.
@@ -88,11 +96,22 @@ function Checkout() {
       </Col>
       <style jsx global>
         {`
+          body,
+          html {
+            background-color: #f6f9fc!important;
+            font-size: 18px;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+          }
           input {
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif!important;
           }
           * {
             box-sizing: border-box;
+          }
+          #user-id,
+          #zip-marker,
+          #zip-value {
+            display: none;
           }
           .checkout h1 {
             color: #32325d;

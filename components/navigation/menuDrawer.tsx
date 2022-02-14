@@ -1,8 +1,12 @@
-import { logout } from '../auth';
-import Icons from '../UI/icons/index';
+import Cookie from "js-cookie";
 import Link from "next/link";
-import styles from "../../styles/Navigation.module.css";
 import { signOut } from "next-auth/react";
+import { useRouter } from 'next/router';
+
+import { logout } from '../auth';
+
+import Icons from '../UI/icons/index';
+import styles from "../../styles/Navigation.module.css";
 import styles2 from "../../styles/Dialog.module.css";
 
 export default function MenuDrawer({ 
@@ -13,6 +17,9 @@ export default function MenuDrawer({
   closeNavContent,
   loginRef,
   registerRef }) {
+
+  const router = useRouter();
+  const currentPage = router.pathname;
 
   const {  
     restaurantIcon,
@@ -74,30 +81,38 @@ export default function MenuDrawer({
       <div className={styles.menuItem}>{helpIcon}<div>Help Center</div></div>
       <div className={styles.menuItem}>{howIcon}<div>How Instaplate Works</div></div>
           {user && user?.provider !== 'google' ? (
-            <Link href="/">
               <a
                 className={styles.navLink}
+                style={{cursor: "pointer"}}
                 onClick={() => {
-                  logout();
-                  handleSetUser(null);
+                  logout(currentPage);
+                  handleSetUser(null, null);
+                  closeNavContent();
                 }}
               >
                 <div className={styles.menuItem}>{logOutIcon}<div>Log out</div></div>
               </a>
-            </Link>
           ) : null}
           {user?.provider === 'google' ? (
-            <Link href="/">
               <a
                 className={styles.navLink}
+                style={{cursor: "pointer"}}
                 onClick={() => {
                   signOut();
-                  handleSetUser(null);
+                  handleSetUser(null, null);
+                    //remove token and user cookie
+                  Cookie.remove("token");
+
+                  // sync logout between multiple windows
+                  window.localStorage.setItem("logout", Date.now().toString());
+                  window.localStorage.removeItem("instacart_user");
+                  window.localStorage.removeItem("instacart_auth_token");
+
+                  closeNavContent();
                 }}
               >
                 <div className={styles.menuItem}>{logOutIcon}<div>Log out</div></div>
               </a>
-            </Link>
           ) : null}
       <hr />
       <div>

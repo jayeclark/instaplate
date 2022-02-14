@@ -17,7 +17,7 @@ function CartDrawer({ handleCloseDrawer }) {
 
   const restaurant = items.length > 0 ? items[0].restaurant : null;
   
-  const itemList = items.map((item, index) => <CartItem key={index} item={item} />);
+  const itemList = items.map((item, index) => <CartItem key={index} item={item} handleCloseDrawer={handleCloseDrawer}/>);
 
 // return Cart
   return (

@@ -13,7 +13,7 @@ const CartIcon = () => {
   let { items } = thisCart ? thisCart : { items: [] };
   if (items.length === 0 && Cookies.getJSON("cart")) {
     thisCart = Cookies.getJSON("cart");
-    handleSetCart(thisCart);
+    //handleSetCart(thisCart);
   }
 
   const [button, setButton] = useState(items.length === 0);
@@ -26,28 +26,58 @@ const CartIcon = () => {
   const hideCartDrawer = () => { 
     closeDrawer();
   }
+
+  const openTimeout = () => { if (drawerOpen === 'opening') { handleSetDrawer('open'); }}
   
+  const closeTimeout = () => { if (drawerOpen === 'closing') { handleSetDrawer('closed') }}
+
   useEffect(() => {
     const el: HTMLElement = drawerRef.current;
-    let status: string;
+    const classes = el.classList;
     let timeout : any;
-    if (drawerOpen === 'open' && !el.classList.contains(styles.show)) {
-      el.classList.add(styles.show);
+    let backgroundTimeout: any;
+
+    if (drawerOpen === 'open') {
+      if (!classes.contains(styles.show)) {classes.add(styles.show);}
+      if (!classes.contains(styles.changeBackgroundDisplay)) { classes.add(styles.changeBackgroundDisplay); }
+      if (!classes.contains(styles.changeBackgroundColor)) { classes.add(styles.changeBackgroundColor); }
     }
-    if (drawerOpen === 'closed' &&el.classList.contains(styles.show)) {
-      el.classList.remove(styles.show);
+
+    if (drawerOpen === 'closed' && el.classList.contains(styles.show)) {
+      if (classes.contains(styles.show)) { classes.remove(styles.show); }
+      if (classes.contains(styles.changeBackgroundColor)) { classes.remove(styles.changeBackgroundColor); }
+      if (classes.contains(styles.changeBackgroundDisplay)) { classes.remove(styles.changeBackgroundDisplay); }
     }
-    if (drawerOpen === 'opening' && !el.classList.contains(styles.show)) {
-      setTimeout(() => el.classList.add(styles.show), 50);
-      status = 'open';
-    } else if (drawerOpen === 'closing' && el.classList.contains(styles.show)) {
-      setTimeout(() => el.classList.remove(styles.show), 50);  
-      status = 'closed';
-    }
-    if (status) {
-      timeout = () => handleSetDrawer(status);
+
+    if (drawerOpen === 'opening' && !classes.contains(styles.show)) {
+      if (!classes.contains(styles.changeBackgroundDisplay)) {
+        classes.add(styles.changeBackgroundDisplay);
+      }
+      setTimeout(() => classes.add(styles.show), 20);
+      setTimeout(() => classes.add(styles.changeBackgroundColor), 20);
+      timeout = closeTimeout;
+      clearTimeout(timeout);
+
+      timeout = openTimeout;
+      setTimeout(timeout, 1000);
+    } 
+
+    if (drawerOpen === 'closing' && classes.contains(styles.show)) {
+      if (!classes.contains(styles.changeBackgroundColor)) {
+        classes.add(styles.changeBackgroundColor);
+      }
+      if (!classes.contains(styles.changeBackgroundDisplay)) {
+        classes.add(styles.changeBackgroundDisplay);
+      }
+      setTimeout(() => classes.remove(styles.changeBackgroundColor), 10);
+      setTimeout(() => classes.remove(styles.show), 10);  
+      timeout = openTimeout;
+      clearTimeout(timeout);
+
+      timeout = closeTimeout;
       setTimeout(timeout, 1000);
     }
+
     if (items.length > 0) {
       setButton(true);
     }
@@ -68,7 +98,7 @@ const CartIcon = () => {
     </button>
     <div ref={drawerRef} className={`${styles.cartDrawerContainer}${(drawerOpen === "open" || drawerOpen === "closing") ? ' ' : ''}${(drawerOpen === "open" || drawerOpen === "closing") ? styles.show : ''}`}>
       {items?.length > 0 ? <div className={styles.cartDrawerContainerBackground}></div> : null}
-      {items?.length > 0 ? <CartDrawer handleCloseDrawer={hideCartDrawer}/> : null}
+      {items?.length > 0 || drawerOpen !== 'closed' ? <CartDrawer handleCloseDrawer={hideCartDrawer}/> : null}
     </div>
     <style jsx>
       {`
@@ -84,6 +114,7 @@ const CartIcon = () => {
           min-width: 82px;
           background-color: rgb(10, 173, 10);
           color: white;
+          transition: background-color 0.5s ease, color 0.5s ease;
         }
 
         button:hover {

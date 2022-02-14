@@ -62,8 +62,8 @@ function MyApp(props: any){
 
   const handleSetUser = (user: any, token: any) => {
     const tempState = { ...state, user};
-    tempState.isAuthenticated = true;
-    tempState.user.token = token;
+    tempState.isAuthenticated = user ? true : null;
+    if (user) { tempState.user.token = token; }
     setState(tempState);
   };
 

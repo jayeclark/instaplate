@@ -35,7 +35,7 @@ export const registerUser = (username:string, email:string, password:string) => 
   });
 };
 
-export const login = (username, password) => {
+export const login = (username: string, password:string, currentPage:string) => {
 
   const API_URL = getAPIUrl();
   //prevent function from being ran on the server
@@ -56,7 +56,7 @@ export const login = (username, password) => {
         //resolve the promise to set loading to false in SignUp form
         resolve(res);
         //redirect back to home page for restaurant selection
-        Router.push("/");
+        Router.push(currentPage);
       })
       .catch((error) => {
         //reject the promise and pass the error object back to the form
@@ -65,7 +65,7 @@ export const login = (username, password) => {
   });
 };
 
-export const logout = () => {
+export const logout = (currentPage) => {
   //remove token and user cookie
   Cookie.remove("token");
 
@@ -75,7 +75,7 @@ export const logout = () => {
   window.localStorage.removeItem("instacart_auth_token");
 
   //redirect to the home page
-  //Router.push("/");
+  Router.push(currentPage);
 };
 
 //Higher Order Component to wrap our pages and logout simultaneously logged in tabs

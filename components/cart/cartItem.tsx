@@ -6,7 +6,7 @@ import UserContext from '../context/userContext';
 import CartContext from '../context/cartContext';
 import Cookie from "js-cookie";
 
-export default function CartItem({ item }) {
+export default function CartItem({ item, handleCloseDrawer }) {
 
   const { cart: thisCart, handleSetCart } = useContext(CartContext);
   const { cart, updateTotal, handleSetCart: handleSetMainCart} = useContext(UserContext);
@@ -32,16 +32,33 @@ export default function CartItem({ item }) {
       newCart.items.filter(x => x.id === item.id)[0].quantity -= 1;
     }
     newCart.total -= item.price;
-    handleSetCart(newCart);
-    Cookie.set("cart", newCart);
+    if (newCart.total === 0) {
+      handleCloseDrawer();
+      Cookie.set("cart", newCart);
+      setTimeout(() => {
+        handleSetCart(newCart);
+      }, 1050)
+    } else {
+      Cookie.set("cart", newCart);
+      handleSetCart(newCart);
+    }
   }
+
   const handleRemoveAll = ({item}) => {
     const newCart = { ...thisCart };
     const quantityInCart = newCart.items.filter(x => x.id === item.id)[0].quantity;
     newCart.items = thisCart.items.filter(x => x.id !== item.id);
     newCart.total -= quantityInCart * item.price;
-    handleSetCart(newCart);
-    Cookie.set("cart", newCart);
+    if (newCart.total === 0) {
+      handleCloseDrawer();
+      Cookie.set("cart", newCart);
+      setTimeout(() => {
+        handleSetCart(newCart);
+      }, 1050)
+    } else {
+      Cookie.set("cart", newCart);
+      handleSetCart(newCart);
+    }
   }
 
   return (
