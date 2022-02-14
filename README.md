@@ -1,6 +1,6 @@
 # Instaplate
 
-## THE INSTACART RESTAURANT DELIVERY CLONE**
+## THE INSTACART RESTAURANT DELIVERY CLONE
 
 <img width="100%" src='instaplate.png'>
 
