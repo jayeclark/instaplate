@@ -3,6 +3,8 @@ import { CardElement } from "@stripe/react-stripe-js";
 
 function CardSection(props) {
 
+  const { buttonDisabled } = props;
+
   return (
     <div>
       <div>
@@ -20,7 +22,7 @@ function CardSection(props) {
               </div>
               <br />
               <div className="order-button-wrapper">
-                <button onClick={props.submitOrder}>Confirm order</button>
+                <button disabled={buttonDisabled} onClick={props.submitOrder}>{buttonDisabled ? "Processing..." : "Confirm order"}</button>
               </div>
               {props.stripeError ? (
                 <div>{props.stripeError.toString()}</div>

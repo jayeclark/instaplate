@@ -5,6 +5,7 @@ import fetch from "isomorphic-fetch";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import CardSection from "./cardSection";
 import UserContext from "../context/userContext";
+import CartContext from "../context/cartContext";
 import Cookies from "js-cookie";
 import styles from '../../styles/Checkout.module.css';
 import { toast } from "react-toastify";
@@ -12,6 +13,7 @@ import { address, address2, city, state, zip } from "../../scripts/validation";
 import Icons from "../UI/icons/index";
 import { getAPIUrl } from "../../scripts/urls";
 import { parseSRC } from "../../scripts/utilities";
+import router from "next/router";
 
 function CheckoutForm() {
   const API_URL = getAPIUrl();
@@ -25,10 +27,12 @@ function CheckoutForm() {
     stripe_id: "",
   });
   const [error, setError] = useState([]);
+  const [processing, setProcessing] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
 
   const cart = Cookies.getJSON("cart");
+  const { handleSetCart } = useContext(CartContext)
 
   const validationFunctions = { address, address2, city, state, zip };
 
@@ -62,7 +66,7 @@ function CheckoutForm() {
 
   async function submitOrder(e) {
     e.preventDefault();
-
+    setProcessing(true);
     // // Use elements.getElement to get a reference to the mounted Element.
     const cardElement = elements.getElement(CardElement);
 
@@ -87,13 +91,14 @@ function CheckoutForm() {
         restaurant_id: cart.items[0].restaurant.id, 
       }),
     });
-    toast('Your order was placed successfully!');
-
 
     if (!response.ok) {
       setError(response.statusText);
     }
-
+    else {
+      Cookies.set("cart", {items: [], total: 0});
+      toast.success('Your order was placed successfully! A driver will be in touch shortly about your expected delivery time', { onOpen: () => setTimeout(() => {setProcessing(false); handleSetCart({items: [], total: 0}); router.push("/")}, 2000)});
+    }
   }
 
   const { mapMarker, cardIcon, bagIcon, giftIcon } = Icons;
@@ -140,7 +145,7 @@ function CheckoutForm() {
       <div style={{marginBottom: "20px", borderBottom: "1px solid #efefef"}}>
         <h6 style={{ display: "flex", alignItems: "center", paddingBottom: "10px", color: formSection === "payment" ? "rgb(10, 173, 10)" : "#888" }}><div style={{margin: "0px 5px"}}>{cardIcon}</div> Payment</h6>
         <div style={{position: "relative", marginBottom: "20px", display: formSection === "payment" ? "block" : "none"}}>
-          <CardSection data={data} stripeError={error} submitOrder={submitOrder} />
+          <CardSection buttonDisabled={processing} data={data} stripeError={error} submitOrder={submitOrder} />
           <div style={{cursor: "pointer", position: "absolute", top:"100px", color: "rgb(10, 173, 10)", fontSize: "0.8rem", right: "10px", zIndex:"9999"}} onClick={()=>setFormSection("address")}>Edit previous section</div>
         </div>
       </div>
