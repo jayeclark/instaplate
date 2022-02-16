@@ -1,16 +1,23 @@
 import {useState} from "react";
 
 import {Container, Row, Col} from "reactstrap";
+import { useQuery } from '@apollo/client';
 
-import DishDetail from "./dish/dishDetail";
-import { getAPIUrl } from "../scripts/urls";
-import { parseSRC } from "../scripts/utilities"
-import LeftRightArrows from "./UI/sliderArrows";
+import { GET_DISHES } from '../../scripts/queries';
+import { parseSRC } from "../../scripts/utilities"
+import LeftRightArrows from "../UI/sliderArrows";
+import DishDetail from "./dishDetail";
 
-function RecommendedDishes({ dishes, filters, sort }){
+function RecommendedDishes({ query, filters, sort }){
 
-  const API_URL = getAPIUrl();
+  const { loading, error, data } = useQuery(GET_DISHES)
   const [currentDish, setCurrentDish] = useState(null);
+
+  if (loading) return <div style={{minHeight: "422px"}}><p>Loading...</p></div>;
+  if (error) return <p>Error: {JSON.stringify(error)}</p>;
+  if (!data) return <p>Not found</p>;
+
+  const dishes = query && query !== '' ? data.dishes.filter(x => x.name.toLowerCase().includes(query.toLowerCase())).slice(0,50) : data.dishes.slice(0,10);
 
   const handleCloseDish = () => {
     setCurrentDish(null);

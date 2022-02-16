@@ -1,9 +1,9 @@
 import {useState} from 'react';
 import FilterSidebar from "./filters/filterSidebar";
 import Search from "./filters/search";
-import RestaurantCardsWrapper from "./restaurantCardsWrapper";
-import RecommendedDishesWrapper from "./recommendedDishesWrapper";
-import RestaurantsWrapper from './recommendedRestaurantsWrapper';
+import RecommendedRestaurants from './restaurant/recommendedRestaurants';
+import RecommendedDishes from './dish/recommendedDishes';
+import RestaurantCards from './restaurant/restaurantCards';
 
 export default function SearchAndFilter({cuisine, highlights}) {
 
@@ -52,17 +52,17 @@ export default function SearchAndFilter({cuisine, highlights}) {
         </div>
         <div className="right-side">
           {shouldHideFeaturedRestaurants() ? null : highlights.map((highlight: any, i: number) => (
-            <RestaurantsWrapper key={i} ids={highlight.ids} sort={highlight.sort} title={highlight.title} subTitle={highlight.subTitle} />
+            <RecommendedRestaurants key={i} ids={highlight.ids} sort={highlight.sort} title={highlight.title} subTitle={highlight.subTitle} />
           ))}
           {shouldHideFeaturedRestaurants() ? null :  (
             <div className="feature-divider">
             </div>
           )}
           <div className="restaurants">
-          <RestaurantCardsWrapper sort={sort} cuisine={cuisine} filters={filters} query={query}/>
+          <RestaurantCards sort={sort} cuisine={cuisine} filters={filters} query={query}/>
           </div>
           <div className="dishes">
-          <RecommendedDishesWrapper sort={sort} filters={filters} query={query}/>
+          <RecommendedDishes sort={sort} filters={filters} query={query}/>
           </div>  
         </div>
       </div>

@@ -1,16 +1,24 @@
-import {useState} from "react";
-
 import {Container, Row, Col, Card} from "reactstrap";
 import Link from "next/link";
+import { useQuery } from '@apollo/client';
 
-import { getAPIUrl } from "../scripts/urls";
-import { parseSRC } from "../scripts/utilities"
-import LeftRightArrows from "./UI/sliderArrows";
+import { GET_RESTAURANTS } from '../../scripts/queries';
+import { parseSRC } from "../../scripts/utilities"
+import LeftRightArrows from "../UI/sliderArrows";
 
-function RecommendedRestaurants({ title, restaurants, subTitle }){
+function RecommendedRestaurants({ ids, title, sort, subTitle }){
+  
+  if (!sort) {
+    sort = (a, b) => b.price - a.price;
+  }
+  const { loading, error, data } = useQuery(GET_RESTAURANTS)
+  
+  if (loading) return <div style={{display: "flex", justifyContent: "center", alignItems: "center", minHeight: "800px"}}><p>Loading...</p></div>;
+  if (error) return <p>Error: {JSON.stringify(error)}</p>;
+  if (!data) return <p>Not found</p>;
 
-  const API_URL = getAPIUrl();
-
+  const restaurants = data.restaurants.filter(x => ids.includes(x.id)).sort(sort)
+  
   if (restaurants.length === 0) {
     return(
 

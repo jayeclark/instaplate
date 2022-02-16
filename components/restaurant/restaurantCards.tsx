@@ -1,13 +1,23 @@
 import Link from 'next/link';
-import Card from './UI/Card';
+import { useQuery } from '@apollo/client';
+import { GET_RESTAURANTS } from '../../scripts/queries';
+
+import Card from '../UI/Card';
 import {
   Container,
   Row,
   Col} from "reactstrap";
-import { getAPIUrl } from '../scripts/urls';
+import { getAPIUrl } from '../../scripts/urls';
 
-function RestaurantCards({ list, filters, cuisine, sort }) {
+function RestaurantCards({ filters, cuisine, sort, query }) {
 
+  const { loading, error, data } = useQuery(GET_RESTAURANTS)
+  
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {JSON.stringify(error)}</p>;
+  if (!data) return <p>Not found</p>;
+
+  const list = query && query !== '' ? data.restaurants.filter(x => x.name.toLowerCase().includes(query.toLowerCase())) : data.restaurants;
   const API_URL = getAPIUrl();
   
   function relevance(a, b) {return b.name?.length - a.name?.length}
