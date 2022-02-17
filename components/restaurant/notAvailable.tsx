@@ -1,5 +1,5 @@
-import styles from '../../styles/Dishes.module.css';
 import { timeToString } from '../../scripts/time';
+import styles from '../../styles/Dishes.module.css';
 
 export default function NotAvailable({ menuStart }) {
 

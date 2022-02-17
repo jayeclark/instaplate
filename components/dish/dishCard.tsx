@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import AddRemoveButton from "../cart/addRemoveButton";
+
 import {
   Card,
   CardBody,
@@ -7,11 +7,13 @@ import {
   CardText,
   CardTitle,
   Col} from "reactstrap";
-import styles from '../../styles/Dishes.module.css';
+
 import { current } from '../../scripts/utilities';
+import { parseSRC } from '../../scripts/utilities';
+import AddRemoveButton from "../cart/addRemoveButton";
 import NotAvailable from '../restaurant/notAvailable';
 import DishDetail from "./dishDetail";
-import { parseSRC } from '../../scripts/utilities';
+import styles from '../../styles/Dishes.module.css';
 
 export default function DishCard({dish, index, isAvailable, menuStart}) {
   

@@ -1,8 +1,10 @@
 import { useState } from 'react';
+
 import { Row } from "reactstrap";
+
+import { isAvailable } from '../../scripts/time';
 import { timeInMinutes } from '../../scripts/time';
 import DishCard from '../dish/dishCard';
-import { isAvailable } from '../../scripts/time';
 import CartIcon from '../cart/cartWidget';
 
 export default function FilteredDishes({dishes}) {

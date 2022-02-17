@@ -1,9 +1,11 @@
 import { useState } from 'react';
+
+import Cookie from "js-cookie";
+
 import CategorySlider from "./filters/categorySlider";
 import CartIcon from "./cart/cartWidget";
 import SearchAndFilter from './searchAndFilter';
 import CartContext from './context/cartContext';
-import Cookie from "js-cookie";
 
 export default function Stores() {
 

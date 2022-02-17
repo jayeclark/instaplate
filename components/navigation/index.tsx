@@ -3,8 +3,8 @@ import { useContext, useRef, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import Cookie from "js-cookie";
-import { current } from "../../scripts/utilities";
 
+import { current } from "../../scripts/utilities";
 import UserContext from "../context/userContext";
 import Icons from '../UI/icons/index';
 import Login from "./loginDrawer";
@@ -12,7 +12,6 @@ import MenuDrawer from "./menuDrawer";
 import Nav from "../UI/Nav";
 import NavItem from "../UI/NavItem";
 import Register from "./registerDrawer";
-
 import styles from '../../styles/Navigation.module.css';
 
 const Navigation = (props) => {

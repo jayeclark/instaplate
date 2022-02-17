@@ -1,8 +1,10 @@
-import Icons from '../UI/icons/index';
 import { useState, useContext } from 'react';
-import CartContext from '../context/cartContext';
-import { parseSRC } from "../../scripts/utilities";
+
 import Cookie from "js-cookie";
+
+import { parseSRC } from "../../scripts/utilities";
+import Icons from '../UI/icons/index';
+import CartContext from '../context/cartContext';
 
 function DishDetail({ dish, handleCloseDish }) {
 

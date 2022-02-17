@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { useQuery } from '@apollo/client';
-import { GET_RESTAURANTS } from '../../scripts/queries';
-
-import Card from '../UI/Card';
 import {
   Container,
   Row,
   Col} from "reactstrap";
+
 import { getAPIUrl } from '../../scripts/urls';
+import { GET_RESTAURANTS } from '../../scripts/queries';
+import Card from '../UI/Card';
 
 function RestaurantCards({ filters, cuisine, sort, query }) {
 

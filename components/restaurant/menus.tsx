@@ -1,13 +1,13 @@
-import Menu from "./menu";
+
 import { useEffect, useState } from "react";
-import { timeToString } from "../../scripts/time";
-import { isAvailable } from '../../scripts/time';
-import FilteredDishes from './filteredDishes';
-import Search from "../filters/search";
+
 import { useQuery } from '@apollo/client';
 
+import { timeToString, isAvailable, timeInMinutes } from "../../scripts/time";
 import { GET_RESTAURANT } from '../../scripts/queries';
-import { timeInMinutes } from '../../scripts/time';
+import FilteredDishes from './filteredDishes';
+import Search from "../filters/search";
+import Menu from "./menu";
 
 function Menus({restaurantID, initialMenu}) {
 

@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client';
+
 import { GET_RESTAURANT_CATEGORIES } from '../../scripts/queries';
 import { parseSRC } from "../../scripts/utilities";
 import LeftRightArrows from '../UI/sliderArrows';

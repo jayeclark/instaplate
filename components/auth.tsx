@@ -1,6 +1,5 @@
-/* /lib/auth.js */
-
 import { useEffect } from "react";
+
 import Router from "next/router";
 import Cookie from "js-cookie";
 import axios from "axios";

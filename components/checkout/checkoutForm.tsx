@@ -1,19 +1,21 @@
 
 import { useState, useContext } from "react";
+
 import { FormGroup, Input } from "reactstrap";
 import fetch from "isomorphic-fetch";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import CardSection from "./cardSection";
-import UserContext from "../context/userContext";
-import CartContext from "../context/cartContext";
-import Cookies from "js-cookie";
-import styles from '../../styles/Checkout.module.css';
-import { toast } from "react-toastify";
-import { address, address2, city, state, zip } from "../../scripts/validation";
-import Icons from "../UI/icons/index";
-import { getAPIUrl } from "../../scripts/urls";
-import { parseSRC } from "../../scripts/utilities";
 import router from "next/router";
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
+
+import { parseSRC } from "../../scripts/utilities";
+import { getAPIUrl } from "../../scripts/urls";
+import { address, address2, city, state, zip } from "../../scripts/validation";
+import CartContext from "../context/cartContext";
+import CardSection from "./cardSection";
+import Icons from "../UI/icons/index";
+import styles from '../../styles/Checkout.module.css';
+
 
 function CheckoutForm() {
   const API_URL = getAPIUrl();
@@ -67,12 +69,9 @@ function CheckoutForm() {
   async function submitOrder(e) {
     e.preventDefault();
     setProcessing(true);
-    // // Use elements.getElement to get a reference to the mounted Element.
+
     const cardElement = elements.getElement(CardElement);
 
-    // // Pass the Element directly to other Stripe.js methods:
-    // // e.g. createToken - https://stripe.com/docs/js/tokens_sources/create_token?type=cardElement
-    // get token back from stripe to process credit card
     const token = await stripe.createToken(cardElement);
     const userToken = Cookies.get("token");
     

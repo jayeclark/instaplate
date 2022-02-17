@@ -1,18 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
+
 import {
   Form,
   FormGroup,
   Input,
 } from "reactstrap";
-import { registerUser } from "../auth";
-import UserContext from "../context/userContext";
-import styles from "../../styles/Dialog.module.css";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { signIn } from "next-auth/react";
-import Icons from '../UI/icons/index';
+
 import { ErrorObject } from "../../types";
+import { registerUser } from "../auth";
+import UserContext from "../context/userContext";
+import Icons from '../UI/icons/index';
+import styles from "../../styles/Dialog.module.css";
 
 
 function Register(props: any) {

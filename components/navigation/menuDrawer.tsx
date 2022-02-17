@@ -4,7 +4,6 @@ import { signOut } from "next-auth/react";
 import { useRouter } from 'next/router';
 
 import { logout } from '../auth';
-
 import Icons from '../UI/icons/index';
 import styles from "../../styles/Navigation.module.css";
 import styles2 from "../../styles/Dialog.module.css";

@@ -1,11 +1,12 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
+
 import { Row } from "reactstrap";
+import Cookie from "js-cookie";
+
 import { isAvailable } from '../../scripts/time';
+import CartContext from "../context/cartContext";
 import DishCard from '../dish/dishCard';
 import CartIcon from "../cart/cartWidget";
-import UserContext from "../context/userContext";
-import CartContext from "../context/cartContext";
-import Cookie from "js-cookie";
 
 function Menu({ restId, menu, style }){
 

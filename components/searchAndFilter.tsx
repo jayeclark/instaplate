@@ -1,4 +1,5 @@
 import {useState} from 'react';
+
 import FilterSidebar from "./filters/filterSidebar";
 import Search from "./filters/search";
 import RecommendedRestaurants from './restaurant/recommendedRestaurants';

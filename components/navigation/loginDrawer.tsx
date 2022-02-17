@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
+
 import {
   Form,
   FormGroup,
   Input,
 } from "reactstrap";
 import { useRouter } from "next/router";
-import { login } from "../auth";
-import UserContext from "../context/userContext";
-import styles from "../../styles/Dialog.module.css";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-import Icons from "../UI/icons";
+
 import { ErrorObject } from "../../types";
+import { login } from "../auth";
+import UserContext from "../context/userContext";
+import Icons from "../UI/icons";
+import styles from "../../styles/Dialog.module.css";
 
 function Login(props: any) {
 
@@ -123,9 +125,8 @@ function Login(props: any) {
                           setLoading(false);
 
                           // set authed User in global context to update header/app state
-
                           handleSetUser(res.data.user, res.data.jwt);
-                          window.localStorage.setItem("loggedInUser", res.data.user);
+                          window.localStorage.setItem("instacart_user", res.data.user);
                         })
                         .catch((error) => {
                           //setError(error.response.data);
