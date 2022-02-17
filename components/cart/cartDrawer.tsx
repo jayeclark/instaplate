@@ -1,11 +1,13 @@
 import { useContext } from "react";
+
 import Link from "next/link";
+
 import UserContext from "../context/userContext";
 import CartContext from "../context/cartContext";
-import styles from "../../styles/Cart.module.css";
 import Icons from "../UI/icons/index";
 import CartHeader from "./cartHeader";
 import CartItem from "./cartItem";
+import styles from "../../styles/Cart.module.css";
 
 function CartDrawer({ handleCloseDrawer }) {
 

@@ -1,15 +1,15 @@
 import { useContext } from 'react';
-import styles from '../../styles/Cart.module.css';
-import Icons from '../UI/icons/index';
-import { parseSRC } from '../../scripts/utilities';
-import UserContext from '../context/userContext';
-import CartContext from '../context/cartContext';
+
 import Cookie from "js-cookie";
+
+import { parseSRC } from '../../scripts/utilities';
+import CartContext from '../context/cartContext';
+import Icons from '../UI/icons/index';
+import styles from '../../styles/Cart.module.css';
 
 export default function CartItem({ item, handleCloseDrawer }) {
 
   const { cart: thisCart, handleSetCart } = useContext(CartContext);
-  const { cart, updateTotal, handleSetCart: handleSetMainCart} = useContext(UserContext);
 
   const { editOutlineIcon, trashOutlineIcon, plusIcon, minusIcon, trashIcon } = Icons;
   const handleAdd = ({item, count}) => {

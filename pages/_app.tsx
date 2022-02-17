@@ -3,7 +3,10 @@ import React, { useEffect, useState } from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import { SessionProvider } from "next-auth/react"
 import { ToastContainer } from "react-toastify";
-import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import { ApolloProvider, 
+  ApolloClient, 
+  HttpLink, 
+  InMemoryCache } from '@apollo/client';
 import Cookie from "js-cookie";
 
 import { getAPIUrl } from "../scripts/urls";

@@ -1,10 +1,13 @@
+
+import { useContext, useRef, useEffect } from "react";
+
+import Cookies from "js-cookie";
+
 import UserContext from "../context/userContext";
 import CartContext from "../context/cartContext";
-import { useContext, useRef, useState, useEffect } from "react";
 import CartDrawer from "./cartDrawer";
-import styles from '../../styles/Cart.module.css';
 import Icons from '../UI/icons/index';
-import Cookies from "js-cookie";
+import styles from '../../styles/Cart.module.css';
 
 const CartIcon = () => {
 

@@ -1,12 +1,10 @@
+import { parseDeliveryByTime } from '../../scripts/time';
+import { parseSRC } from '../../scripts/utilities';
 import Icons from '../UI/icons/index';
 import styles from '../../styles/Cart.module.css';
-import { parseDeliveryByTime } from '../../scripts/time';
-import { getAPIUrl } from '../../scripts/urls';
-import { parseSRC } from '../../scripts/utilities';
 
 export default function CartHeader({ restaurant, cartTotal, zipCode='00901' }) {
 
-  const API_URL = getAPIUrl();
   const { guaranteeIcon } = Icons;
 
   if (cartTotal === 0) {
