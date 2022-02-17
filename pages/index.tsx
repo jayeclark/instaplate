@@ -1,9 +1,12 @@
 import { useState } from 'react';
+
+import Cookie from "js-cookie";
+
 import CategorySlider from "../components/filters/categorySlider";
 import CartIcon from "../components/cart/cartWidget";
 import SearchAndFilter from '../components/searchAndFilter';
 import CartContext from '../components/context/cartContext';
-import Cookie from "js-cookie";
+
 
 function Home() {
 

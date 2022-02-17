@@ -1,4 +1,3 @@
-import { signIn } from 'next-auth/react';
 import navStyles from "../styles/Navigation.module.css";
 
 export default function Unauthorized({type}) {

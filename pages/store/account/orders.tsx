@@ -1,8 +1,10 @@
 import { useContext } from "react";
+
+import { useQuery } from "@apollo/client";
+
+import { GET_ORDERS } from "../../../scripts/queries";
 import UserContext from "../../../components/context/userContext";
 import Unauthorized from "../../unauthorized";
-import { useQuery } from "@apollo/client";
-import { GET_ORDERS } from "../../../scripts/queries";
 import OrderItem from "../../../components/order/orderItem";
 import styles from '../../../styles/Cart.module.css';
 

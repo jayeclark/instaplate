@@ -1,15 +1,18 @@
 /* pages/checkout.js */
 
 import { useContext, useState, useEffect } from "react";
+
 import { Container, Row, Col } from "reactstrap";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import Link from "next/link";
+import Cookie from "js-cookie";
+
 import CheckoutForm from "../components/checkout/checkoutForm";
 import UserContext from "../components/context/userContext";
 import styles from "../styles/Checkout.module.css";
 import navStyles from "../styles/Navigation.module.css";
-import Link from "next/link";
-import Cookie from "js-cookie";
+
 
 function Checkout() {
   // get app context
