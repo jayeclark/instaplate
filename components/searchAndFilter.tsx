@@ -10,7 +10,7 @@ export default function SearchAndFilter({cuisine, highlights}) {
 
   const [sort, setSort] = useState('relevance');
   const [query, setQuery] = useState('');
-  const [filters, setFilters] = useState({dietary: [], price: [], cuisine, query: null})
+  const [filters, setFilters] = useState({dietary: [], price: [], query: null})
 
   const handleSetQuery = (str: string) => {
     const newFilters = {...filters};
@@ -38,7 +38,7 @@ export default function SearchAndFilter({cuisine, highlights}) {
 
   const shouldHideFeaturedRestaurants = () => {
     return ((query && query !== '') 
-            || filters.cuisine 
+            || cuisine 
             || filters.price.length > 0 
             || filters.dietary.length > 0 
             || sort !== 'relevance')

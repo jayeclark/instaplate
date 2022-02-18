@@ -33,7 +33,11 @@ export default function Home() {
   const [cuisine, setCuisine] = useState(null);
 
   const handleSetCuisine = (id) => {
-    setCuisine(id);
+    if (cuisine === id) {
+      setCuisine(null)
+    } else {
+      setCuisine(id);    
+    }
   }
 
   return (
