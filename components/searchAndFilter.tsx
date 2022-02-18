@@ -10,7 +10,7 @@ export default function SearchAndFilter({cuisine, highlights}) {
 
   const [sort, setSort] = useState('relevance');
   const [query, setQuery] = useState('');
-  const [filters, setFilters] = useState({dietary: [], price: [], cuisine: null, query: null})
+  const [filters, setFilters] = useState({dietary: [], price: [], cuisine, query: null})
 
   const handleSetQuery = (str: string) => {
     const newFilters = {...filters};
