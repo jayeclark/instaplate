@@ -119,26 +119,26 @@ function CheckoutForm() {
           </div>
           <FormGroup >
             <div style={{ flex: "0.90", marginRight: 0 }}>
-              <Input placeholder="Address line 1" name="address" onChange={onChange} />
+              <Input autoComplete="off" placeholder="Address line 1" name="address" onChange={onChange} />
             </div>
             </FormGroup>
             <FormGroup>
             <div style={{ flex: "0.90", marginRight: 0 }}>
-              <Input placeholder="Address line 2 (optional)" name="address2" onChange={onChange} />
+              <Input autoComplete="off" placeholder="Address line 2 (optional)" name="address2" onChange={onChange} />
             </div>
           </FormGroup>
           <FormGroup style={{ display: "flex", marginTop: "-10px"}}>
             <div style={{ flex: "0.52", marginRight: 10 }}>
-              <Input placeholder="City" name="city" onChange={onChange} />
+              <Input autoComplete="off" placeholder="City" name="city" onChange={onChange} />
             </div>
             <div style={{ flex: "0.18", marginRight: 10 }}>
-              <Input placeholder="State" name="state" onChange={onChange} />
+              <Input autoComplete="off" placeholder="State" name="state" onChange={onChange} />
             </div>
             <div style={{ flex: "0.3", marginRight: 0 }}>
-              <Input placeholder="Zip code" name="zip" defaultValue="" onChange={onChange} />
+              <Input autoComplete="off" placeholder="Zip code" name="zip" defaultValue="" onChange={onChange} />
             </div>
           </FormGroup>
-          <button type="button" style={{position:"relative", left: "calc(100% - 200px)", marginTop: "5px", marginBottom: "25px!important", borderRadius: "4px", marginLeft:"auto", minWidth: "200px", backgroundColor: "rgb(10, 173, 10)"}} onClick={() => setFormSection("payment")}>Save</button>
+          <button className="save-button" type="button" onClick={() => setFormSection("payment")}>Save</button>
         </div>
       </div>
       <div style={{marginBottom: "20px", borderBottom: "1px solid #efefef"}}>
@@ -210,6 +210,16 @@ function CheckoutForm() {
             transition: all 150ms ease;
             margin-top: 10px;
           }
+          .save-button {
+            position: relative; 
+            left: calc(100% - 200px); 
+            margin-top: 5px; 
+            margin-bottom: 25px!important; 
+            border-radius: 4px;
+            margin-left: auto; 
+            min-width: 200px; 
+            background-color: rgb(10, 173, 10)!important;
+          }
           form {
             margin-bottom: 40px;
             padding-bottom: 40px;
@@ -252,6 +262,16 @@ function CheckoutForm() {
           .StripeElement.IdealBankElement,
           .StripeElement.PaymentRequestButton {
             padding: 0;
+          }
+
+          @media only screen and (max-width: 576px) {
+            .save-button {
+              min-width: 100%; 
+              left: 0px;
+            }
+            input {
+              padding: 10px 5px!important;
+            }
           }
         `}
       </style>
