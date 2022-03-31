@@ -36,12 +36,3 @@ For the backend, visit the [instaplate-backend](https://github.com/jayeclark/ins
 2. Make sure you are using Node 14 or 12. (Project may break on 16 or 17)
 3. Run ```npm install``` to install dependencies.
 4. After npm has finished installing, run ``npm run -p 3000`` to start the development server
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
